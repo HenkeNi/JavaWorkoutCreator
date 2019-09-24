@@ -26,7 +26,7 @@ public class StaffMember extends Person {
 
     // toString istället = (returnerar allt!?)
     public String getFullWorkShift() {
-        return ", from: " + shiftStartHour + " to: " + shiftEndHour;
+        return "starts: " + shiftStartHour + ", ends: " + shiftEndHour;
     }
 
 }

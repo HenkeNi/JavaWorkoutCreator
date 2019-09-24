@@ -33,6 +33,15 @@ public class GymMember extends Person {
     }*/
 
     public void showWorkouts() {
+
+        System.out.println("Current Workouts:");
+
+        // If no workouts in workoutList
+        if (workoutList.isEmpty()) {
+            System.out.println("\t-Empty");
+            return;
+        }
+
         for (int i = 0; i < workoutList.size(); i++) {
             System.out.printf("%s. %s\n", i + 1 , workoutList.get(i).getWorkoutName());
             workoutList.get(i).showExercises(i);

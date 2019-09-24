@@ -2,13 +2,15 @@ package com.HenrikJangefelt;
 
 import java.util.*;
 
+// TODO: egen class för StaffSchedule
+
 // TODO: FIxa try and catch for inputs!!
 // TODO: ta in userInout som String och omvandla sedan (Fixar bugg med nextLine inte läses in?) TODO: FIx isNumber
 
 // TODO: kolla att enum Muscle fungerar
 // TODO: use enums more!!!
 
-// TODO: add functionallity for changing your username
+// TODO: add functionallity for changing your username, hämta/se sitt password/email
 
 // TODO: ange veckodagar för staff
 
@@ -24,50 +26,25 @@ import java.util.*;
 public class TrainingProgram {
 
     Scanner input = new Scanner(System.in);
-    GymMember accountHolder = new GymMember("MrOrMrs.", "Somebody"); // TODO: Sätt default värde i Person istället?
-    static GymMember currentUser = new GymMember("", ""); // TEST (Static)
 
+    //GymMember accountHolder = new GymMember("MrOrMrs.", "Somebody"); // TODO: Sätt default värde i Person istället?
+
+    static GymMember currentUser = new GymMember("", ""); // TEST (Static) TODO: (ta bort från konstruktorn i Person???)
 
     public TrainingProgram() {
-        //public TrainingProgram(GymMember currentUser) {
-
-        //this.currentUser = currentUser;
-        //System.out.println(this.currentUser.getFullName()); verkar funka TODO: måste skicak ett objetkt av GmyMember
-        //createNewAccount();
-        //System.out.printf("Welcome %s!\n", currentUser.getFullName());
-        mainMenu();
+        test();
+        showMainMenu();
     }
 
 
-    // TODO: Rename
-    public void createNewAccount() {
-
-        System.out.println("\nWelcome to the workout creator!\nHere you can create your own custom workouts\n" +
-                "\nBut first you must enter some personal details:");
-
-        System.out.println("\nFirstname:");
-        String firstName = input.nextLine().trim();
-        System.out.println("Lastname:");
-        String lastName = input.nextLine().trim();
-        accountHolder.setFirstName(firstName);
-        accountHolder.setLastName(lastName);
-
-        System.out.printf("Welcome %s!\n\n", accountHolder.getFullName());
-    }
-
-
-    // TODO: !!!! Friends ska vara ett option där man både kan editera och alääga till
-    // TODO: combine addWorkout with add Gym buddies -> submenu
-    public void mainMenu() {
+    public void showMainMenu() {
 
         int menuSelection = 0;
         String userInput = "";
 
-        //System.out.println("\nThis is the workout creator! Here you can create new workouts");
 
         do {
-            System.out.println("Main Menu:\n1. Add or Edit Workouts\n2. Add or Edit Friend List\n3. Search\n4. Show\n5. Help(TODO)\n6. Check Available Staff\n7. Exit\n8. TEST SORT");
-            //System.out.println("This is the Main Menu.\n1. Add Workouts\n2. Edit Workouts\n3. Add Gym Buddies\n4. Edit Gym Buddies \n5. Search\n6. Show all\n7. Help(TODO)\n8. Exit");
+            System.out.println("Main Menu:\n1. Workouts\n2. Friends\n3. Check Available Staff\n4. Help(TODO)\n5. Exit");
             userInput = input.nextLine();
 
             menuSelection = isNumber(userInput);
@@ -75,191 +52,93 @@ public class TrainingProgram {
 
             switch (menuSelection) {
                 case 1:
-                    addOrEditWorkout();
-                    //createNewWorkout();
+                    showWorkoutMenu();
                     break;
                 case 2:
-                    addOrEditFriendList();
-                    //editWorkouts();
+                    showFriendsMenu();
                     break;
                 case 3:
-                    searchWorkoutOrFriend();
-                    // searchWorkout();
-                    break;
-                case 4:
-                    showFriendsOrWorkouts();
-                    break;
-                case 5:
-                    help();
-                    break;
-                case 6:
                     checkAvailableStaff();
                     break;
-                case 7:
+                case 4:
+                    help();
+                    break;
+                case 5:
                     return;
-                case 8:
+            }
+        } while (menuSelection != 5);
+    }
+
+
+
+    private void showWorkoutMenu() {
+
+        do {
+            System.out.println("Workout menu:\n1. Add Workout\n2. Edit Workout\n3. Show Workouts \n4. Search Workout\n5. Sort Workout \n6. Go Back");
+            int menuSelection = isNumber(input.nextLine());
+
+            switch (menuSelection) {
+                case 1:
+                    createWorkout();
+                    break;
+                case 2:
+                    showEditWorkoutMenu();
+                    break;
+                case 3:
+                    currentUser.showWorkouts();
+                    break;
+                case 4:
+                    searchWorkout();
+                    break;
+                case 5:
                     sortWorkout();
                     break;
-            }
-        } while (menuSelection != 7);
-    }
-
-
-    // TODO: Fixa flexible minimenu!?
-    // public void miniMenu(String option1, String option2) {
-    /*public void miniMenu(String[] menuOptions) {
-
-        for (int i = 0; i < menuOptions.length; i++) {
-            System.out.printf("%s. %s\n", i + 1, menuOptions[i]);
-        }
-
-        int menuSelection = isNumber(input.nextLine());
-
-        switch (menuSelection) {
-
-        }
-    }*/
-
-    public void checkAvailableStaff() {
-
-        Gym currentGym = new Gym();
-
-        // TODO: add workdays (5 days of the week)
-        //Date todaysDate = new Date();
-        //todaysDate.getTime();
-
-        //System.out.println(java.time.LocalTime.now().getHour()); // GETS Current time
-
-        int currentTime = java.time.LocalTime.now().getHour();
-
-        for (int i = 0; i < currentGym.staffMembers.size(); i++) {
-
-            if (currentTime > currentGym.staffMembers.get(i).getShiftStartHour() && currentTime < currentGym.staffMembers.get(i).getShiftEndHour()) {
-                System.out.printf("Available staff: %s %s\n\n", currentGym.staffMembers.get(i).getFullName(), currentGym.staffMembers.get(i).getFullWorkShift()); // TODO: print staff
-            }
-        }
-    }
-
-    // TODO: Show (if there is, workouts before adding or editing)
-    public void addOrEditWorkout() {
-
-        // TODO: Show gymBuddies??
-        do {
-            System.out.println("1. Add Workout\n2. Edit Workout\n3. Go Back");
-            int menuSelection = isNumber(input.nextLine());
-
-            switch (menuSelection) {
-                case 1:
-                    createNewWorkout();
-                    break;
-                case 2:
-                    editWorkouts();
-                    break;
-                case 3:
-                    return;
-            }
-        } while (true);
-    }
-
-    // TODO: Show if possible friends before
-    public void addOrEditFriendList() {
-
-        do {
-            System.out.println("1. Add Gym Buddy\n2. Edit Gym Buddy\n3. Go Back");
-            int menuSelection = isNumber(input.nextLine());
-
-            switch (menuSelection) {
-                case 1:
-                    addGymBuddy();
-                    break;
-                case 2:
-                    editGymBuddy();
-                    break;
-                case 3:
-                    return;
-            }
-        } while (true);
-    }
-
-    public void showFriendsOrWorkouts() {
-
-        do {
-            System.out.println("Choose which to show:\n1. Workouts\n2. Friends\n3. Go Back");
-            int menuSelection = isNumber(input.nextLine());
-
-            switch (menuSelection) {
-                case 1:
-                    showWorkouts();
-                    break;
-                case 2:
-                    showGymBuddies();
-                    break;
-                case 3:
+                case 6:
                     return;
             }
         } while (true);
     }
 
 
-    public void searchWorkoutOrFriend() {
-        System.out.println("Search for workout or friend\n1. Workout\n2. Friend");
-        int menuSelection = isNumber(input.nextLine());
-
-        switch (menuSelection) {
-            case 1:
-                searchWorkout();
-            case 2:
-                searchGymBuddy();
-        }
+    // Creates a new workout
+    public void createWorkout() {
+        System.out.println("Enter workout's name:");
+        input.nextLine(); // TODO: Kan ta bort?
+        currentUser.addWorkout(input.nextLine());
+        addExercise(currentUser.workoutList.size() - 1); // Add new exercise to the last workout in the workoutList
     }
 
 
-    public void createNewWorkout() {
-        System.out.println("Enter new workout's name:");
-        //input.nextLine(); // TODO: Kan ta bort?
-        accountHolder.addWorkout(input.nextLine());
-
-        addExercises(accountHolder.workoutList.size() - 1); // Access last element
-
-
-    }
-
-
-    // TODO: Fixa inout number från string (går att ange bokstav)
-    public void addExercises(int workoutIndex) {
+    // Add exercises to workouts
+    public void addExercise(int workoutIndex) {
 
         do {
-            System.out.println("Enter exercise name:");
+            System.out.println("Exercise name:");
             String exerciseName = input.nextLine();
 
-            System.out.println("Enter amount of reps:");
-            int amountOfReps = isNumber(input.nextLine());
+            System.out.println("Number of reps:");
+            int numberOfReps = isNumber(input.nextLine());
 
-            System.out.println("Enter amount of sets:");
-            int amountOfSets = isNumber(input.nextLine());
+            System.out.println("Number of sets:");
+            int numberOfSets = isNumber(input.nextLine());
 
-            Exercise.Muscle targetedMuslce = enterTargetedMuscle();
+            currentUser.workoutList.get(workoutIndex).addExercise(exerciseName, numberOfReps, numberOfSets, selectMuscleGroup());
 
-            //System.out.println(targetedMuslce);
-            accountHolder.workoutList.get(workoutIndex).addExercise(exerciseName, amountOfReps, amountOfSets, targetedMuslce);
-
-            System.out.printf("Workout: \'%s\' currently consist of %s exercises\n", accountHolder.workoutList.get(workoutIndex).getWorkoutName(), accountHolder.workoutList.get(workoutIndex).exerciseList.size());
+            System.out.printf("Workout: \'%s\' currently consist of %s exercises\n", currentUser.workoutList.get(workoutIndex).getWorkoutName(), currentUser.workoutList.get(workoutIndex).exerciseList.size());
             System.out.println("1. Add another exercise\n2. Go Back");
 
             int menuSelection = isNumber(input.nextLine());
 
             switch (menuSelection) {
-                case 1:
-                    break;
                 case 2:
                     return;
             }
-
         } while (true);
     }
 
-
-    public Exercise.Muscle enterTargetedMuscle() {
+    // TODO: Bara kunna ange tal mellan 1-7
+    // Choose worked muscle group for exercise
+    public Exercise.Muscle selectMuscleGroup() {
         System.out.println("Choose targeted muscle for exercise:\n" +
                 "1. Chest\n" +
                 "2. Back\n" +
@@ -291,67 +170,27 @@ public class TrainingProgram {
     }
 
 
-    /*public void exerciseTargetedMuscle(int workoutNumber, int exerciseNumber) {
-        System.out.println("Choose targeted muscle for exercise:\n" +
-                "1. Chest\n" +
-                "2. Back\n" +
-                "3. Shoulders\n" +
-                "4. Biceps\n" +
-                "5. Triceps\n" +
-                "6. Abs\n" +
-                "7. Legs\n");
-
-        int muscleSelection = isNumber(input.nextLine());
-
-        switch (muscleSelection) {
-            case 1:
-                accountHolder.workoutList.get(workoutNumber -1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(Exercise.Muscle.CHEST);
-                break;
-            case 2:
-                accountHolder.workoutList.get(workoutNumber -1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(Exercise.Muscle.BACK);
-                break;
-            case 3:
-                accountHolder.workoutList.get(workoutNumber -1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(Exercise.Muscle.SHOULDERS);
-                break;
-            case 4:
-                accountHolder.workoutList.get(workoutNumber -1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(Exercise.Muscle.BICEPS);
-                break;
-            case 5:
-                accountHolder.workoutList.get(workoutNumber -1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(Exercise.Muscle.TRICEPS);
-                break;
-            case 6:
-                accountHolder.workoutList.get(workoutNumber -1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(Exercise.Muscle.ABS);
-                break;
-            case 7:
-                accountHolder.workoutList.get(workoutNumber -1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(Exercise.Muscle.LEGS);
-                break;
-        }
-    }*/
-
-
-
-
-    // Edit workouts menu
-    public void editWorkouts() {
+    public void showEditWorkoutMenu() {
 
         int menuSelection = 0;
         String userInput = "";
 
         do {
-            showWorkouts();
+            currentUser.showWorkouts();
 
-            if (accountHolder.workoutList.size() != 0) {
+            if (currentUser.workoutList.size() != 0) {
                 System.out.println("\nOptions:\n1. Add exercise\n2. Edit\n3. Delete\n4. Go Back");
                 userInput = input.nextLine();
 
-                 menuSelection = isNumber(userInput);
+                menuSelection = isNumber(userInput);
 
                 switch (menuSelection) {
                     case 1:
-                        addMoreExercises(); // Add new exercise to existing workout
+                        System.out.println("Enter the number of the workout you wish to add exercise to");
+                        addExercise(isNumber(input.nextLine()) - 1);
                         break;
                     case 2:
-                        alterWorkout(); // Change name of workout/exercise, amount of reps, etc.
+                        editWorkout(); // Change name of workout/exercise, amount of reps, etc.
                         break;
                     case 3:
                         deleteWorkout(); // Delete workout or exercise
@@ -360,26 +199,394 @@ public class TrainingProgram {
                         return; // Go Back
                 }
             }
-        } while (!accountHolder.workoutList.isEmpty());
+        } while (!currentUser.workoutList.isEmpty());
     }
 
 
 
-    // TODO: GÖr om till generics (tar in antingen workoutList eller clientList)? // ELLER TAR IN ARRAY AV OBJECT
-    // TODO: INte metdo??? lägg kod i switch?
-    public void showWorkouts() {
 
-        //System.out.println(accountHolder.getFullName() + "'s current Workouts:"); // TODO: ange namn?
-        System.out.println("Current Workouts:");
 
-        // If no workouts in workoutList
-        if (accountHolder.workoutList.isEmpty()) {
-            System.out.println("\t-Empty");
-            return;
+
+
+
+
+    // TODO: förbättra
+    public void updateWorkout(int workoutNumber) {
+
+        int menuSelection = 0;
+        String userInput = ""; // TODO: behövs??? Kan ta bort på alla? och lägga direkt i isNumber(input.Netxtline)
+
+        do {
+            System.out.println("" +
+                    "Workout options:\n" +
+                    "1. Change workout name\n" +
+                    "2. Go Back");
+
+            userInput = input.nextLine();
+            menuSelection = isNumber(userInput);
+
+
+            switch (menuSelection) {
+                case 1:
+                    // TODO: GÖr till funktion (eller lägg addNEwExercise i switch case med)
+                    System.out.println("Enter new workout name:");
+                    input.nextLine();
+                    String newWorkoutName = input.nextLine();
+                    currentUser.workoutList.get(workoutNumber - 1).setWorkoutName(newWorkoutName); // Change workout name
+                    break;
+                case 2:
+                    return;
+            }
+        } while (true);
+    }
+
+
+
+
+    // TODO: förbättra
+    public void updateExercise(int workoutNumber, int exerciseNumber) {
+
+        int menuSelection = 0;
+        String userInput = "";
+
+        do {
+            System.out.println("" +
+                    "Exercise options:\n" +
+                    "1. Change exercise name\n" +
+                    "2. Change amount of reps\n" +
+                    "3. Change amount of sets\n" +
+                    "4. Change targeted muscle\n" +
+                    "5. Go Back\n");
+
+
+            userInput = input.nextLine();
+            menuSelection = isNumber(userInput);
+
+            switch (menuSelection) {
+                case 1:
+                    System.out.println("Enter new exercise name:");
+                    input.nextLine(); // TODO: ta bort senare
+                    currentUser.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setExerciseName(input.nextLine()); // Change exercise name
+                    break;
+                case 2:
+                    System.out.println("Enter new amount of reps:");
+                    currentUser.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfReps(isNumber(input.nextLine())); // Change amount of reps
+                    break;
+                case 3:
+                    System.out.println("Enter new amount of sets:");
+                    currentUser.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfSets(isNumber(input.nextLine())); // Change amount of sets
+                    break;
+                case 4:
+                    currentUser.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(selectMuscleGroup()); // Change targeted muscle group
+                    break;
+                case 5:
+                    return;
+            }
+            System.out.println("Exercise successfully updated!");
+        } while (true);
+    }
+
+
+
+
+    // TODO: kolla över check.., alter, updateExer
+
+
+
+    // TODO: fix userInput krasch
+    // TODO: loop, om inte angivit giltligt tal, ange ett nytt...
+    // TODO: kolla om string kan kovertas till tal
+    // TODO: Ändra till att kolla om det är en dubbel
+    // Checks if user input is a number (workout) or a number.number (exercise)
+    public int[] returnWorkoutOrExercise(String mode) {
+        //public int[] checkIfWorkoutOrExercise(String userInput, String mode) {
+        System.out.printf("Enter the prefix-number of the workout or exercise you want to %s:\n", mode);
+        input.nextLine();
+        String selectedWorkout = input.nextLine();
+        int[] indexArray = new int[2];
+
+
+        // User entered an exercise in a workout
+        if (selectedWorkout.contains(".") && selectedWorkout.length() >= 3 && selectedWorkout.charAt(1) == '.') {
+
+            String[] numbers = selectedWorkout.split("\\."); // Split String at "."
+            int workoutIndex = Integer.parseInt(numbers[0]); // Store first half of the String in workoutIndex as a number
+            int exerciseIndex = Integer.parseInt(numbers[1].replace(".", "")); // Store the second half as a number and remove the dot
+
+            indexArray[0] = workoutIndex;
+            indexArray[1] = exerciseIndex;
+        } else {
+            char number = selectedWorkout.charAt(0);
+            int workoutIndex = Character.getNumericValue(number);
+            indexArray[0] = workoutIndex;
+        }
+        return indexArray;
+    }
+
+
+
+    // TODO: förbättra
+    public void editWorkout() {
+
+        int[] indexArray = returnWorkoutOrExercise("change");
+        int workoutNumber = indexArray[0];
+        int exerciseNumber = indexArray[1];
+
+        if (exerciseNumber == 0) {
+            updateWorkout(workoutNumber);
+        } else {
+            updateExercise(workoutNumber, exerciseNumber);
+        }
+    }
+
+
+    // TODO: försök konvertera usreInout till double annars returnera int (optional return values???)
+    // TODO: Försök tilll att göra om wokroutOrexercise med double
+    public void test() {
+
+
+        // ta numret, gör om till int (ta bort punkt) första siffra blir
+        System.out.printf("Enter the prefix-number of the workout or exercise you want to change");
+        String userInput = input.nextLine().replace(".", "").trim();
+        System.out.println(userInput);
+
+
+        /*
+        double decimalNumb = 0.0;
+        System.out.printf("Enter the prefix-number of the workout or exercise you want to change");
+        String userInput = input.nextLine();
+
+        try {
+            decimalNumb = Double.parseDouble(userInput);
+        } catch (Exception e) {
+            System.out.println("Didnt wokr"); // Loop, bool etc.
         }
 
-        accountHolder.showWorkouts();
+        int workoutNumb = (int)decimalNumb;
+        System.out.println(workoutNumb);*/
+
     }
+
+
+
+
+    // Delete workouts or exercises
+    public void deleteWorkout() {
+
+        int[] indexArray = returnWorkoutOrExercise("delete");
+        int workoutNumber = indexArray[0];
+        int exerciseNumber = indexArray[1];
+
+        if (exerciseNumber == 0) {
+            System.out.printf("Workout '%s' was deleted!\n", currentUser.workoutList.get(workoutNumber - 1).getWorkoutName());
+            currentUser.workoutList.remove(workoutNumber - 1); // Remove workout
+
+        } else {
+            // If exercise is the last in workout, then delete the whole workout
+            if (currentUser.workoutList.get(workoutNumber - 1).exerciseList.size() <= 1) {
+                System.out.printf("Workout '%s' was deleted!\n", currentUser.workoutList.get(workoutNumber - 1).getWorkoutName());
+                currentUser.workoutList.remove(workoutNumber - 1);
+
+            } else {
+                System.out.printf("Exercise '%s' was deleted!\n", currentUser.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber -1).getExerciseName());
+                currentUser.workoutList.get(workoutNumber - 1).removeExercise(exerciseNumber - 1); // Delete exercise
+            }
+        }
+        return;
+    }
+
+
+    // TODO: Go back function!!!
+    public void searchWorkout() {
+
+        // TODO: find better way
+        int matchingWorkouts = 0;
+        int relatedWorkouts = 0;
+
+        System.out.println("Enter name of the workout you are looking for:");
+        input.nextLine();
+        String searchedWorkout = input.nextLine();
+
+
+        for (int i = 0; i < currentUser.workoutList.size(); i++) {
+
+            if (currentUser.workoutList.get(i).getWorkoutName().equalsIgnoreCase(searchedWorkout)) {
+                if (matchingWorkouts == 0) {
+                    System.out.println("Workout(s) Found:");
+                }
+                System.out.println(currentUser.workoutList.get(i).getWorkoutName());
+                currentUser.workoutList.get(i).showExercises(i + 1);
+                matchingWorkouts++;
+
+                // TODO: FIxa för många upperCase?
+                //} else if (workout.contains(searchedWorkout) &&  !workout.equals(searchedWorkout)) {
+            } else if (currentUser.workoutList.get(i).getWorkoutName().toUpperCase().contains(searchedWorkout.toUpperCase()) && matchingWorkouts == 0) {
+
+                // Only get related workouts in no exact match are found
+                if (relatedWorkouts == 0) {
+                    System.out.printf("Workout that contains '%s' found:\n", searchedWorkout);
+                }
+                System.out.println(currentUser.workoutList.get(i).getWorkoutName());
+                currentUser.workoutList.get(i).showExercises(i + 1);
+                relatedWorkouts++;
+            }
+        }
+
+        // If no matching or related workout found
+        if (matchingWorkouts == 0 && relatedWorkouts == 0) {
+            System.out.println("No workouts found with that name");
+        }
+    }
+
+
+
+
+    // TODO: egen klass?
+    // TODO: loop
+    public void help() {
+        System.out.println("What do you need help with?");
+        System.out.println("1. How to create a workout\n2. How to edit a workout\n3. How to search for a workout\n4. Go Back\n");
+
+        int menuSelector = isNumber(input.nextLine());
+
+        switch (menuSelector) {
+            case 1:
+                helpCreateWorkout();
+                break;
+            case 2:
+                helpEditWorkout();
+                break;
+            case 3:
+                System.out.println("How to search");
+                break;
+            case 4:
+                return;
+        }
+    }
+
+
+    public void helpCreateWorkout() {
+        System.out.println("Step 1: Give your workout a name (ex: 'Chest day' or 'Monday Workout'.\n" +
+                "\t It's okey to name to workouts the same.\n\n" +
+                "Step 2: Enter the name of the exercise you want to add (all workouts need at least one exercise).\n" +
+                "\t It's also okey for exercises to have the same name.\n\n" +
+                "Step 3: Specify the amount of reps of the given exercise.\n" +
+                "\tReps or repitions are the number of times you perform an exercise (ex: doing 15 pushup, 15 will be your amount of reps)).\n\n" +
+                "Step 4: Specify the amount of sets of the given exercise.\n" +
+                "\tSets are the number of times you're gonna repeat an exercise (if you do 15 pushups then rest and then do 15 more, you have done two sets).\n");
+    }
+
+    public void helpEditWorkout() {
+        System.out.println("Step 1: Choose 'Edit Workouts' in the main menu.\n\n" +
+                "For adding a new exercise to a already created workout, .....  ");
+
+
+        // To edit an exercise enter the number infront (1.2)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // TODO: Show if possible friends before
+    public void showFriendsMenu() {
+
+        do {
+            System.out.println("1. Add Gym Buddy\n2. Edit Gym Buddy\n3. Show Friends\n4. Search\n5. Sort\n6. Go Back");
+            int menuSelection = isNumber(input.nextLine());
+
+            switch (menuSelection) {
+                case 1:
+                    addGymBuddy();
+                    break;
+                case 2:
+                    editGymBuddy();
+                    break;
+                case 3:
+                    showGymBuddies();
+                case 4:
+                    searchGymBuddy();
+                    break;
+                case 5:
+                    return;
+            }
+        } while (true);
+    }
+
+
+
+
+
+
+
+
+
+
+    public void checkAvailableStaff() {
+
+        Gym currentGym = new Gym();
+
+        // TODO: add workdays (5 days of the week)
+        //Date todaysDate = new Date();
+        //todaysDate.getTime();
+
+        //System.out.println(java.time.LocalTime.now().getHour()); // GETS Current time
+
+        int currentTime = java.time.LocalTime.now().getHour();
+
+        System.out.println("Available Staff at your local gym:");
+
+        for (int i = 0; i < currentGym.staffMembers.size(); i++) {
+
+            if (currentTime > currentGym.staffMembers.get(i).getShiftStartHour() && currentTime < currentGym.staffMembers.get(i).getShiftEndHour()) {
+                System.out.printf("\t-%s %s\n\n", currentGym.staffMembers.get(i).getFullName(), currentGym.staffMembers.get(i).getFullWorkShift()); // TODO: print staff
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -403,214 +610,6 @@ public class TrainingProgram {
 
 
 
-    // TODO: fix userInput krasch
-    // Checks if user input is a number (workout) or a number.number (exercise)
-
-    public int[] checkIfWorkoutOrExercise(String mode) {
-        //public int[] checkIfWorkoutOrExercise(String userInput, String mode) {
-        System.out.printf("Enter the prefix-number of the workout or exercise you want to %s:\n", mode);
-        input.nextLine();
-        String selectedWorkout = input.nextLine();
-        int[] indexArray = new int[2];
-
-        // TODO: loop, om inte angivit giltligt tal, ange ett nytt...
-
-        // TODO: kolla om string kan kovertas till tal
-
-
-        // TODO: Ändra till att kolla om det är en dubbel
-        // TODO: övning blir t.ex: 1.12 för workout 1 och övning 12
-        // TODO: kolla om det double är i en funktion....
-        // User entered an exercise in a workout
-        if (selectedWorkout.contains(".") && selectedWorkout.length() == 3 && selectedWorkout.charAt(1) == '.') {
-
-            String[] numbers = selectedWorkout.split("\\."); // Split String at "."
-            int workoutIndex = Integer.parseInt(numbers[0]); // Store first half of the String in workoutIndex as a number
-            int exerciseIndex = Integer.parseInt(numbers[1].replace(".", "")); // Store the second half as a number and remove the dot
-
-            indexArray[0] = workoutIndex;
-            indexArray[1] = exerciseIndex;
-        } else {
-            char number = selectedWorkout.charAt(0);
-            int workoutIndex = Character.getNumericValue(number);
-            indexArray[0] = workoutIndex;
-        }
-        return indexArray;
-    }
-
-
-    // Delete workouts or exercises
-    public void deleteWorkout() {
-
-        int[] indexArray = checkIfWorkoutOrExercise("delete");
-        int workoutNumber = indexArray[0];
-        int exerciseNumber = indexArray[1];
-
-        if (exerciseNumber == 0) {
-            System.out.printf("Workout '%s' was deleted!\n", accountHolder.workoutList.get(workoutNumber - 1).getWorkoutName());
-            accountHolder.workoutList.remove(workoutNumber - 1); // Remove workout
-
-        } else {
-            // If exercise is the last in workout, then delete the whole workout
-            if (accountHolder.workoutList.get(workoutNumber - 1).exerciseList.size() <= 1) {
-                System.out.printf("Workout '%s' was deleted!\n", accountHolder.workoutList.get(workoutNumber - 1).getWorkoutName());
-                accountHolder.workoutList.remove(workoutNumber - 1);
-
-            } else {
-                System.out.printf("Exercise '%s' was deleted!\n", accountHolder.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber -1).getExerciseName());
-                accountHolder.workoutList.get(workoutNumber - 1).removeExercise(exerciseNumber - 1); // Delete exercise
-            }
-        }
-        return;
-    }
-
-
-    // Add additional exercises to a workout
-    public void addMoreExercises() {
-
-        System.out.println("Enter the number of the workout you wish to add exercise to");
-        //int workoutIndex = input.nextInt();
-        int workoutIndex = isNumber(input.nextLine());
-        addExercises(workoutIndex - 1);
-    }
-
-
-    // TODO: bryt upp! För stor funktion
-      public void alterWorkout() {
-
-        int[] indexArray = checkIfWorkoutOrExercise("change");
-        int workoutNumber = indexArray[0];
-        int exerciseNumber = indexArray[1];
-
-          if (exerciseNumber == 0) {
-            updateWorkout(workoutNumber);
-        } else {
-            updateExercise(workoutNumber, exerciseNumber);
-        }
-    }
-
-
-    public void updateExercise(int workoutNumber, int exerciseNumber) {
-
-        int menuSelection = 0;
-        String userInput = "";
-
-        do {
-            System.out.println("" +
-                    "Exercise options:\n" +
-                    "1. Change exercise name\n" +
-                    "2. Change amount of reps\n" +
-                    "3. Change amount of sets\n" +
-                    "4. Change targeted muscle\n" +
-                    "5. GO Back\n");
-
-
-            userInput = input.nextLine();
-            menuSelection = isNumber(userInput);
-
-            switch (menuSelection) {
-                case 1:
-                    System.out.println("Enter new exercise name:");
-                    input.nextLine();
-                    String newName = input.nextLine();
-                    System.out.println("Name was changed to " + newName);
-                    accountHolder.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setExerciseName(newName); // Change exercise name
-                    break;
-                case 2:
-                    System.out.println("Enter new amount of reps:");
-                    int newReps = isNumber(input.nextLine());
-                    accountHolder.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfReps(newReps); // Change amount of reps
-                    break;
-                case 3:
-                    System.out.println("Enter new amount of sets:");
-                    int newSets = isNumber(input.nextLine());
-                    accountHolder.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfSets(newSets); // Change amount of sets
-                    break;
-                case 4:
-                    accountHolder.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(enterTargetedMuscle());
-                    //exerciseTargetedMuscle(workoutNumber, exerciseNumber);
-                    //accountHolder.workoutList.get(workoutNumber -1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(Exercise.Muscle.BICEPS);
-                    break;
-                case 5:
-                    return;
-            }
-        } while (true);
-    }
-
-
-    public void updateWorkout(int workoutNumber) {
-
-        int menuSelection = 0;
-        String userInput = "";
-
-        do {
-            System.out.println("" +
-                    "Workout options:\n" +
-                    "1. Change workout name\n" +
-                    "2. Go Back");
-
-            userInput = input.nextLine();
-            menuSelection = isNumber(userInput);
-
-
-            switch (menuSelection) {
-                case 1:
-                    // TODO: GÖr till funktion (eller lägg addNEwExercise i switch case med)
-                    System.out.println("Enter new workout name:");
-                    input.nextLine();
-                    String newWorkoutName = input.nextLine();
-                    accountHolder.workoutList.get(workoutNumber - 1).setWorkoutName(newWorkoutName); // Change workout name
-                    break;
-                case 2:
-                    return;
-            }
-        } while (true);
-    }
-
-
-
-
-    // TODO: Go back function!!!
-    public void searchWorkout() {
-
-        // TODO: find better way
-        int matchingWorkouts = 0;
-        int relatedWorkouts = 0;
-
-        System.out.println("Enter name of the workout you are looking for:");
-        input.nextLine();
-        String searchedWorkout = input.nextLine();
-
-
-        for (int i = 0; i < accountHolder.workoutList.size(); i++) {
-
-            if (accountHolder.workoutList.get(i).getWorkoutName().equalsIgnoreCase(searchedWorkout)) {
-                if (matchingWorkouts == 0) {
-                    System.out.println("Workout(s) Found:");
-                }
-                System.out.println(accountHolder.workoutList.get(i).getWorkoutName());
-                accountHolder.workoutList.get(i).showExercises(i + 1);
-                matchingWorkouts++;
-
-                // TODO: FIxa för många upperCase?
-            //} else if (workout.contains(searchedWorkout) &&  !workout.equals(searchedWorkout)) {
-            } else if (accountHolder.workoutList.get(i).getWorkoutName().toUpperCase().contains(searchedWorkout.toUpperCase()) && matchingWorkouts == 0) {
-
-                // Only get related workouts in no exact match are found
-                if (relatedWorkouts == 0) {
-                    System.out.printf("Workout that contains '%s' found:\n", searchedWorkout);
-                }
-                System.out.println(accountHolder.workoutList.get(i).getWorkoutName());
-                accountHolder.workoutList.get(i).showExercises(i + 1);
-                relatedWorkouts++;
-            }
-        }
-
-        // If no matching or related workout found
-        if (matchingWorkouts == 0 && relatedWorkouts == 0) {
-            System.out.println("No workouts found with that name");
-        }
-    }
 
 
     // TODO: COmbine with search workout?
@@ -624,24 +623,24 @@ public class TrainingProgram {
         String searchedFriend = input.nextLine();
 
 
-        for (int i = 0; i < accountHolder.gymBuddies.size(); i++) {
+        for (int i = 0; i < currentUser.gymBuddies.size(); i++) {
 
-            if (accountHolder.gymBuddies.get(i).getFullName().equalsIgnoreCase(searchedFriend)) {
+            if (currentUser.gymBuddies.get(i).getFullName().equalsIgnoreCase(searchedFriend)) {
                 if (numberOfMatchingNames == 0) {
                     System.out.println("Friend(s) Found:");
                 }
-                System.out.println(accountHolder.gymBuddies.get(i).getFullName());
+                System.out.println(currentUser.gymBuddies.get(i).getFullName());
                 numberOfMatchingNames++;
 
                 // TODO: FIxa för många upperCase?
                 //} else if (workout.contains(searchedWorkout) &&  !workout.equals(searchedWorkout)) {
-            } else if (accountHolder.gymBuddies.get(i).getFullName().toUpperCase().contains(searchedFriend.toUpperCase()) && numberOfMatchingNames == 0) {
+            } else if (currentUser.gymBuddies.get(i).getFullName().toUpperCase().contains(searchedFriend.toUpperCase()) && numberOfMatchingNames == 0) {
 
                 // Only get related workouts in no exact match are found
                 if (numberOfRelatedNames == 0) {
                     System.out.printf("Friend that contains '%s' found:\n", searchedFriend);
                 }
-                System.out.println(accountHolder.gymBuddies.get(i).getFullName());
+                System.out.println(currentUser.gymBuddies.get(i).getFullName());
                 numberOfRelatedNames++;
             }
         }
@@ -666,8 +665,8 @@ public class TrainingProgram {
             System.out.println("Enter friends last name");
             String lastName = input.nextLine().trim();
 
-            accountHolder.addGymBuddy(firstName, lastName);
-            System.out.println(accountHolder.gymBuddies.get(accountHolder.gymBuddies.size() - 1).getFullName() + " was added to your friendlist");
+            currentUser.addGymBuddy(firstName, lastName);
+            System.out.println(currentUser.gymBuddies.get(currentUser.gymBuddies.size() - 1).getFullName() + " was added to your friendlist");
 
             System.out.println("Do you want to add another friend?\n1. Add friend\n2. Go Back");
             int menuSelection = isNumber(input.nextLine());
@@ -688,13 +687,13 @@ public class TrainingProgram {
         System.out.println("Friends in friend list:");
 
         // If no friends in gymBuddies
-        if (accountHolder.gymBuddies.isEmpty()) {
+        if (currentUser.gymBuddies.isEmpty()) {
             System.out.println("\t-Empty");
             return;
         }
 
 
-        accountHolder.showGymBuddies();
+        currentUser.showGymBuddies();
         /*for (int i = 0; i < accountHolder.gymBuddies.size(); i++) {
             System.out.printf("\n%s. %s\n", i + 1, accountHolder.gymBuddies.get(i).getWorkoutName());
 
@@ -708,7 +707,7 @@ public class TrainingProgram {
         // Show all gym buddies
         showGymBuddies();
 
-        if (accountHolder.gymBuddies.size() == 0) {
+        if (currentUser.gymBuddies.size() == 0) {
             return;
         }
 
@@ -723,14 +722,14 @@ public class TrainingProgram {
             switch (menuSelection) {
                 case 1:
                     System.out.println("Enter new first name:");
-                    accountHolder.gymBuddies.get(friendIndex - 1).setFirstName(input.nextLine().trim());
+                    currentUser.gymBuddies.get(friendIndex - 1).setFirstName(input.nextLine().trim());
                     break;
                 case 2:
                     System.out.println("Enter new last name");
-                    accountHolder.gymBuddies.get(friendIndex - 1).setLastName(input.nextLine().trim());
+                    currentUser.gymBuddies.get(friendIndex - 1).setLastName(input.nextLine().trim());
                     break;
                 case 3:
-                    accountHolder.removeGymBuddy(friendIndex - 1);
+                    currentUser.removeGymBuddy(friendIndex - 1);
                     return;
                 case 4:
                     return;
@@ -754,7 +753,7 @@ public class TrainingProgram {
 
         //Collections.sort();
 
-        ArrayList<Workout> workouts = accountHolder.workoutList;
+        ArrayList<Workout> workouts = currentUser.workoutList;
         //Comparator<Workout> compareByName = (Workout o1, Workout o2) ->
 
 
@@ -902,58 +901,8 @@ public class TrainingProgram {
 
 
 
-    // TODO: egen klass?
-    // TODO: loop
-    public void help() {
-        System.out.println("What do you need help with?");
-        System.out.println("1. How to create a workout\n2. How to edit a workout\n3. How to search for a workout\n4. Go Back\n");
-
-        int menuSelector = isNumber(input.nextLine());
-
-        switch (menuSelector) {
-            case 1:
-                helpCreateWorkout();
-                break;
-            case 2:
-                helpEditWorkout();
-                break;
-            case 3:
-                System.out.println("How to search");
-                break;
-            case 4:
-                return;
-        }
-    }
 
 
-    public void helpCreateWorkout() {
-        System.out.println("Step 1: Give your workout a name (ex: 'Chest day' or 'Monday Workout'.\n" +
-                "\t It's okey to name to workouts the same.\n\n" +
-                "Step 2: Enter the name of the exercise you want to add (all workouts need at least one exercise).\n" +
-                "\t It's also okey for exercises to have the same name.\n\n" +
-                "Step 3: Specify the amount of reps of the given exercise.\n" +
-                "\tReps or repitions are the number of times you perform an exercise (ex: doing 15 pushup, 15 will be your amount of reps)).\n\n" +
-                "Step 4: Specify the amount of sets of the given exercise.\n" +
-                "\tSets are the number of times you're gonna repeat an exercise (if you do 15 pushups then rest and then do 15 more, you have done two sets).\n");
-    }
-
-    public void helpEditWorkout() {
-        System.out.println("Step 1: Choose 'Edit Workouts' in the main menu.\n\n" +
-                "For adding a new exercise to a already created workout, .....  ");
-
-
-        // To edit an exercise enter the number infront (1.2)
-    }
-
-
-
-
-
-
-    // TODO: ange email vid friends/eget
-    public void checkForValidEmail() {
-
-    }
 
 
 
