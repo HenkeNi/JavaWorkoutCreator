@@ -3,29 +3,38 @@ package com.HenrikJangefelt;
 import java.util.*;
 
 // TODO: FIxa try and catch for inputs!!
-// TODO: use enums more!!!
-// TODO: randomera/slumpa fram en övning?
 // TODO: ta in userInout som String och omvandla sedan (Fixar bugg med nextLine inte läses in?) TODO: FIx isNumber
-// TODO: add functionallity for changing your username
-// TODO: ADD staffMembers (Friends is mixture of GymMembers and staffmembers?)
-// TODO: KOLLA FÖRST OM DET REDAN FINNS: Men vid add exercise i edit kunna gå tillbaka istället för att ange vilken workout att lägga till i
+
 // TODO: kolla att enum Muscle fungerar
+// TODO: use enums more!!!
+
+// TODO: add functionallity for changing your username
+
+// TODO: ange veckodagar för staff
+
+// TODO: Are you sure you want to delete friend/workout/exercise - check first?
 // TODO: clean - rensa alla
 
-// TODO: Are you sure you want to delete friend/workout/exercise
+// TODO: (TAnkar) menyalternativ som en array av enums eller liknande ???
 
-// TODO:ADD friends
-// TODO: sök på antgingen workout eller friend
+// TODO: Bygg efter singelton (kolla upp!!)
+
+// TODO: sort
 
 public class TrainingProgram {
 
     Scanner input = new Scanner(System.in);
     GymMember accountHolder = new GymMember("MrOrMrs.", "Somebody"); // TODO: Sätt default värde i Person istället?
+    static GymMember currentUser = new GymMember("", ""); // TEST (Static)
 
 
     public TrainingProgram() {
+        //public TrainingProgram(GymMember currentUser) {
 
-        createNewAccount();
+        //this.currentUser = currentUser;
+        //System.out.println(this.currentUser.getFullName()); verkar funka TODO: måste skicak ett objetkt av GmyMember
+        //createNewAccount();
+        //System.out.printf("Welcome %s!\n", currentUser.getFullName());
         mainMenu();
     }
 
@@ -47,6 +56,7 @@ public class TrainingProgram {
     }
 
 
+    // TODO: !!!! Friends ska vara ett option där man både kan editera och alääga till
     // TODO: combine addWorkout with add Gym buddies -> submenu
     public void mainMenu() {
 
@@ -56,7 +66,7 @@ public class TrainingProgram {
         //System.out.println("\nThis is the workout creator! Here you can create new workouts");
 
         do {
-            System.out.println("This is the Main Menu.\n1. Add or Edit Workouts\n2. Add or Edit Friend List\n3. Search\n4. Show\n5. Help(TODO)\n6. Check Available Staff\n7. Exit\n8. TEST SORT");
+            System.out.println("Main Menu:\n1. Add or Edit Workouts\n2. Add or Edit Friend List\n3. Search\n4. Show\n5. Help(TODO)\n6. Check Available Staff\n7. Exit\n8. TEST SORT");
             //System.out.println("This is the Main Menu.\n1. Add Workouts\n2. Edit Workouts\n3. Add Gym Buddies\n4. Edit Gym Buddies \n5. Search\n6. Show all\n7. Help(TODO)\n8. Exit");
             userInput = input.nextLine();
 
@@ -940,148 +950,12 @@ public class TrainingProgram {
 
 
 
-
+    // TODO: ange email vid friends/eget
     public void checkForValidEmail() {
 
     }
 
 
-    public void saveSocialSecurityNumber() {
-        System.out.println("Input your social security number:");
 
-        String socialSecurityNumb = "";
-
-        do {
-            socialSecurityNumb = input.nextLine();
-
-            if (socialSecurityNumb.length() == 11 && socialSecurityNumb.charAt(6) == '-') {
-                // Save or return number
-                return;
-            }
-        } while (true);
-    }
 }
 
-
-
-
-
-
-  /*public void createNewWorkout() {
-        System.out.println("Enter new workout's name:");
-        input.nextLine(); // TODO: Kan ta bort?
-        Workout newWorkout = new Workout(input.nextLine().trim());
-        //workoutList.add(newWorkout);
-        accountHolder.workoutList.add(newWorkout);
-
-        addExercises(newWorkout);
-    }*/
-
-
-        /*public void addExercises(Workout newWorkout) {
-
-        boolean addingExercise = true;
-        String userInput = "";
-
-        do {
-
-            // Must add at least one exercise to a workout
-            if (newWorkout.exerciseList.size() == 0) {
-                newWorkout = createExercise(newWorkout);
-                //addNewExercise(newWorkout);
-            } else {
-                System.out.printf("Workout: \'%s\' currently consist of %s exercises\n", newWorkout.getWorkoutName(), newWorkout.exerciseList.size());
-                System.out.println("1. Add another exercise\n2. Go back");
-                userInput = input.nextLine();
-
-
-                int menuSelection = isNumber(userInput);
-
-                switch (menuSelection) {
-                    case 1:
-                        newWorkout = createExercise(newWorkout); // Add exercise to current workout
-                        //addNewExercise(newWorkout);
-                        break;
-                    case 2:
-                        addingExercise = false;
-                        break;
-                }
-            }
-        } while (addingExercise);
-
-        //workoutList.add(newWorkout); // Add workout to workoutList
-    }*/
-
-
-    /*public Workout createExercise(Workout newWorkout) {
-
-        System.out.println("Name of exercise to add:");
-
-        // Fixes bug(?) where user input isn't registered
-        // TODO: ta bort?
-        if (newWorkout.exerciseList.size() > 0) {
-            input.nextLine();
-        }
-        String exerciseName = input.nextLine();
-
-        System.out.println("Amount of Reps for exercise:");
-        int amountOfReps = isNumber(input.nextLine());
-
-        System.out.println("Amount of Sets for exercise:");
-        int amountOfSets = isNumber(input.nextLine());
-        //int amountOfSets = checkForValidInput();
-
-        newWorkout.addExercise(exerciseName, amountOfReps, amountOfSets); // Add exercise to workout
-        System.out.printf("Exercise '%s' was added to workout '%s'!\n\n", exerciseName, newWorkout.getWorkoutName());
-        return newWorkout;
-    }*/
-
-
-    /*
-      // Delete workouts or exercises
-    public void deleteUserWorkout() {
-
-        int[] indexArray = checkIfWorkoutOrExercise("delete");
-        int workoutNumber = indexArray[0];
-        int exerciseNumber = indexArray[1];
-
-        if (exerciseNumber == 0) {
-            System.out.printf("Workout '%s' was deleted!\n", workoutList.get(workoutNumber - 1).getWorkoutName());
-            workoutList.remove(workoutNumber - 1); // Remove workout
-
-        } else {
-            // If exercise is the last in workout, then delete the whole workout
-            if (workoutList.get(workoutNumber - 1).exerciseList.size() <= 1) {
-                System.out.printf("Workout '%s' was deleted!\n", workoutList.get(workoutNumber - 1).getWorkoutName());
-                workoutList.remove(workoutNumber - 1);
-
-            } else {
-                System.out.printf("Exercise '%s' was deleted!\n", workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber -1).getExerciseName());
-                workoutList.get(workoutNumber - 1).removeExercise(exerciseNumber - 1); // Delete exercise
-            }
-        }
-        return;
-    }
-     */
-
-
-    /*
-      public void showWorkouts() {
-
-        System.out.println("Current Workouts:");
-
-        // If no workouts in workoutList
-        if (accountHolder.workoutList.isEmpty()) {
-            System.out.println("\t-Empty");
-            return;
-        }
-
-
-        // Prints out all workouts in workoutList, including their exercises
-        for (int i = 0; i < accountHolder.workoutList.size(); i++) {
-            System.out.printf("\n%s. %s\n", i + 1, accountHolder.workoutList.get(i).getWorkoutName());
-
-            accountHolder.workoutList.get(i).showExercises(i + 1);
-        }
-    }
-     */

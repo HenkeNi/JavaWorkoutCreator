@@ -6,7 +6,8 @@ public abstract class Person {
 
     private String firstName; // TODO, sätt default värde?
     private String lastName;
-    private String email;
+    private String emailAdress;
+    private String password;
 
     public Person(String firstName, String lastName) {
         this.firstName = firstName;
@@ -25,11 +26,19 @@ public abstract class Person {
         this.lastName = lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailAdress(String emailAdress) {
+        this.emailAdress = emailAdress;
     }
-    public String getEmail() {
-        return email;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmailAdress() {
+        return emailAdress;
+    }
+    public String getPassword() {
+        return password;
     }
 
     //TODO: add an abstract metod
