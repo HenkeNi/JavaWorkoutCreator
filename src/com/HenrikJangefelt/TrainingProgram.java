@@ -1,6 +1,5 @@
 package com.HenrikJangefelt;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 // TODO: egen class för StaffSchedule
@@ -10,6 +9,8 @@ import java.util.*;
 
 // TODO: kolla att enum Muscle fungerar
 // TODO: use enums more!!!
+
+// TODO: sortera; muskel grupper tillsammans
 
 // TODO: add functionallity for changing your username, hämta/se sitt password/email
 
@@ -21,6 +22,8 @@ import java.util.*;
 // TODO: clean - rensa alla
 
 // TODO: (TAnkar) menyalternativ som en array av enums eller liknande ???
+
+// TODO: sätt 0 som return
 
 // TODO: Bygg efter singelton (kolla upp!!)
 
@@ -93,7 +96,7 @@ public class TrainingProgram {
                     searchWorkout();
                     break;
                 case 5:
-                    sortWorkout();
+                    sortMenu();
                     break;
                 case 6:
                     return;
@@ -181,12 +184,14 @@ public class TrainingProgram {
             currentUser.showWorkouts();
 
             if (currentUser.workoutList.size() != 0) {
-                System.out.println("\nOptions:\n1. Add exercise\n2. Edit\n3. Delete\n4. Go Back");
+                System.out.println("\nOptions:\n1. Add exercise\n2. Edit\n3. Delete\n0. Go Back");
                 userInput = input.nextLine();
 
                 menuSelection = isNumber(userInput);
 
                 switch (menuSelection) {
+                    case 0:
+                        return;
                     case 1:
                         System.out.println("Enter the number of the workout you wish to add exercise to");
                         addExercise(isNumber(input.nextLine()) - 1);
@@ -197,8 +202,6 @@ public class TrainingProgram {
                     case 3:
                         deleteWorkout(); // Delete workout or exercise
                         break;
-                    case 4:
-                        return; // Go Back
                 }
             }
         } while (!currentUser.workoutList.isEmpty());
@@ -416,6 +419,68 @@ public class TrainingProgram {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+    public void sortMenu() {
+
+        do {
+            System.out.println("Sort:\n1. Workouts\n2. Exercises\n0. Go Back");
+            int sortSelection = isNumber(input.nextLine());
+
+            switch (sortSelection) {
+                case 0:
+                    return;
+                case 1:
+                    break;
+                case 2:
+                    currentUser.showWorkouts();
+                    System.out.println("Enter workout prefix for sorting exercises");
+                    //int workoutIndex = isNumber(input.nextLine());
+                    //sortExercises(workoutIndex);
+                    sortExercises(isNumber(input.nextLine()));
+                    currentUser.showWorkouts();
+                    break;
+            }
+        } while (true);
+    }
+
+    // TODO: enum för olika sortering??
+    // TODO: lägg sort i edit
+    public void sortWorkout() {
+
+
+    }
+
+    public void sortExercises(int workoutIndex) {
+        System.out.println("Sort by:\n1. Name\n2. Reps\n3. Sets\n4. Go Back");
+        int menuSelection = isNumber(input.nextLine());
+
+        switch (menuSelection) {
+            case 1:
+                SortExerciseName sortExerciseName = new SortExerciseName();
+                Collections.sort(currentUser.workoutList.get(workoutIndex - 1).exerciseList, sortExerciseName);
+                break;
+            case 2:
+                SortExerciseReps sortExerciseReps = new SortExerciseReps();
+                Collections.sort(currentUser.workoutList.get(workoutIndex - 1).exerciseList, sortExerciseReps);
+                break;
+            case 3:
+                SortExerciseSets sortExerciseSets = new SortExerciseSets();
+                Collections.sort(currentUser.workoutList.get(workoutIndex - 1).exerciseList, sortExerciseSets);
+                break;
+            case 4:
+                return;
+        }
+
+    }
 
 
 
@@ -716,55 +781,6 @@ public class TrainingProgram {
     }
 
 
-
-    // TODO: enum för olika sortering
-    // TODO: lägg sort i edit
-    public void sortWorkout() {
-
-        /*Comparator<Workout> compareByName = new Comparator<Workout>() {
-            @Override
-            public int compare(Workout o1, Workout o2) {
-                //return 0;
-                return o1.getWorkoutName().compareTo(o2.getWorkoutName());
-            }
-        };*/
-
-        //Collections.sort();
-
-        ArrayList<Workout> workouts = currentUser.workoutList;
-        //Comparator<Workout> compareByName = (Workout o1, Workout o2) ->
-
-
-
-        //Comparator<Workout> compareByName = (Workout o1, Workout o2) -> o1.getWorkoutName().compareTo(o2.getWorkoutName());
-        //Comparator<Workout> compareBySometthing
-
-
-
-        //showWorkouts();
-        //Collections.sort(accountHolder.workoutList);
-        // Return if empty
-        /*if (!workoutList.isEmpty()) {
-
-        }*/
-        //Collections.sort(workoutList);
-
-
-    }
-
-    // RÄtt eller använd index??
-    public void sortWorkoutsManually(Workout firstWorkout, Workout secondWorkout) {
-
-        Workout tempWorkout = firstWorkout;
-        firstWorkout = secondWorkout;
-        secondWorkout = tempWorkout;
-
-    }
-
-
-    public void sortByName() {
-
-    }
 
 
 

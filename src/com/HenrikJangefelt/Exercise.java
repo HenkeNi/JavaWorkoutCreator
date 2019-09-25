@@ -44,6 +44,14 @@ public class Exercise implements Comparable<Exercise> {
         return exerciseName;
     }
 
+    public int getNumberOfReps() {
+        return numberOfReps;
+    }
+
+    public int getNumberOfSets() {
+        return numberOfSets;
+    }
+
     public String getExercise() {
         //return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ")"; // TODO: Fixa, inte jätte snyggt
         return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ", Targeted Muscle: " + targetedMuscle.label + ")";

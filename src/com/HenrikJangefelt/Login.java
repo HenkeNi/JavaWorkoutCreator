@@ -27,7 +27,7 @@ public class Login {
                     break;
                 case 3:
                     System.out.println("Terminating...");
-                    break;
+                    return;
                 case 4:
                     bypassOption();
                     break;
