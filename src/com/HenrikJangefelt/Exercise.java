@@ -11,22 +11,24 @@ public class Exercise implements Comparable<Exercise> {
     // private float weightUsed;
     // private // enum muscleGroup
 
+
     enum Muscle {
-        CHEST,
-        BACK,
-        SHOULDERS,
-        BICEPS,
-        TRICEPS,
-        ABS,
-        LEGS,
-        UNKOWN
+        CHEST("Chest"),
+        BACK("Back"),
+        SHOULDERS("Shoulders"),
+        BICEPS("Bicep"),
+        TRICEPS("Tricep"),
+        ABS("Abs"),
+        LEGS("Legs"),
+        UNKOWN("Unspecified");
+
+        public String label;
+        private Muscle(String label) {
+            this.label = label;
+        }
     }
 
-    enum SortBy {
-        EXERCISENAME,
-        REPS,
-        SETS,
-    }
+
 
 
     public Exercise(String exerciseName, int numberOfReps, int numberOfSets, Muscle targetedMuscle) {
@@ -44,7 +46,7 @@ public class Exercise implements Comparable<Exercise> {
 
     public String getExercise() {
         //return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ")"; // TODO: Fixa, inte jätte snyggt
-        return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ", Targeted Muscle: " + targetedMuscle + ")";
+        return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ", Targeted Muscle: " + targetedMuscle.label + ")";
     }
 
     public String toString() {

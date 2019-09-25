@@ -67,6 +67,8 @@ public class Workout implements Comparable<Workout> {
     }*/
 
 
+
+
     // Vad som ska vissas nåär man printar workout
     public String toString() {
         //return workoutName;

@@ -38,7 +38,7 @@ public class TrainingProgram {
         showMainMenu();
     }
 
-
+    // TODO: lägg till funktion för att köra passet?
     public void showMainMenu() {
 
         int menuSelection = 0;
@@ -374,8 +374,7 @@ public class TrainingProgram {
     }
 
 
-    // TODO: Go back function!!!
-    // TODO: Put in workout Class???
+    // TODO: använd den i GymMember klass istället
     public void searchWorkout() {
 
         // TODO: find better way

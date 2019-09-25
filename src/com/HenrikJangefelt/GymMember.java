@@ -49,9 +49,45 @@ public class GymMember extends Person {
                 /*for (int j = 0; j < workoutList.size(); j++) {
                     System.out.printf("\t%s. %s\n", j + 1 , workoutList.get(j));
                 }*/
-
         }
     }
+
+    // TODO: Fix
+    public void searchWorkout(String searchedWorkout) {
+
+        int matchingWorkouts = 0;
+        int relatedWorkouts = 0;
+
+        for (int i = 0; i < workoutList.size(); i++) {
+
+            if (workoutList.get(i).getWorkoutName().equalsIgnoreCase(searchedWorkout)) {
+                if (matchingWorkouts == 0) {
+                    System.out.println("Workout(s) Found:");
+                }
+                System.out.println(workoutList.get(i).getWorkoutName());
+                workoutList.get(i).showExercises(i + 1);
+                matchingWorkouts++;
+
+                // TODO: FIxa för många upperCase?
+                //} else if (workout.contains(searchedWorkout) &&  !workout.equals(searchedWorkout)) {
+            } else if (workoutList.get(i).getWorkoutName().toUpperCase().contains(searchedWorkout.toUpperCase()) && matchingWorkouts == 0) {
+
+                // Only get related workouts in no exact match are found
+                if (relatedWorkouts == 0) {
+                    System.out.printf("Workout that contains '%s' found:\n", searchedWorkout);
+                }
+                System.out.println(workoutList.get(i).getWorkoutName());
+                workoutList.get(i).showExercises(i + 1);
+                relatedWorkouts++;
+            }
+        }
+
+        // If no matching or related workout found
+        if (matchingWorkouts == 0 && relatedWorkouts == 0) {
+            System.out.println("No workouts found with that name");
+        }
+    }
+
 
     public void removeGymBuddy(int indexPosition) {
         gymBuddies.remove(indexPosition);
