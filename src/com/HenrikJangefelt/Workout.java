@@ -2,7 +2,7 @@ package com.HenrikJangefelt;
 
 import java.util.ArrayList;
 
-public class Workout {
+public class Workout implements Comparable<Workout> {
 
     private String workoutName;
     //private int totalAmountOfReps;
@@ -75,4 +75,9 @@ public class Workout {
     }
 
 
+    // TODO jämför kod
+    @Override
+    public int compareTo(Workout o) {
+        return 0;
+    }
 }

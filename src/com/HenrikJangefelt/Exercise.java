@@ -1,15 +1,15 @@
 package com.HenrikJangefelt;
 
 // TODO: rätt att den ärver från workout??? Behöver workout name?
-public class Exercise {
+public class Exercise implements Comparable<Exercise> {
 
     private String exerciseName;
     private int numberOfReps;
     private int numberOfSets;
     private Muscle targetedMuscle;
+
     // private float weightUsed;
     // private // enum muscleGroup
-
 
     enum Muscle {
         CHEST,
@@ -20,6 +20,12 @@ public class Exercise {
         ABS,
         LEGS,
         UNKOWN
+    }
+
+    enum SortBy {
+        EXERCISENAME,
+        REPS,
+        SETS,
     }
 
 
@@ -69,6 +75,10 @@ public class Exercise {
         //return "Main muscle worked: " + targetedMuscle.toString();
     }
 
+    @Override
+    public int compareTo(Exercise o) {
+        return 0;
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package com.HenrikJangefelt;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 // TODO: egen class för StaffSchedule
@@ -13,6 +14,8 @@ import java.util.*;
 // TODO: add functionallity for changing your username, hämta/se sitt password/email
 
 // TODO: ange veckodagar för staff
+
+// TODO: kolla om det finns mer att lägga i de olika klasserna (workouts etc.)
 
 // TODO: Are you sure you want to delete friend/workout/exercise - check first?
 // TODO: clean - rensa alla
@@ -32,7 +35,6 @@ public class TrainingProgram {
     static GymMember currentUser = new GymMember("", ""); // TEST (Static) TODO: (ta bort från konstruktorn i Person???)
 
     public TrainingProgram() {
-        test();
         showMainMenu();
     }
 
@@ -204,12 +206,6 @@ public class TrainingProgram {
 
 
 
-
-
-
-
-
-
     // TODO: förbättra
     public void updateWorkout(int workoutNumber) {
 
@@ -225,7 +221,6 @@ public class TrainingProgram {
             userInput = input.nextLine();
             menuSelection = isNumber(userInput);
 
-
             switch (menuSelection) {
                 case 1:
                     // TODO: GÖr till funktion (eller lägg addNEwExercise i switch case med)
@@ -237,10 +232,9 @@ public class TrainingProgram {
                 case 2:
                     return;
             }
+            System.out.println("Workout successfully updated!");
         } while (true);
     }
-
-
 
 
     // TODO: förbättra
@@ -287,24 +281,53 @@ public class TrainingProgram {
     }
 
 
+    // TODO: förbättra (lägg i workout)
+    // TODO: Combine with returnWorkoutPrefix??
+    public void editWorkout() {
+
+        int[] indexArray = returnWorkoutPrefix("change");
+        int workoutNumber = indexArray[0];
+        int exerciseNumber = indexArray[1];
+
+        if (exerciseNumber == 0) {
+            updateWorkout(workoutNumber);
+        } else {
+            updateExercise(workoutNumber, exerciseNumber);
+        }
+    }
 
 
-    // TODO: kolla över check.., alter, updateExer
+    public int[] returnWorkoutPrefix(String editMode) {
 
+        boolean validNumbers = false;
+        int workoutIndex = 0;
+        int exerciseIndex = 0;
 
+        do {
+            System.out.println("Enter the prefix-number of the workout or exercise you want to " + editMode);
+            String userInput = input.nextLine().replace(".", "").trim();
+            try {
+                //workoutIndex = Character.getNumericValue(userInput.charAt(0));
+                workoutIndex = Integer.parseInt(userInput.substring(0, 1));
+                if (userInput.length() >= 2) {
+                    exerciseIndex = Integer.parseInt(userInput.substring(1));
+                }
+                validNumbers = true;
+            } catch (Exception e) {
+                System.out.println("Must enter a valid number prefix.");
+            }
+        } while (!validNumbers);
 
-    // TODO: fix userInput krasch
-    // TODO: loop, om inte angivit giltligt tal, ange ett nytt...
-    // TODO: kolla om string kan kovertas till tal
-    // TODO: Ändra till att kolla om det är en dubbel
-    // Checks if user input is a number (workout) or a number.number (exercise)
-    public int[] returnWorkoutOrExercise(String mode) {
-        //public int[] checkIfWorkoutOrExercise(String userInput, String mode) {
+        int[] prefixArray = {workoutIndex, exerciseIndex };
+        return prefixArray;
+    }
+
+    // OLD VERSION
+   /* public int[] returnWorkoutOrExercise(String mode) {
         System.out.printf("Enter the prefix-number of the workout or exercise you want to %s:\n", mode);
         input.nextLine();
         String selectedWorkout = input.nextLine();
         int[] indexArray = new int[2];
-
 
         // User entered an exercise in a workout
         if (selectedWorkout.contains(".") && selectedWorkout.length() >= 3 && selectedWorkout.charAt(1) == '.') {
@@ -321,59 +344,14 @@ public class TrainingProgram {
             indexArray[0] = workoutIndex;
         }
         return indexArray;
-    }
-
-
-
-    // TODO: förbättra
-    public void editWorkout() {
-
-        int[] indexArray = returnWorkoutOrExercise("change");
-        int workoutNumber = indexArray[0];
-        int exerciseNumber = indexArray[1];
-
-        if (exerciseNumber == 0) {
-            updateWorkout(workoutNumber);
-        } else {
-            updateExercise(workoutNumber, exerciseNumber);
-        }
-    }
-
-
-    // TODO: försök konvertera usreInout till double annars returnera int (optional return values???)
-    // TODO: Försök tilll att göra om wokroutOrexercise med double
-    public void test() {
-
-
-        // ta numret, gör om till int (ta bort punkt) första siffra blir
-        System.out.printf("Enter the prefix-number of the workout or exercise you want to change");
-        String userInput = input.nextLine().replace(".", "").trim();
-        System.out.println(userInput);
-
-
-        /*
-        double decimalNumb = 0.0;
-        System.out.printf("Enter the prefix-number of the workout or exercise you want to change");
-        String userInput = input.nextLine();
-
-        try {
-            decimalNumb = Double.parseDouble(userInput);
-        } catch (Exception e) {
-            System.out.println("Didnt wokr"); // Loop, bool etc.
-        }
-
-        int workoutNumb = (int)decimalNumb;
-        System.out.println(workoutNumb);*/
-
-    }
-
+    }*/
 
 
 
     // Delete workouts or exercises
     public void deleteWorkout() {
 
-        int[] indexArray = returnWorkoutOrExercise("delete");
+        int[] indexArray = returnWorkoutPrefix("delete");
         int workoutNumber = indexArray[0];
         int exerciseNumber = indexArray[1];
 
@@ -397,6 +375,7 @@ public class TrainingProgram {
 
 
     // TODO: Go back function!!!
+    // TODO: Put in workout Class???
     public void searchWorkout() {
 
         // TODO: find better way
