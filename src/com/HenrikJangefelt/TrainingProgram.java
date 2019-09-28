@@ -92,7 +92,7 @@ public class TrainingProgram {
                     showEditWorkoutMenu(gymMember);
                     break;
                 case 3:
-                    gymMember.showWorkouts();
+                    showWorkouts(gymMember, gymMember.getWorkoutList());
                     break;
                 case 4:
                     searchWorkout(gymMember);
@@ -184,7 +184,7 @@ public class TrainingProgram {
         String userInput = "";
 
         do {
-            gymMember.showWorkouts();
+            showWorkouts(gymMember, gymMember.getWorkoutList());
 
             if (gymMember.getWorkoutList().size() != 0) {
                 System.out.println("\nOptions:\n1. Add exercise\n2. Edit\n3. Delete\n0. Go Back");
@@ -377,7 +377,6 @@ public class TrainingProgram {
     }
 
 
-    // TODO: använd den i GymMember klass istället
     public void searchWorkout(GymMember gymMember) {
 
         System.out.println("Enter name of the workout you are looking for:");
@@ -387,19 +386,14 @@ public class TrainingProgram {
         ArrayList<Workout> matchingWorkouts = gymMember.getSearchedWorkout(searchedWorkout);
         ArrayList<Workout> relatedWorkouts = gymMember.getRelatedSearchedWorkout(searchedWorkout);
 
-        // TODO: bygg ihop funktion för att printa ut wokruts (kanske samma som i klass gmMEmber)
         if (!matchingWorkouts.isEmpty()) {
             System.out.println("Workout(s) Found:");
-            for (int i = 0; i < matchingWorkouts.size(); i++) {
-                System.out.println(matchingWorkouts.get(i).getWorkoutName());
-                matchingWorkouts.get(i).showExercises(i + 1);
-            }
+            gymMember.showWorkoutsInList(matchingWorkouts);
+
         } else if (!relatedWorkouts.isEmpty()) {
             System.out.printf("Workout that contains '%s' found:\n", searchedWorkout);
-            for (int i = 0; i < relatedWorkouts.size(); i++) {
-                System.out.println(relatedWorkouts.get(i).getWorkoutName());
-                relatedWorkouts.get(i).showExercises(i + 1);
-            }
+            gymMember.showWorkoutsInList(relatedWorkouts);
+
         } else {
             System.out.printf("No workouts matching %s found\n", searchedWorkout);
         }
@@ -407,6 +401,17 @@ public class TrainingProgram {
 
 
 
+    // TODO: sätt Workouts som optional?
+    public void showWorkouts(GymMember gymMember, ArrayList<Workout> workouts) {
+
+        System.out.println("Current Workouts:");
+
+        if (gymMember.getWorkoutList().isEmpty()) {
+            System.out.println("\t -Empty");
+            return;
+        }
+        gymMember.showWorkoutsInList(workouts);
+    }
 
 
 
@@ -428,10 +433,10 @@ public class TrainingProgram {
                     sortWorkout(gymMember);
                     break;
                 case 2:
-                    gymMember.showWorkouts();
+                    showWorkouts(gymMember, gymMember.getWorkoutList());
                     System.out.println("Enter workout prefix for sorting exercises");
                     sortExercises(gymMember, isNumber(input.nextLine()));
-                    gymMember.showWorkouts();
+                    showWorkouts(gymMember, gymMember.getWorkoutList());
                     break;
             }
         } while (true);
@@ -451,7 +456,7 @@ public class TrainingProgram {
             case 1:
                 SortWorkoutName sortWorkoutName = new SortWorkoutName();
                 Collections.sort(gymMember.getWorkoutList(), sortWorkoutName);
-                gymMember.showWorkouts();
+                showWorkouts(gymMember, gymMember.getWorkoutList());
                 break;
         }
     }
@@ -482,6 +487,7 @@ public class TrainingProgram {
         }
 
     }
+
 
 
 
