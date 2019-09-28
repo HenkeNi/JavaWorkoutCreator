@@ -77,6 +77,7 @@ public class Workout implements Comparable<Workout> {
     }
 
 
+    // TODO: kan ta bort?
     // TODO jämför kod
     @Override
     public int compareTo(Workout o) {

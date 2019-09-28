@@ -6,15 +6,20 @@ import java.util.ArrayList;
 // GymGoer, lifter, trainee,
 public class GymMember extends Person {
 
-    // TODO: Sätt till privata
-    ArrayList<Workout> workoutList = new ArrayList<>();
-    ArrayList<GymMember> gymBuddies = new ArrayList<>();
+    // TODO: ha bara logik i klasserna!!
+    private ArrayList<Workout> workoutList = new ArrayList<>();
+    private ArrayList<GymMember> friendList = new ArrayList<>();
 
+    // TODO: lägg till email och lösen?? NEJ: måste ange det när man lägger till frineds då....
     public GymMember(String firstName, String lastName) {
 
         super(firstName, lastName);
     }
 
+
+    public ArrayList<Workout> getWorkoutList() {
+        return workoutList;
+    }
 
     public void removeWorkout(int indexPosition) {
         workoutList.remove(indexPosition);
@@ -53,6 +58,7 @@ public class GymMember extends Person {
     }
 
     // TODO: Fix
+    // TODO returnera värde/workouts. ..
     public void searchWorkout(String searchedWorkout) {
 
         int matchingWorkouts = 0;
@@ -88,20 +94,36 @@ public class GymMember extends Person {
         }
     }
 
+    public Workout[] getSearchedWorkout() {
 
-    public void removeGymBuddy(int indexPosition) {
-        gymBuddies.remove(indexPosition);
-    }
-
-    public void addGymBuddy(String firstName, String lastName) {
-        GymMember gymBuddy = new GymMember(firstName, lastName);
-        gymBuddies.add(gymBuddy);
-    }
-
-    public void showGymBuddies() {
-        for (int i = 0; i < gymBuddies.size(); i++) {
-            System.out.printf("\t%s. %s\n", i + 1, gymBuddies.get(i).getFullName());
+        for (int i = 0; i < workoutList.size(); i++) {
+            
         }
     }
+
+    public Workout[] getRelatedSearchedWorkout() {
+
+    }
+
+
+    public ArrayList<GymMember> getFriendList() {
+        return friendList;
+    }
+
+    public void addFriend(String firstName, String lastName) {
+        friendList.add(new GymMember(firstName, lastName));
+    }
+
+    public void deleteFriend(int indexPosition) {
+        friendList.remove(indexPosition);
+    }
+
+    public void showFriends() {
+        for (int i = 0; i < friendList.size(); i++) {
+            System.out.printf("\t%s. %s\n", i + 1, friendList.get(i).getFullName());
+        }
+    }
+
+
 
 }

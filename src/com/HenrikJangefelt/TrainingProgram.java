@@ -2,62 +2,64 @@ package com.HenrikJangefelt;
 
 import java.util.*;
 
+// TODO: dum idé att alla metoder tar in GymMember. Ja: onödigt? .Nej: Programmet funkar för att lägga till workouts till andra???
+
 // TODO: egen class för StaffSchedule
 
 // TODO: FIxa try and catch for inputs!!
 // TODO: ta in userInout som String och omvandla sedan (Fixar bugg med nextLine inte läses in?) TODO: FIx isNumber
 
-// TODO: kolla att enum Muscle fungerar
-// TODO: use enums more!!!
+// TODO: Försök lägga till mer enums?,
 
-// TODO: sortera; muskel grupper tillsammans
+// TOOD: sätt så mycket som möjligt till private?
 
-// TODO: add functionallity for changing your username, hämta/se sitt password/email
+// TODO: Settings, chang your username, ändra/se sitt password/email. Rensa alla arrays
 
 // TODO: ange veckodagar för staff
 
 // TODO: kolla om det finns mer att lägga i de olika klasserna (workouts etc.)
 
-// TODO: Are you sure you want to delete friend/workout/exercise - check first?
-// TODO: clean - rensa alla
 
 // TODO: (TAnkar) menyalternativ som en array av enums eller liknande ???
 
-// TODO: sätt 0 som return
+// TODO: sätt 0 som return i alla switch menyer?
 
 // TODO: Bygg efter singelton (kolla upp!!)
 
-// TODO: sort
+// TODO: Final check- kolla att man bara kan ange siffror, samt bara rätt intervall för tex arrayer...
 
 public class TrainingProgram {
 
     Scanner input = new Scanner(System.in);
 
-    //GymMember accountHolder = new GymMember("MrOrMrs.", "Somebody"); // TODO: Sätt default värde i Person istället?
-
     static GymMember currentUser = new GymMember("", ""); // TEST (Static) TODO: (ta bort från konstruktorn i Person???)
 
     public TrainingProgram() {
-        showMainMenu();
+        showMainMenu(currentUser);
     }
 
     // TODO: lägg till funktion för att köra passet?
-    public void showMainMenu() {
+    public void showMainMenu(GymMember gymMember) {
 
         int menuSelection = 0;
         String userInput = "";
 
 
         do {
-            System.out.println("Main Menu:\n1. Workouts\n2. Friends\n3. Check Available Staff\n4. Help(TODO)\n5. Exit");
-            userInput = input.nextLine();
+            System.out.println("Main Menu:\n1. Workouts\n2. Friends\n3. Check Available Staff\n4. Help(TODO)\n0. Exit");
+            //userInput = input.nextLine();
 
-            menuSelection = isNumber(userInput);
+            do {
+                menuSelection = isNumber(input.nextLine());
+            } while (menuSelection == 0);
+            //menuSelection = isNumber(userInput);
             //int numberInt = checkIfValidNumber(userInput);
 
             switch (menuSelection) {
+                case 0:
+                    return;
                 case 1:
-                    showWorkoutMenu();
+                    showWorkoutMenu(gymMember);
                     break;
                 case 2:
                     showFriendsMenu();
@@ -68,54 +70,53 @@ public class TrainingProgram {
                 case 4:
                     help();
                     break;
-                case 5:
-                    return;
             }
-        } while (menuSelection != 5);
+        } while (menuSelection != 0);
     }
 
 
 
-    private void showWorkoutMenu() {
+    private void showWorkoutMenu(GymMember gymMember) {
 
         do {
-            System.out.println("Workout menu:\n1. Add Workout\n2. Edit Workout\n3. Show Workouts \n4. Search Workout\n5. Sort Workout \n6. Go Back");
+            System.out.println("Workout menu:\n1. Add Workout\n2. Edit Workout\n3. Show Workouts \n4. Search Workout\n5. Sort Workout \n0. Go Back");
             int menuSelection = isNumber(input.nextLine());
 
             switch (menuSelection) {
+                case 0:
+                    return;
                 case 1:
-                    createWorkout();
+                    createWorkout(gymMember);
                     break;
                 case 2:
-                    showEditWorkoutMenu();
+                    showEditWorkoutMenu(gymMember);
                     break;
                 case 3:
-                    currentUser.showWorkouts();
+                    gymMember.showWorkouts();
                     break;
                 case 4:
-                    searchWorkout();
+                    searchWorkout(gymMember);
                     break;
                 case 5:
-                    sortMenu();
+                    sortMenu(gymMember);
                     break;
-                case 6:
-                    return;
             }
         } while (true);
     }
 
 
-    // Creates a new workout
-    public void createWorkout() {
+    public void createWorkout(GymMember gymMember) {
+
         System.out.println("Enter workout's name:");
-        input.nextLine(); // TODO: Kan ta bort?
-        currentUser.addWorkout(input.nextLine());
-        addExercise(currentUser.workoutList.size() - 1); // Add new exercise to the last workout in the workoutList
+        //input.nextLine(); // TODO: Kan ta bort?
+        gymMember.addWorkout(input.nextLine());
+
+        addExercise(currentUser,gymMember.getWorkoutList().size() - 1); // Add new exercise to the last workout in the workoutList
+
     }
 
 
-    // Add exercises to workouts
-    public void addExercise(int workoutIndex) {
+    public void addExercise(GymMember gymMember, int workoutIndex) {
 
         do {
             System.out.println("Exercise name:");
@@ -127,19 +128,21 @@ public class TrainingProgram {
             System.out.println("Number of sets:");
             int numberOfSets = isNumber(input.nextLine());
 
-            currentUser.workoutList.get(workoutIndex).addExercise(exerciseName, numberOfReps, numberOfSets, selectMuscleGroup());
+            gymMember.getWorkoutList().get(workoutIndex).addExercise(exerciseName, numberOfReps, numberOfSets, selectMuscleGroup());
 
-            System.out.printf("Workout: \'%s\' currently consist of %s exercises\n", currentUser.workoutList.get(workoutIndex).getWorkoutName(), currentUser.workoutList.get(workoutIndex).exerciseList.size());
-            System.out.println("1. Add another exercise\n2. Go Back");
+
+            System.out.printf("Workout: \'%s\' currently consist of %s exercises\n", gymMember.getWorkoutList().get(workoutIndex).getWorkoutName(), gymMember.getWorkoutList().get(workoutIndex).exerciseList.size());
+            System.out.println("1. Add another exercise\n0. Go Back");
 
             int menuSelection = isNumber(input.nextLine());
 
             switch (menuSelection) {
-                case 2:
+                case 0:
                     return;
             }
         } while (true);
     }
+
 
     // TODO: Bara kunna ange tal mellan 1-7
     // Choose worked muscle group for exercise
@@ -175,15 +178,15 @@ public class TrainingProgram {
     }
 
 
-    public void showEditWorkoutMenu() {
+    public void showEditWorkoutMenu(GymMember gymMember) {
 
         int menuSelection = 0;
         String userInput = "";
 
         do {
-            currentUser.showWorkouts();
+            gymMember.showWorkouts();
 
-            if (currentUser.workoutList.size() != 0) {
+            if (gymMember.getWorkoutList().size() != 0) {
                 System.out.println("\nOptions:\n1. Add exercise\n2. Edit\n3. Delete\n0. Go Back");
                 userInput = input.nextLine();
 
@@ -194,23 +197,21 @@ public class TrainingProgram {
                         return;
                     case 1:
                         System.out.println("Enter the number of the workout you wish to add exercise to");
-                        addExercise(isNumber(input.nextLine()) - 1);
+                        addExercise(gymMember,isNumber(input.nextLine()) - 1);
                         break;
                     case 2:
                         editWorkout(); // Change name of workout/exercise, amount of reps, etc.
                         break;
                     case 3:
-                        deleteWorkout(); // Delete workout or exercise
+                        deleteWorkout(currentUser); // Delete workout or exercise
                         break;
                 }
             }
-        } while (!currentUser.workoutList.isEmpty());
+        } while (!gymMember.getWorkoutList().isEmpty());
     }
 
 
-
-    // TODO: förbättra
-    public void updateWorkout(int workoutNumber) {
+    public void updateWorkout(GymMember gymMember, int workoutNumber) {
 
         int menuSelection = 0;
         String userInput = ""; // TODO: behövs??? Kan ta bort på alla? och lägga direkt i isNumber(input.Netxtline)
@@ -219,29 +220,28 @@ public class TrainingProgram {
             System.out.println("" +
                     "Workout options:\n" +
                     "1. Change workout name\n" +
-                    "2. Go Back");
+                    "0. Go Back");
 
             userInput = input.nextLine();
             menuSelection = isNumber(userInput);
 
             switch (menuSelection) {
+                case 0:
+                    return;
                 case 1:
                     // TODO: GÖr till funktion (eller lägg addNEwExercise i switch case med)
                     System.out.println("Enter new workout name:");
                     input.nextLine();
                     String newWorkoutName = input.nextLine();
-                    currentUser.workoutList.get(workoutNumber - 1).setWorkoutName(newWorkoutName); // Change workout name
+                    gymMember.getWorkoutList().get(workoutNumber - 1).setWorkoutName(newWorkoutName); // Change workout name
                     break;
-                case 2:
-                    return;
             }
             System.out.println("Workout successfully updated!");
         } while (true);
     }
 
 
-    // TODO: förbättra
-    public void updateExercise(int workoutNumber, int exerciseNumber) {
+    public void updateExercise(GymMember gymMember, int workoutNumber, int exerciseNumber) {
 
         int menuSelection = 0;
         String userInput = "";
@@ -253,31 +253,31 @@ public class TrainingProgram {
                     "2. Change amount of reps\n" +
                     "3. Change amount of sets\n" +
                     "4. Change targeted muscle\n" +
-                    "5. Go Back\n");
+                    "0. Go Back\n");
 
 
             userInput = input.nextLine();
             menuSelection = isNumber(userInput);
 
             switch (menuSelection) {
+                case 0:
+                    return;
                 case 1:
                     System.out.println("Enter new exercise name:");
                     input.nextLine(); // TODO: ta bort senare
-                    currentUser.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setExerciseName(input.nextLine()); // Change exercise name
+                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setExerciseName(input.nextLine()); // Change exercise name
                     break;
                 case 2:
                     System.out.println("Enter new amount of reps:");
-                    currentUser.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfReps(isNumber(input.nextLine())); // Change amount of reps
+                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfReps(isNumber(input.nextLine())); // Change amount of reps
                     break;
                 case 3:
                     System.out.println("Enter new amount of sets:");
-                    currentUser.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfSets(isNumber(input.nextLine())); // Change amount of sets
+                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfSets(isNumber(input.nextLine())); // Change amount of sets
                     break;
                 case 4:
-                    currentUser.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(selectMuscleGroup()); // Change targeted muscle group
+                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(selectMuscleGroup()); // Change targeted muscle group
                     break;
-                case 5:
-                    return;
             }
             System.out.println("Exercise successfully updated!");
         } while (true);
@@ -293,9 +293,9 @@ public class TrainingProgram {
         int exerciseNumber = indexArray[1];
 
         if (exerciseNumber == 0) {
-            updateWorkout(workoutNumber);
+            updateWorkout(currentUser, workoutNumber);
         } else {
-            updateExercise(workoutNumber, exerciseNumber);
+            updateExercise(currentUser, workoutNumber, exerciseNumber);
         }
     }
 
@@ -352,25 +352,25 @@ public class TrainingProgram {
 
 
     // Delete workouts or exercises
-    public void deleteWorkout() {
+    public void deleteWorkout(GymMember gymMember) {
 
         int[] indexArray = returnWorkoutPrefix("delete");
         int workoutNumber = indexArray[0];
         int exerciseNumber = indexArray[1];
 
         if (exerciseNumber == 0) {
-            System.out.printf("Workout '%s' was deleted!\n", currentUser.workoutList.get(workoutNumber - 1).getWorkoutName());
-            currentUser.workoutList.remove(workoutNumber - 1); // Remove workout
+            System.out.printf("Workout '%s' was deleted!\n", gymMember.getWorkoutList().get(workoutNumber - 1).getWorkoutName());
+            gymMember.getWorkoutList().remove(workoutNumber - 1); // Remove workout
 
         } else {
             // If exercise is the last in workout, then delete the whole workout
-            if (currentUser.workoutList.get(workoutNumber - 1).exerciseList.size() <= 1) {
-                System.out.printf("Workout '%s' was deleted!\n", currentUser.workoutList.get(workoutNumber - 1).getWorkoutName());
-                currentUser.workoutList.remove(workoutNumber - 1);
+            if (gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.size() <= 1) {
+                System.out.printf("Workout '%s' was deleted!\n", gymMember.getWorkoutList().get(workoutNumber - 1).getWorkoutName());
+                gymMember.getWorkoutList().remove(workoutNumber - 1);
 
             } else {
-                System.out.printf("Exercise '%s' was deleted!\n", currentUser.workoutList.get(workoutNumber - 1).exerciseList.get(exerciseNumber -1).getExerciseName());
-                currentUser.workoutList.get(workoutNumber - 1).removeExercise(exerciseNumber - 1); // Delete exercise
+                System.out.printf("Exercise '%s' was deleted!\n", gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber -1).getExerciseName());
+                gymMember.getWorkoutList().get(workoutNumber - 1).removeExercise(exerciseNumber - 1); // Delete exercise
             }
         }
         return;
@@ -378,7 +378,7 @@ public class TrainingProgram {
 
 
     // TODO: använd den i GymMember klass istället
-    public void searchWorkout() {
+    public void searchWorkout(GymMember gymMember) {
 
         // TODO: find better way
         int matchingWorkouts = 0;
@@ -389,26 +389,26 @@ public class TrainingProgram {
         String searchedWorkout = input.nextLine();
 
 
-        for (int i = 0; i < currentUser.workoutList.size(); i++) {
+        for (int i = 0; i < gymMember.getWorkoutList().size(); i++) {
 
-            if (currentUser.workoutList.get(i).getWorkoutName().equalsIgnoreCase(searchedWorkout)) {
+            if (gymMember.getWorkoutList().get(i).getWorkoutName().equalsIgnoreCase(searchedWorkout)) {
                 if (matchingWorkouts == 0) {
                     System.out.println("Workout(s) Found:");
                 }
-                System.out.println(currentUser.workoutList.get(i).getWorkoutName());
-                currentUser.workoutList.get(i).showExercises(i + 1);
+                System.out.println(gymMember.getWorkoutList().get(i).getWorkoutName());
+                gymMember.getWorkoutList().get(i).showExercises(i + 1);
                 matchingWorkouts++;
 
                 // TODO: FIxa för många upperCase?
                 //} else if (workout.contains(searchedWorkout) &&  !workout.equals(searchedWorkout)) {
-            } else if (currentUser.workoutList.get(i).getWorkoutName().toUpperCase().contains(searchedWorkout.toUpperCase()) && matchingWorkouts == 0) {
+            } else if (gymMember.getWorkoutList().get(i).getWorkoutName().toUpperCase().contains(searchedWorkout.toUpperCase()) && matchingWorkouts == 0) {
 
                 // Only get related workouts in no exact match are found
                 if (relatedWorkouts == 0) {
                     System.out.printf("Workout that contains '%s' found:\n", searchedWorkout);
                 }
-                System.out.println(currentUser.workoutList.get(i).getWorkoutName());
-                currentUser.workoutList.get(i).showExercises(i + 1);
+                System.out.println(gymMember.getWorkoutList().get(i).getWorkoutName());
+                gymMember.getWorkoutList().get(i).showExercises(i + 1);
                 relatedWorkouts++;
             }
         }
@@ -429,7 +429,7 @@ public class TrainingProgram {
 
 
 
-    public void sortMenu() {
+    public void sortMenu(GymMember gymMember) {
 
         do {
             System.out.println("Sort:\n1. Workouts\n2. Exercises\n0. Go Back");
@@ -439,45 +439,60 @@ public class TrainingProgram {
                 case 0:
                     return;
                 case 1:
+                    sortWorkout(gymMember);
                     break;
                 case 2:
-                    currentUser.showWorkouts();
+                    gymMember.showWorkouts();
                     System.out.println("Enter workout prefix for sorting exercises");
-                    //int workoutIndex = isNumber(input.nextLine());
-                    //sortExercises(workoutIndex);
-                    sortExercises(isNumber(input.nextLine()));
-                    currentUser.showWorkouts();
+                    sortExercises(gymMember, isNumber(input.nextLine()));
+                    gymMember.showWorkouts();
                     break;
             }
         } while (true);
     }
 
     // TODO: enum för olika sortering??
-    // TODO: lägg sort i edit
-    public void sortWorkout() {
+    // TODO: lägg sort i edit??
+    public void sortWorkout(GymMember gymMember) {
 
-
-    }
-
-    public void sortExercises(int workoutIndex) {
-        System.out.println("Sort by:\n1. Name\n2. Reps\n3. Sets\n4. Go Back");
+        System.out.println("Sort by:\n1. Name\n0. Exit");
         int menuSelection = isNumber(input.nextLine());
 
         switch (menuSelection) {
+
+            case 0:
+                return;
+            case 1:
+                SortWorkoutName sortWorkoutName = new SortWorkoutName();
+                Collections.sort(gymMember.getWorkoutList(), sortWorkoutName);
+                gymMember.showWorkouts();
+                break;
+        }
+    }
+
+    public void sortExercises(GymMember gymMember, int workoutIndex) {
+        System.out.println("Sort by:\n1. Name\n2. Reps\n3. Sets\n4. Muscle\n0. Go Back");
+        int menuSelection = isNumber(input.nextLine());
+
+        switch (menuSelection) {
+            case 0:
+                return;
             case 1:
                 SortExerciseName sortExerciseName = new SortExerciseName();
-                Collections.sort(currentUser.workoutList.get(workoutIndex - 1).exerciseList, sortExerciseName);
+                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).exerciseList, sortExerciseName);
                 break;
             case 2:
                 SortExerciseReps sortExerciseReps = new SortExerciseReps();
-                Collections.sort(currentUser.workoutList.get(workoutIndex - 1).exerciseList, sortExerciseReps);
+                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).exerciseList, sortExerciseReps);
                 break;
             case 3:
                 SortExerciseSets sortExerciseSets = new SortExerciseSets();
-                Collections.sort(currentUser.workoutList.get(workoutIndex - 1).exerciseList, sortExerciseSets);
+                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).exerciseList, sortExerciseSets);
                 break;
             case 4:
-                return;
+                SortExercisesMuscle sortExercisesMuscle = new SortExercisesMuscle();
+                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).exerciseList, sortExercisesMuscle);
+                break;
         }
 
     }
@@ -488,11 +503,13 @@ public class TrainingProgram {
     // TODO: loop
     public void help() {
         System.out.println("What do you need help with?");
-        System.out.println("1. How to create a workout\n2. How to edit a workout\n3. How to search for a workout\n4. Go Back\n");
+        System.out.println("1. How to create a workout\n2. How to edit a workout\n3. How to search for a workout\n0. Go Back\n");
 
         int menuSelector = isNumber(input.nextLine());
 
         switch (menuSelector) {
+            case 0:
+                return;
             case 1:
                 helpCreateWorkout();
                 break;
@@ -502,8 +519,6 @@ public class TrainingProgram {
             case 3:
                 System.out.println("How to search");
                 break;
-            case 4:
-                return;
         }
     }
 
@@ -557,10 +572,12 @@ public class TrainingProgram {
     public void showFriendsMenu() {
 
         do {
-            System.out.println("1. Add Gym Buddy\n2. Edit Gym Buddy\n3. Show Friends\n4. Search\n5. Sort\n6. Go Back");
+            System.out.println("1. Add Gym Buddy\n2. Edit Gym Buddy\n3. Show Friends\n4. Search\n5. Sort\n0. Go Back");
             int menuSelection = isNumber(input.nextLine());
 
             switch (menuSelection) {
+                case 0:
+                    return;
                 case 1:
                     addGymBuddy();
                     break;
@@ -573,7 +590,8 @@ public class TrainingProgram {
                     searchGymBuddy();
                     break;
                 case 5:
-                    return;
+                    sortGymBuddies(currentUser);
+                    break;
             }
         } while (true);
     }
@@ -583,10 +601,15 @@ public class TrainingProgram {
 
 
 
+    public void sortGymBuddies(GymMember gymMember) {
+
+        SortFriend sortFriend = new SortFriend();
+        Collections.sort(gymMember.getFriendList(), sortFriend);
+        gymMember.showFriends();
+    }
 
 
-
-
+    // TODO: if no staff. skriv ingen oersonal. Samt tid när deet är bamanat? alt. när nästashift börjar?
     public void checkAvailableStaff() {
 
         Gym currentGym = new Gym();
@@ -654,7 +677,7 @@ public class TrainingProgram {
 
 
 
-
+    // TODO: Ändra curretnUsers till gymMembers?? (nej: bara kunna en själv ska kunna söka. ja: programmet bör vara utformat för alla..)
     // TODO: COmbine with search workout?
     public void searchGymBuddy() {
 
@@ -666,24 +689,24 @@ public class TrainingProgram {
         String searchedFriend = input.nextLine();
 
 
-        for (int i = 0; i < currentUser.gymBuddies.size(); i++) {
+        for (int i = 0; i < currentUser.getFriendList().size(); i++) {
 
-            if (currentUser.gymBuddies.get(i).getFullName().equalsIgnoreCase(searchedFriend)) {
+            if (currentUser.getFriendList().get(i).getFullName().equalsIgnoreCase(searchedFriend)) {
                 if (numberOfMatchingNames == 0) {
                     System.out.println("Friend(s) Found:");
                 }
-                System.out.println(currentUser.gymBuddies.get(i).getFullName());
+                System.out.println(currentUser.getFriendList().get(i).getFullName());
                 numberOfMatchingNames++;
 
                 // TODO: FIxa för många upperCase?
                 //} else if (workout.contains(searchedWorkout) &&  !workout.equals(searchedWorkout)) {
-            } else if (currentUser.gymBuddies.get(i).getFullName().toUpperCase().contains(searchedFriend.toUpperCase()) && numberOfMatchingNames == 0) {
+            } else if (currentUser.getFriendList().get(i).getFullName().toUpperCase().contains(searchedFriend.toUpperCase()) && numberOfMatchingNames == 0) {
 
                 // Only get related workouts in no exact match are found
                 if (numberOfRelatedNames == 0) {
                     System.out.printf("Friend that contains '%s' found:\n", searchedFriend);
                 }
-                System.out.println(currentUser.gymBuddies.get(i).getFullName());
+                System.out.println(currentUser.getFriendList().get(i).getFullName());
                 numberOfRelatedNames++;
             }
         }
@@ -708,8 +731,8 @@ public class TrainingProgram {
             System.out.println("Enter friends last name");
             String lastName = input.nextLine().trim();
 
-            currentUser.addGymBuddy(firstName, lastName);
-            System.out.println(currentUser.gymBuddies.get(currentUser.gymBuddies.size() - 1).getFullName() + " was added to your friendlist");
+            currentUser.addFriend(firstName, lastName);
+            System.out.println(currentUser.getFriendList().get(currentUser.getFriendList().size() - 1).getFullName() + " was added to your friendlist");
 
             System.out.println("Do you want to add another friend?\n1. Add friend\n2. Go Back");
             int menuSelection = isNumber(input.nextLine());
@@ -730,13 +753,13 @@ public class TrainingProgram {
         System.out.println("Friends in friend list:");
 
         // If no friends in gymBuddies
-        if (currentUser.gymBuddies.isEmpty()) {
+        if (currentUser.getFriendList().isEmpty()) {
             System.out.println("\t-Empty");
             return;
         }
 
 
-        currentUser.showGymBuddies();
+        currentUser.showFriends();
         /*for (int i = 0; i < accountHolder.gymBuddies.size(); i++) {
             System.out.printf("\n%s. %s\n", i + 1, accountHolder.gymBuddies.get(i).getWorkoutName());
 
@@ -750,7 +773,7 @@ public class TrainingProgram {
         // Show all gym buddies
         showGymBuddies();
 
-        if (currentUser.gymBuddies.size() == 0) {
+        if (currentUser.getFriendList().size() == 0) {
             return;
         }
 
@@ -759,22 +782,22 @@ public class TrainingProgram {
         int friendIndex = isNumber(input.nextLine());
 
         do {
-            System.out.println("Options:\n1. Edit First Name\n2. Edit Last Name\n3. Remove Friend\n4. Go Back");
+            System.out.println("Options:\n1. Edit First Name\n2. Edit Last Name\n3. Remove Friend\n0. Go Back");
             int menuSelection = isNumber(input.nextLine());
 
             switch (menuSelection) {
+                case 0:
+                    return;
                 case 1:
                     System.out.println("Enter new first name:");
-                    currentUser.gymBuddies.get(friendIndex - 1).setFirstName(input.nextLine().trim());
+                    currentUser.getFriendList().get(friendIndex - 1).setFirstName(input.nextLine().trim());
                     break;
                 case 2:
                     System.out.println("Enter new last name");
-                    currentUser.gymBuddies.get(friendIndex - 1).setLastName(input.nextLine().trim());
+                    currentUser.getFriendList().get(friendIndex - 1).setLastName(input.nextLine().trim());
                     break;
                 case 3:
-                    currentUser.removeGymBuddy(friendIndex - 1);
-                    return;
-                case 4:
+                    currentUser.deleteFriend(friendIndex - 1);
                     return;
             }
         } while (true);
@@ -827,17 +850,17 @@ public class TrainingProgram {
 
 
     // TODO: rename convert to number? / inputToNumber
+    // TODO: lägg do while när funktionen kallas på isätället?
     public int isNumber(String str) {
 
-
-        do {
+        //do {
             try {
                 return Integer.parseInt(str);
             } catch (Exception e) {
                 System.out.println("Must enter a number:");
                 return 0;
             }
-        } while (true);
+        //} while (true);
     }
 
     // FUNkar inte overloada med anna return typ

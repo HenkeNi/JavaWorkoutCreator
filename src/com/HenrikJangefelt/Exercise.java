@@ -85,6 +85,7 @@ public class Exercise implements Comparable<Exercise> {
         //return "Main muscle worked: " + targetedMuscle.toString();
     }
 
+    // TODO: kan ta bort?
     @Override
     public int compareTo(Exercise o) {
         return 0;

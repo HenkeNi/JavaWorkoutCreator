@@ -7,7 +7,6 @@ public class Login {
 
     Scanner input = new Scanner(System.in);
 
-
     public Login() {
         loginMenu();
     }
@@ -29,7 +28,7 @@ public class Login {
                     System.out.println("Terminating...");
                     return;
                 case 4:
-                    bypassOption();
+                    quickLogin();
                     break;
             }
         } while (true);
@@ -137,7 +136,7 @@ public class Login {
         //return email.equals(TrainingProgram.currentUser.getEmailAdress()) && password.equals(TrainingProgram.currentUser.getPassword());
     }
 
-    private void bypassOption() {
+    private void quickLogin() {
 
         TrainingProgram.currentUser.setFirstName("Mr.");
         TrainingProgram.currentUser.setLastName("Default");
