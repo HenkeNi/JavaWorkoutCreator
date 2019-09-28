@@ -59,7 +59,7 @@ public class GymMember extends Person {
 
     // TODO: Fix
     // TODO returnera värde/workouts. ..
-    public void searchWorkout(String searchedWorkout) {
+    /*public void searchWorkout(String searchedWorkout) {
 
         int matchingWorkouts = 0;
         int relatedWorkouts = 0;
@@ -92,17 +92,39 @@ public class GymMember extends Person {
         if (matchingWorkouts == 0 && relatedWorkouts == 0) {
             System.out.println("No workouts found with that name");
         }
-    }
+    }*/
 
-    public Workout[] getSearchedWorkout() {
+    public ArrayList<Workout> getSearchedWorkout(String searchedWorkout) {
+
+        ArrayList<Workout> matchingWorkouts = new ArrayList<>();
 
         for (int i = 0; i < workoutList.size(); i++) {
-            
+
+            if (workoutList.get(i).getWorkoutName().equalsIgnoreCase(searchedWorkout)) {
+
+                matchingWorkouts.add(workoutList.get(i));
+
+            }
         }
+        return matchingWorkouts;
     }
 
-    public Workout[] getRelatedSearchedWorkout() {
 
+
+    public ArrayList<Workout> getRelatedSearchedWorkout(String searchedWorkout) {
+
+        ArrayList<Workout> relatedWorkouts = new ArrayList<>();
+
+        for (int i = 0; i < workoutList.size(); i++) {
+
+            if (workoutList.get(i).getWorkoutName().toUpperCase().contains(searchedWorkout.toUpperCase())) {
+                relatedWorkouts.add(workoutList.get(i));
+            }
+        }
+
+        return relatedWorkouts;
+
+            //workoutList.get(i).showExercises(i + 1);
     }
 
 

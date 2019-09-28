@@ -380,42 +380,28 @@ public class TrainingProgram {
     // TODO: använd den i GymMember klass istället
     public void searchWorkout(GymMember gymMember) {
 
-        // TODO: find better way
-        int matchingWorkouts = 0;
-        int relatedWorkouts = 0;
-
         System.out.println("Enter name of the workout you are looking for:");
         input.nextLine();
         String searchedWorkout = input.nextLine();
 
+        ArrayList<Workout> matchingWorkouts = gymMember.getSearchedWorkout(searchedWorkout);
+        ArrayList<Workout> relatedWorkouts = gymMember.getRelatedSearchedWorkout(searchedWorkout);
 
-        for (int i = 0; i < gymMember.getWorkoutList().size(); i++) {
-
-            if (gymMember.getWorkoutList().get(i).getWorkoutName().equalsIgnoreCase(searchedWorkout)) {
-                if (matchingWorkouts == 0) {
-                    System.out.println("Workout(s) Found:");
-                }
-                System.out.println(gymMember.getWorkoutList().get(i).getWorkoutName());
-                gymMember.getWorkoutList().get(i).showExercises(i + 1);
-                matchingWorkouts++;
-
-                // TODO: FIxa för många upperCase?
-                //} else if (workout.contains(searchedWorkout) &&  !workout.equals(searchedWorkout)) {
-            } else if (gymMember.getWorkoutList().get(i).getWorkoutName().toUpperCase().contains(searchedWorkout.toUpperCase()) && matchingWorkouts == 0) {
-
-                // Only get related workouts in no exact match are found
-                if (relatedWorkouts == 0) {
-                    System.out.printf("Workout that contains '%s' found:\n", searchedWorkout);
-                }
-                System.out.println(gymMember.getWorkoutList().get(i).getWorkoutName());
-                gymMember.getWorkoutList().get(i).showExercises(i + 1);
-                relatedWorkouts++;
+        // TODO: bygg ihop funktion för att printa ut wokruts (kanske samma som i klass gmMEmber)
+        if (!matchingWorkouts.isEmpty()) {
+            System.out.println("Workout(s) Found:");
+            for (int i = 0; i < matchingWorkouts.size(); i++) {
+                System.out.println(matchingWorkouts.get(i).getWorkoutName());
+                matchingWorkouts.get(i).showExercises(i + 1);
             }
-        }
-
-        // If no matching or related workout found
-        if (matchingWorkouts == 0 && relatedWorkouts == 0) {
-            System.out.println("No workouts found with that name");
+        } else if (!relatedWorkouts.isEmpty()) {
+            System.out.printf("Workout that contains '%s' found:\n", searchedWorkout);
+            for (int i = 0; i < relatedWorkouts.size(); i++) {
+                System.out.println(relatedWorkouts.get(i).getWorkoutName());
+                relatedWorkouts.get(i).showExercises(i + 1);
+            }
+        } else {
+            System.out.printf("No workouts matching %s found\n", searchedWorkout);
         }
     }
 
