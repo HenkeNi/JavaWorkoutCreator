@@ -20,6 +20,8 @@ import java.util.*;
 // TODO: kolla om det finns mer att lägga i de olika klasserna (workouts etc.)
 
 
+// TODO: Dela upp training program i två klasser? för friends och workouts?? NEJ: MVC TraingP är Controllern
+
 // TODO: (TAnkar) menyalternativ som en array av enums eller liknande ???
 
 // TODO: sätt 0 som return i alla switch menyer?
@@ -355,25 +357,7 @@ public class TrainingProgram {
     public void deleteWorkout(GymMember gymMember) {
 
         int[] indexArray = returnWorkoutPrefix("delete");
-        int workoutNumber = indexArray[0];
-        int exerciseNumber = indexArray[1];
-
-        if (exerciseNumber == 0) {
-            System.out.printf("Workout '%s' was deleted!\n", gymMember.getWorkoutList().get(workoutNumber - 1).getWorkoutName());
-            gymMember.getWorkoutList().remove(workoutNumber - 1); // Remove workout
-
-        } else {
-            // If exercise is the last in workout, then delete the whole workout
-            if (gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.size() <= 1) {
-                System.out.printf("Workout '%s' was deleted!\n", gymMember.getWorkoutList().get(workoutNumber - 1).getWorkoutName());
-                gymMember.getWorkoutList().remove(workoutNumber - 1);
-
-            } else {
-                System.out.printf("Exercise '%s' was deleted!\n", gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber -1).getExerciseName());
-                gymMember.getWorkoutList().get(workoutNumber - 1).removeExercise(exerciseNumber - 1); // Delete exercise
-            }
-        }
-        return;
+        System.out.println(gymMember.deleteWorkout(indexArray[0], indexArray[1]));
     }
 
 
@@ -388,11 +372,11 @@ public class TrainingProgram {
 
         if (!matchingWorkouts.isEmpty()) {
             System.out.println("Workout(s) Found:");
-            gymMember.showWorkoutsInList(matchingWorkouts);
+            gymMember.showWorkouts(matchingWorkouts);
 
         } else if (!relatedWorkouts.isEmpty()) {
             System.out.printf("Workout that contains '%s' found:\n", searchedWorkout);
-            gymMember.showWorkoutsInList(relatedWorkouts);
+            gymMember.showWorkouts(relatedWorkouts);
 
         } else {
             System.out.printf("No workouts matching %s found\n", searchedWorkout);
@@ -410,7 +394,7 @@ public class TrainingProgram {
             System.out.println("\t -Empty");
             return;
         }
-        gymMember.showWorkoutsInList(workouts);
+        gymMember.showWorkouts(workouts);
     }
 
 

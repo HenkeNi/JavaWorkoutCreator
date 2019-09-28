@@ -21,9 +21,29 @@ public class GymMember extends Person {
         return workoutList;
     }
 
+    /*
     public void removeWorkout(int indexPosition) {
         workoutList.remove(indexPosition);
+    }*/
+
+
+    public String deleteWorkout(int workoutIndex, int exerciseIndex) {
+
+        if (exerciseIndex == 0) {
+            Workout deletedWorkout = getWorkoutList().remove(workoutIndex - 1);
+            return "Workout " + deletedWorkout.getWorkoutName() + " was deleted!";
+        } else {
+            // If exercise is the last in workout, then delete the whole workout
+            if (getWorkoutList().get(workoutIndex - 1).exerciseList.size() <= 1) {
+                Workout deletedWorkout = getWorkoutList().remove(workoutIndex - 1);
+                return "Workout " + deletedWorkout.getWorkoutName() + " was deleted!";
+            } else {
+                getWorkoutList().get(workoutIndex - 1).removeExercise(exerciseIndex - 1); // Delete exercise
+                return "Exercise " + workoutList.get(workoutIndex - 1).exerciseList.get(exerciseIndex - 1).getExerciseName() + " was deleted!";
+            }
+        }
     }
+
 
     public void addWorkout(String workoutName) {
         Workout newWorkout = new Workout(workoutName);
@@ -32,14 +52,13 @@ public class GymMember extends Person {
 
 
 
-    public void showWorkoutsInList(ArrayList<Workout> workouts) {
+    public void showWorkouts(ArrayList<Workout> workouts) {
 
         for (int i = 0; i < workouts.size(); i++) {
             System.out.printf("%s. %s\n", i + 1, workouts.get(i).getWorkoutName());
             workouts.get(i).showExercises(i);
         }
     }
-
 
     // Returns workouts that match searched workout
     public ArrayList<Workout> getSearchedWorkout(String searchedWorkout) {
