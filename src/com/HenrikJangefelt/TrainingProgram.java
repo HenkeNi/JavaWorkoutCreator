@@ -9,26 +9,15 @@ import java.util.*;
 // TODO: FIxa try and catch for inputs!!
 // TODO: ta in userInout som String och omvandla sedan (Fixar bugg med nextLine inte läses in?) TODO: FIx isNumber
 
-// TODO: Försök lägga till mer enums?,
+// TODO: Försök implementera: Interface, mer enums(?), abstrakta metoder, Singleton (design mönster)
+// TODO: Förbättra: Jobba mer med att lägga logik i klasser
+// TODO: Lägga till: Settings -> chang your username, ändra/se sitt password/email. Rensa alla arrays. Staff -> Ange veckodagar dem arbetar
 
-// TOOD: sätt så mycket som möjligt till private?
+// TODO: sätt så mycket som möjligt till private?
 
-// TODO: Settings, chang your username, ändra/se sitt password/email. Rensa alla arrays
-
-// TODO: ange veckodagar för staff
-
-// TODO: kolla om det finns mer att lägga i de olika klasserna (workouts etc.)
-
-
-// TODO: Dela upp training program i två klasser? för friends och workouts?? NEJ: MVC TraingP är Controllern
-
-// TODO: (TAnkar) menyalternativ som en array av enums eller liknande ???
-
-// TODO: sätt 0 som return i alla switch menyer?
-
-// TODO: Bygg efter singelton (kolla upp!!)
 
 // TODO: Final check- kolla att man bara kan ange siffror, samt bara rätt intervall för tex arrayer...
+// TODO: Final check Rensa klasser som inte används längre
 
 public class TrainingProgram {
 
@@ -44,18 +33,11 @@ public class TrainingProgram {
     public void showMainMenu(GymMember gymMember) {
 
         int menuSelection = 0;
-        String userInput = "";
-
 
         do {
             System.out.println("Main Menu:\n1. Workouts\n2. Friends\n3. Check Available Staff\n4. Help(TODO)\n0. Exit");
-            //userInput = input.nextLine();
 
-            do {
-                menuSelection = isNumber(input.nextLine());
-            } while (menuSelection == 0);
-            //menuSelection = isNumber(userInput);
-            //int numberInt = checkIfValidNumber(userInput);
+            menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
                 case 0:
@@ -82,7 +64,7 @@ public class TrainingProgram {
 
         do {
             System.out.println("Workout menu:\n1. Add Workout\n2. Edit Workout\n3. Show Workouts \n4. Search Workout\n5. Sort Workout \n0. Go Back");
-            int menuSelection = isNumber(input.nextLine());
+            int menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
                 case 0:
@@ -125,10 +107,10 @@ public class TrainingProgram {
             String exerciseName = input.nextLine();
 
             System.out.println("Number of reps:");
-            int numberOfReps = isNumber(input.nextLine());
+            int numberOfReps = getNumberFromUserInput();
 
             System.out.println("Number of sets:");
-            int numberOfSets = isNumber(input.nextLine());
+            int numberOfSets = getNumberFromUserInput();
 
             gymMember.getWorkoutList().get(workoutIndex).addExercise(exerciseName, numberOfReps, numberOfSets, selectMuscleGroup());
 
@@ -136,7 +118,7 @@ public class TrainingProgram {
             System.out.printf("Workout: \'%s\' currently consist of %s exercises\n", gymMember.getWorkoutList().get(workoutIndex).getWorkoutName(), gymMember.getWorkoutList().get(workoutIndex).exerciseList.size());
             System.out.println("1. Add another exercise\n0. Go Back");
 
-            int menuSelection = isNumber(input.nextLine());
+            int menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
                 case 0:
@@ -158,7 +140,7 @@ public class TrainingProgram {
                 "6. Abs\n" +
                 "7. Legs");
 
-        int muscleSelection = isNumber(input.nextLine());
+        int muscleSelection = getNumberFromUserInput();
 
         switch (muscleSelection) {
             case 1:
@@ -192,14 +174,15 @@ public class TrainingProgram {
                 System.out.println("\nOptions:\n1. Add exercise\n2. Edit\n3. Delete\n0. Go Back");
                 userInput = input.nextLine();
 
-                menuSelection = isNumber(userInput);
+                menuSelection = getNumberFromUserInput();
 
                 switch (menuSelection) {
                     case 0:
                         return;
                     case 1:
                         System.out.println("Enter the number of the workout you wish to add exercise to");
-                        addExercise(gymMember,isNumber(input.nextLine()) - 1);
+                        //addExercise(gymMember,isNumber(input.nextLine()) - 1); // TODO : TA bort sen
+                        addExercise(gymMember, getNumberFromUserInput() - 1);
                         break;
                     case 2:
                         editWorkout(); // Change name of workout/exercise, amount of reps, etc.
@@ -225,7 +208,7 @@ public class TrainingProgram {
                     "0. Go Back");
 
             userInput = input.nextLine();
-            menuSelection = isNumber(userInput);
+            menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
                 case 0:
@@ -259,7 +242,7 @@ public class TrainingProgram {
 
 
             userInput = input.nextLine();
-            menuSelection = isNumber(userInput);
+            menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
                 case 0:
@@ -271,11 +254,11 @@ public class TrainingProgram {
                     break;
                 case 2:
                     System.out.println("Enter new amount of reps:");
-                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfReps(isNumber(input.nextLine())); // Change amount of reps
+                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfReps(getNumberFromUserInput()); // Change amount of reps
                     break;
                 case 3:
                     System.out.println("Enter new amount of sets:");
-                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfSets(isNumber(input.nextLine())); // Change amount of sets
+                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfSets(getNumberFromUserInput()); // Change amount of sets
                     break;
                 case 4:
                     gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(selectMuscleGroup()); // Change targeted muscle group
@@ -402,13 +385,11 @@ public class TrainingProgram {
 
 
 
-
-
     public void sortMenu(GymMember gymMember) {
 
         do {
             System.out.println("Sort:\n1. Workouts\n2. Exercises\n0. Go Back");
-            int sortSelection = isNumber(input.nextLine());
+            int sortSelection = getNumberFromUserInput();
 
             switch (sortSelection) {
                 case 0:
@@ -419,7 +400,7 @@ public class TrainingProgram {
                 case 2:
                     showWorkouts(gymMember, gymMember.getWorkoutList());
                     System.out.println("Enter workout prefix for sorting exercises");
-                    sortExercises(gymMember, isNumber(input.nextLine()));
+                    sortExercises(gymMember, getNumberFromUserInput());
                     showWorkouts(gymMember, gymMember.getWorkoutList());
                     break;
             }
@@ -431,7 +412,7 @@ public class TrainingProgram {
     public void sortWorkout(GymMember gymMember) {
 
         System.out.println("Sort by:\n1. Name\n0. Exit");
-        int menuSelection = isNumber(input.nextLine());
+        int menuSelection = getNumberFromUserInput();
 
         switch (menuSelection) {
 
@@ -447,7 +428,7 @@ public class TrainingProgram {
 
     public void sortExercises(GymMember gymMember, int workoutIndex) {
         System.out.println("Sort by:\n1. Name\n2. Reps\n3. Sets\n4. Muscle\n0. Go Back");
-        int menuSelection = isNumber(input.nextLine());
+        int menuSelection = getNumberFromUserInput();
 
         switch (menuSelection) {
             case 0:
@@ -481,7 +462,7 @@ public class TrainingProgram {
         System.out.println("What do you need help with?");
         System.out.println("1. How to create a workout\n2. How to edit a workout\n3. How to search for a workout\n0. Go Back\n");
 
-        int menuSelector = isNumber(input.nextLine());
+        int menuSelector = getNumberFromUserInput();
 
         switch (menuSelector) {
             case 0:
@@ -498,7 +479,7 @@ public class TrainingProgram {
         }
     }
 
-
+    // Läs in från fil?
     public void helpCreateWorkout() {
         System.out.println("Step 1: Give your workout a name (ex: 'Chest day' or 'Monday Workout'.\n" +
                 "\t It's okey to name to workouts the same.\n\n" +
@@ -549,7 +530,7 @@ public class TrainingProgram {
 
         do {
             System.out.println("1. Add Gym Buddy\n2. Edit Gym Buddy\n3. Show Friends\n4. Search\n5. Sort\n0. Go Back");
-            int menuSelection = isNumber(input.nextLine());
+            int menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
                 case 0:
@@ -566,7 +547,7 @@ public class TrainingProgram {
                     searchGymBuddy();
                     break;
                 case 5:
-                    sortGymBuddies(currentUser);
+                    sortFriends(currentUser);
                     break;
             }
         } while (true);
@@ -577,7 +558,7 @@ public class TrainingProgram {
 
 
 
-    public void sortGymBuddies(GymMember gymMember) {
+    public void sortFriends(GymMember gymMember) {
 
         SortFriend sortFriend = new SortFriend();
         Collections.sort(gymMember.getFriendList(), sortFriend);
@@ -711,7 +692,7 @@ public class TrainingProgram {
             System.out.println(currentUser.getFriendList().get(currentUser.getFriendList().size() - 1).getFullName() + " was added to your friendlist");
 
             System.out.println("Do you want to add another friend?\n1. Add friend\n2. Go Back");
-            int menuSelection = isNumber(input.nextLine());
+            int menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
 
@@ -755,11 +736,11 @@ public class TrainingProgram {
 
         // Choose buddy
         System.out.println("Enter the number of the friend you wish to change:");
-        int friendIndex = isNumber(input.nextLine());
+        int friendIndex = getNumberFromUserInput();
 
         do {
             System.out.println("Options:\n1. Edit First Name\n2. Edit Last Name\n3. Remove Friend\n0. Go Back");
-            int menuSelection = isNumber(input.nextLine());
+            int menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
                 case 0:
@@ -788,8 +769,8 @@ public class TrainingProgram {
 
 
 
-
-    public Number checkIfValidNumber(String str) {
+    // TODO: ta bort?
+    /*public Number checkIfValidNumber(String str) {
 
         do {
             try {
@@ -805,13 +786,12 @@ public class TrainingProgram {
                 }
             }
         } while (true);
-    }
+    }*/
 
 
-    // TODO: add message (Enter menu selectiom: or Enter amount of Sets:)
-    public int checkIfInteger() {
+    public int getNumberFromUserInput() {
 
-        int numb = 0;
+        int numb = -999;
 
         do {
             String userInput = input.nextLine();
@@ -820,36 +800,13 @@ public class TrainingProgram {
             } catch (Exception e) {
                 System.out.println("Must enter a number:");
             }
-        } while (numb == 0);
+        } while (numb == -999);
         return numb;
     }
 
 
-    // TODO: rename convert to number? / inputToNumber
-    // TODO: lägg do while när funktionen kallas på isätället?
-    public int isNumber(String str) {
 
-        //do {
-            try {
-                return Integer.parseInt(str);
-            } catch (Exception e) {
-                System.out.println("Must enter a number:");
-                return 0;
-            }
-        //} while (true);
-    }
 
-    // FUNkar inte overloada med anna return typ
-    /*public double isNumber(String str) {
-        do {
-            try {
-                return Double.parseDouble(str);
-            } catch (Exception e) {
-                System.out.println("Must enter a decimal number:");
-                return 0;
-            }
-        } while (true);
-    }*/
 
 
   /*public <T extends Number> T checkInput() {
