@@ -33,12 +33,12 @@ public class GymMember extends Person {
             return "Workout " + deletedWorkout.getWorkoutName() + " was deleted!";
         } else {
             // If exercise is the last in workout, then delete the whole workout
-            if (getWorkoutList().get(workoutIndex - 1).exerciseList.size() <= 1) {
+            if (getWorkoutList().get(workoutIndex - 1).getExerciseList().size() <= 1) {
                 Workout deletedWorkout = getWorkoutList().remove(workoutIndex - 1);
                 return "Workout " + deletedWorkout.getWorkoutName() + " was deleted!";
             } else {
                 getWorkoutList().get(workoutIndex - 1).removeExercise(exerciseIndex - 1); // Delete exercise
-                return "Exercise " + workoutList.get(workoutIndex - 1).exerciseList.get(exerciseIndex - 1).getExerciseName() + " was deleted!";
+                return "Exercise " + workoutList.get(workoutIndex - 1).getExerciseList().get(exerciseIndex - 1).getExerciseName() + " was deleted!";
             }
         }
     }
@@ -100,6 +100,42 @@ public class GymMember extends Person {
         for (int i = 0; i < friends.size(); i++) {
             System.out.printf("\t%s. %s\n", i + 1, friends.get(i).getFullName());
         }
+    }
+
+
+    // TODO Gör så att den bara kan ta in generic objekts
+    public <T extends Object> ArrayList<T> getSearchedObject(ArrayList<T> objectList, String searchWord) {
+
+        ArrayList<T> matches = new ArrayList<>();
+
+        for (int i = 0; i < objectList.size(); i++) {
+
+            if (objectList == workoutList && workoutList.get(i).getWorkoutName().equalsIgnoreCase(searchWord)) {
+                matches.add((T) workoutList.get(i));
+            }
+
+            if (objectList == friendList && friendList.get(i).getFullName().equalsIgnoreCase(searchWord)) {
+                matches.add((T) friendList.get(i));
+            }
+        }
+        return matches;
+    }
+
+    public <T extends Object> ArrayList<T> getRelatedSearchedObject(ArrayList<T> objectList, String searchWord) {
+
+        ArrayList<T> relatedMatches = new ArrayList<>();
+
+        for (int i = 0; i < objectList.size(); i++) {
+
+            if (objectList == workoutList && workoutList.get(i).getWorkoutName().toUpperCase().contains(searchWord.toUpperCase())) {
+                relatedMatches.add((T) workoutList.get(i));
+            }
+
+            if (objectList == friendList && friendList.get(i).getFullName().toUpperCase().contains(searchWord.toUpperCase())) {
+                relatedMatches.add((T) friendList.get(i));
+            }
+        }
+        return relatedMatches;
     }
 
 

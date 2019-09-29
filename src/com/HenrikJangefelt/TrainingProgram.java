@@ -17,7 +17,7 @@ import java.util.*;
 
 
 // TODO: Final check- kolla att man bara kan ange siffror, samt bara rätt intervall för tex arrayer...
-// TODO: Final check Rensa klasser som inte används längre
+// TODO: Final check Rensa klasser som inte används längre, compareTo/comparator kika närmare på
 
 public class TrainingProgram {
 
@@ -32,12 +32,10 @@ public class TrainingProgram {
     // TODO: lägg till funktion för att köra passet?
     public void showMainMenu(GymMember gymMember) {
 
-        int menuSelection = 0;
-
         do {
             System.out.println("Main Menu:\n1. Workouts\n2. Friends\n3. Check Available Staff\n4. Help(TODO)\n0. Exit");
 
-            menuSelection = getNumberFromUserInput();
+            int menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
                 case 0:
@@ -55,7 +53,7 @@ public class TrainingProgram {
                     help();
                     break;
             }
-        } while (menuSelection != 0);
+        } while (true);
     }
 
 
@@ -91,11 +89,9 @@ public class TrainingProgram {
     public void createWorkout(GymMember gymMember) {
 
         System.out.println("Enter workout's name:");
-        //input.nextLine(); // TODO: Kan ta bort?
         gymMember.addWorkout(input.nextLine());
 
         addExercise(currentUser, gymMember.getWorkoutList().size() - 1); // Add new exercise to the last workout in the workoutList
-
     }
 
 
@@ -114,7 +110,7 @@ public class TrainingProgram {
             gymMember.getWorkoutList().get(workoutIndex).addExercise(exerciseName, numberOfReps, numberOfSets, selectMuscleGroup());
 
 
-            System.out.printf("Workout: \'%s\' currently consist of %s exercises\n", gymMember.getWorkoutList().get(workoutIndex).getWorkoutName(), gymMember.getWorkoutList().get(workoutIndex).exerciseList.size());
+            System.out.printf("Workout: \'%s\' currently consist of %s exercises\n", gymMember.getWorkoutList().get(workoutIndex).getWorkoutName(), gymMember.getWorkoutList().get(workoutIndex).getExerciseList().size());
             System.out.println("1. Add another exercise\n0. Go Back");
 
             int menuSelection = getNumberFromUserInput();
@@ -163,24 +159,19 @@ public class TrainingProgram {
 
     public void showEditWorkoutMenu(GymMember gymMember) {
 
-        int menuSelection = 0;
-        String userInput = "";
-
         do {
             showWorkouts(gymMember, gymMember.getWorkoutList());
 
             if (gymMember.getWorkoutList().size() != 0) {
                 System.out.println("\nOptions:\n1. Add exercise\n2. Edit\n3. Delete\n0. Go Back");
-                userInput = input.nextLine();
 
-                menuSelection = getNumberFromUserInput();
+                int menuSelection = getNumberFromUserInput();
 
                 switch (menuSelection) {
                     case 0:
                         return;
                     case 1:
                         System.out.println("Enter the number of the workout you wish to add exercise to");
-                        //addExercise(gymMember,isNumber(input.nextLine()) - 1); // TODO : TA bort sen
                         addExercise(gymMember, getNumberFromUserInput() - 1);
                         break;
                     case 2:
@@ -197,17 +188,13 @@ public class TrainingProgram {
 
     public void updateWorkout(GymMember gymMember, int workoutNumber) {
 
-        int menuSelection = 0;
-        String userInput = ""; // TODO: behövs??? Kan ta bort på alla? och lägga direkt i isNumber(input.Netxtline)
-
         do {
             System.out.println("" +
                     "Workout options:\n" +
                     "1. Change workout name\n" +
                     "0. Go Back");
 
-            userInput = input.nextLine();
-            menuSelection = getNumberFromUserInput();
+            int menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
                 case 0:
@@ -215,7 +202,6 @@ public class TrainingProgram {
                 case 1:
                     // TODO: GÖr till funktion (eller lägg addNEwExercise i switch case med)
                     System.out.println("Enter new workout name:");
-                    input.nextLine();
                     String newWorkoutName = input.nextLine();
                     gymMember.getWorkoutList().get(workoutNumber - 1).setWorkoutName(newWorkoutName); // Change workout name
                     break;
@@ -227,9 +213,6 @@ public class TrainingProgram {
 
     public void updateExercise(GymMember gymMember, int workoutNumber, int exerciseNumber) {
 
-        int menuSelection = 0;
-        String userInput = "";
-
         do {
             System.out.println("" +
                     "Exercise options:\n" +
@@ -239,28 +222,25 @@ public class TrainingProgram {
                     "4. Change targeted muscle\n" +
                     "0. Go Back\n");
 
-
-            userInput = input.nextLine();
-            menuSelection = getNumberFromUserInput();
+            int menuSelection = getNumberFromUserInput();
 
             switch (menuSelection) {
                 case 0:
                     return;
                 case 1:
                     System.out.println("Enter new exercise name:");
-                    input.nextLine(); // TODO: ta bort senare
-                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setExerciseName(input.nextLine()); // Change exercise name
+                    gymMember.getWorkoutList().get(workoutNumber - 1).getExerciseList().get(exerciseNumber - 1).setExerciseName(input.nextLine()); // Change exercise name
                     break;
                 case 2:
                     System.out.println("Enter new amount of reps:");
-                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfReps(getNumberFromUserInput()); // Change amount of reps
+                    gymMember.getWorkoutList().get(workoutNumber - 1).getExerciseList().get(exerciseNumber - 1).setNumberOfReps(getNumberFromUserInput()); // Change amount of reps
                     break;
                 case 3:
                     System.out.println("Enter new amount of sets:");
-                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setNumberOfSets(getNumberFromUserInput()); // Change amount of sets
+                    gymMember.getWorkoutList().get(workoutNumber - 1).getExerciseList().get(exerciseNumber - 1).setNumberOfSets(getNumberFromUserInput()); // Change amount of sets
                     break;
                 case 4:
-                    gymMember.getWorkoutList().get(workoutNumber - 1).exerciseList.get(exerciseNumber - 1).setTargetedMuscle(selectMuscleGroup()); // Change targeted muscle group
+                    gymMember.getWorkoutList().get(workoutNumber - 1).getExerciseList().get(exerciseNumber - 1).setTargetedMuscle(selectMuscleGroup()); // Change targeted muscle group
                     break;
             }
             System.out.println("Exercise successfully updated!");
@@ -342,12 +322,31 @@ public class TrainingProgram {
     }
 
 
+
+
+
+
     public void searchWorkout(GymMember gymMember) {
 
+
         System.out.println("Enter name of the workout you are looking for:");
-        input.nextLine();
         String searchedWorkout = input.nextLine();
 
+        ArrayList<Workout> matches = gymMember.getSearchedObject(gymMember.getWorkoutList(), searchedWorkout);
+        ArrayList<Workout> related = gymMember.getRelatedSearchedObject(gymMember.getWorkoutList(), searchedWorkout);
+
+        if (!matches.isEmpty()) {
+            System.out.println("Workout(s) Found:");
+            gymMember.showWorkouts(matches);
+        } else if (!related.isEmpty()) {
+            System.out.printf("Workout that contains '%s' found:\n", searchedWorkout);
+            gymMember.showWorkouts(related);
+        } else {
+            System.out.printf("No workouts matching %s found\n", searchedWorkout);
+        }
+
+
+        /*
         ArrayList<Workout> matchingWorkouts = gymMember.getSearchedWorkout(searchedWorkout);
         ArrayList<Workout> relatedWorkouts = gymMember.getRelatedSearchedWorkout(searchedWorkout);
 
@@ -361,7 +360,7 @@ public class TrainingProgram {
 
         } else {
             System.out.printf("No workouts matching %s found\n", searchedWorkout);
-        }
+        }*/
     }
 
 
@@ -428,19 +427,19 @@ public class TrainingProgram {
                 return;
             case 1:
                 SortExerciseName sortExerciseName = new SortExerciseName();
-                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).exerciseList, sortExerciseName);
+                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).getExerciseList(), sortExerciseName);
                 break;
             case 2:
                 SortExerciseReps sortExerciseReps = new SortExerciseReps();
-                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).exerciseList, sortExerciseReps);
+                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).getExerciseList(), sortExerciseReps);
                 break;
             case 3:
                 SortExerciseSets sortExerciseSets = new SortExerciseSets();
-                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).exerciseList, sortExerciseSets);
+                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).getExerciseList(), sortExerciseSets);
                 break;
             case 4:
                 SortExercisesMuscle sortExercisesMuscle = new SortExercisesMuscle();
-                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).exerciseList, sortExercisesMuscle);
+                Collections.sort(gymMember.getWorkoutList().get(workoutIndex - 1).getExerciseList(), sortExercisesMuscle);
                 break;
         }
 
@@ -559,7 +558,6 @@ public class TrainingProgram {
 
 
         System.out.println("Enter name of the friend you are looking for:");
-        input.nextLine();
         String searchedFriend = input.nextLine();
 
         ArrayList<GymMember> matchingFriends = currentUser.getSearchedFriend(searchedFriend);

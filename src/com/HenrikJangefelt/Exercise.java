@@ -1,15 +1,13 @@
 package com.HenrikJangefelt;
 
-// TODO: rätt att den ärver från workout??? Behöver workout name?
+// TODO: Ta bort comparable
 public class Exercise implements Comparable<Exercise> {
 
     private String exerciseName;
+    private Muscle targetedMuscle;
     private int numberOfReps;
     private int numberOfSets;
-    private Muscle targetedMuscle;
-
-    // private float weightUsed;
-    // private // enum muscleGroup
+    // private float weightUsed; // TODO: add weight used?
 
 
     enum Muscle {
@@ -29,11 +27,7 @@ public class Exercise implements Comparable<Exercise> {
     }
 
 
-
-
     public Exercise(String exerciseName, int numberOfReps, int numberOfSets, Muscle targetedMuscle) {
-    //public Exercise(String exerciseName, int numberOfReps, int numberOfSets) {
-
         this.exerciseName = exerciseName;
         this.numberOfReps = numberOfReps;
         this.numberOfSets = numberOfSets;
@@ -52,16 +46,12 @@ public class Exercise implements Comparable<Exercise> {
         return numberOfSets;
     }
 
-    public String getExercise() {
-        //return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ")"; // TODO: Fixa, inte jätte snyggt
+    // TODO: ta bort
+    /*public String getExercise() {
         return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ", Targeted Muscle: " + targetedMuscle.label + ")";
-    }
+    }*/
 
-    public String toString() {
-        return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ", Targeted Muscle: " + targetedMuscle + ")";
-    }
 
-    // Set
     public void setExerciseName(String exerciseName) {
         this.exerciseName = exerciseName;
     }
@@ -77,6 +67,11 @@ public class Exercise implements Comparable<Exercise> {
     public void setTargetedMuscle(Muscle targetedMuscle) {
         this.targetedMuscle = targetedMuscle;
     }
+
+    public String toString() {
+        return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ", Targeted Muscle: " + targetedMuscle + ")";
+    }
+
 
     // TEST (Lägg i konstruktorn)
     public String getTargetedMuscle() {

@@ -2,15 +2,16 @@ package com.HenrikJangefelt;
 
 import java.util.ArrayList;
 
+// TODO: ta bort comparable?
 public class Workout implements Comparable<Workout> {
 
+    private ArrayList<Exercise> exerciseList = new ArrayList<>();
     private String workoutName;
     //private int totalAmountOfReps;
     //private int totalAmountOfSets;
     //private int totalAmountOfExercises;
 
     // TODO: Sätt till private (ha funktion public ArrayList<Exercise> getExerciseList() { return exerciseList }
-    ArrayList<Exercise> exerciseList = new ArrayList<>();
 
 
     public Workout(String workoutName) {
@@ -18,18 +19,21 @@ public class Workout implements Comparable<Workout> {
     }
 
 
+
+    public ArrayList<Exercise> getExerciseList() {
+        return exerciseList;
+    }
+
     public String getWorkoutName() {
         return workoutName;
     }
+
 
     public void setWorkoutName(String workoutName) {
         this.workoutName = workoutName;
     }
 
-    // TODO: LADE till (test)
-    public ArrayList<Exercise> getExerciseList() {
-        return exerciseList;
-    }
+
 
     // TODO: lägg logik för att lägga till övningar här?
 
@@ -48,7 +52,7 @@ public class Workout implements Comparable<Workout> {
     public void showExercises(int workoutIndex) {
 
         for (int i = 0; i < exerciseList.size(); i++) {
-            System.out.printf("\t%s.%s %s\n", workoutIndex + 1, i + 1 , exerciseList.get(i).getExercise());
+            System.out.printf("\t%s.%s %s\n", workoutIndex + 1, i + 1 , exerciseList.get(i).toString());
         }
     }
     /*public void showExercises(int workoutIndex) {
@@ -78,7 +82,6 @@ public class Workout implements Comparable<Workout> {
 
 
     // TODO: kan ta bort?
-    // TODO jämför kod
     @Override
     public int compareTo(Workout o) {
         return 0;
