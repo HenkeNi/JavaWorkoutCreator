@@ -1,7 +1,7 @@
 package com.HenrikJangefelt;
 
 // TODO: Ta bort comparable
-public class Exercise implements Comparable<Exercise> {
+public class Exercise {
 
     private String exerciseName;
     private Muscle targetedMuscle;
@@ -9,29 +9,28 @@ public class Exercise implements Comparable<Exercise> {
     private int numberOfSets;
     // private float weightUsed; // TODO: add weight used?
 
-
     enum Muscle {
         CHEST("Chest"),
         BACK("Back"),
         SHOULDERS("Shoulders"),
-        BICEPS("Bicep"),
-        TRICEPS("Tricep"),
+        BICEPS("Biceps"),
+        TRICEPS("Triceps"),
         ABS("Abs"),
         LEGS("Legs"),
         UNKOWN("Unspecified");
 
         public String label;
+
         private Muscle(String label) {
             this.label = label;
         }
     }
 
-
     public Exercise(String exerciseName, int numberOfReps, int numberOfSets, Muscle targetedMuscle) {
         this.exerciseName = exerciseName;
         this.numberOfReps = numberOfReps;
         this.numberOfSets = numberOfSets;
-        this.targetedMuscle = targetedMuscle; // TEST
+        this.targetedMuscle = targetedMuscle;
     }
 
     public String getExerciseName() {
@@ -46,11 +45,9 @@ public class Exercise implements Comparable<Exercise> {
         return numberOfSets;
     }
 
-    // TODO: ta bort
-    /*public String getExercise() {
-        return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ", Targeted Muscle: " + targetedMuscle.label + ")";
-    }*/
-
+    public String getTargetedMuscle() {
+        return targetedMuscle.toString();
+    }
 
     public void setExerciseName(String exerciseName) {
         this.exerciseName = exerciseName;
@@ -69,22 +66,10 @@ public class Exercise implements Comparable<Exercise> {
     }
 
     public String toString() {
-        return exerciseName + " (Reps: " + numberOfReps + ", Sets: " + numberOfSets + ", Targeted Muscle: " + targetedMuscle + ")";
+        return exerciseName +
+                " (Reps: " + numberOfReps +
+                ", Sets: " + numberOfSets +
+                ", Targeted Muscle: " + targetedMuscle +
+                ")";
     }
-
-
-    // TEST (Lägg i konstruktorn)
-    public String getTargetedMuscle() {
-        //return Muscle.valueOf(targetedMuscle.toString());
-        return targetedMuscle.toString();
-        //return "Main muscle worked: " + targetedMuscle.toString();
-    }
-
-    // TODO: kan ta bort?
-    @Override
-    public int compareTo(Exercise o) {
-        return 0;
-    }
-
-
 }

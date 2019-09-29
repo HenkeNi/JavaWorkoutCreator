@@ -52,7 +52,7 @@ public class GymMember extends Person {
     public void showWorkouts(ArrayList<Workout> workouts) {
 
         for (int i = 0; i < workouts.size(); i++) {
-            System.out.printf("%s. %s\n", i + 1, workouts.get(i).getWorkoutName());
+            System.out.printf("%s. %s\n", i + 1, workouts.get(i).toString());
             workouts.get(i).showExercises(i);
         }
     }
