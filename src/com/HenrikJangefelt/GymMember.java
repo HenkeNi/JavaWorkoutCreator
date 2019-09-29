@@ -26,7 +26,6 @@ public class GymMember extends Person {
         workoutList.remove(indexPosition);
     }*/
 
-
     public String deleteWorkout(int workoutIndex, int exerciseIndex) {
 
         if (exerciseIndex == 0) {
@@ -49,8 +48,6 @@ public class GymMember extends Person {
         Workout newWorkout = new Workout(workoutName);
         workoutList.add(newWorkout);
     }
-
-
 
     public void showWorkouts(ArrayList<Workout> workouts) {
 
@@ -99,10 +96,41 @@ public class GymMember extends Person {
         friendList.remove(indexPosition);
     }
 
-    public void showFriends() {
-        for (int i = 0; i < friendList.size(); i++) {
-            System.out.printf("\t%s. %s\n", i + 1, friendList.get(i).getFullName());
+    public void showFriends(ArrayList<GymMember> friends) {
+        for (int i = 0; i < friends.size(); i++) {
+            System.out.printf("\t%s. %s\n", i + 1, friends.get(i).getFullName());
         }
+    }
+
+
+
+
+
+    // TODO: Combine getSearcchedFriend/Workout && getRelated.../Friend/Workout && showWorkout//Friend
+
+    public ArrayList<GymMember> getSearchedFriend(String searchedFriend) {
+
+        ArrayList<GymMember> matchingFriends = new ArrayList<>();
+        for (int i = 0; i < friendList.size(); i++) {
+
+            if (friendList.get(i).getFullName().equalsIgnoreCase(searchedFriend)) {
+                matchingFriends.add(friendList.get(i));
+            }
+        }
+        return matchingFriends;
+    }
+
+    // Returns workouts that contains the seatched workout
+    public ArrayList<GymMember> getRelatedSearchedFriend(String searchedFriend) {
+
+        ArrayList<GymMember> relatedFriends = new ArrayList<>();
+        for (int i = 0; i < friendList.size(); i++) {
+
+            if (friendList.get(i).getFullName().toUpperCase().contains(searchedFriend.toUpperCase())) {
+                relatedFriends.add(friendList.get(i));
+            }
+        }
+        return relatedFriends;
     }
 
 

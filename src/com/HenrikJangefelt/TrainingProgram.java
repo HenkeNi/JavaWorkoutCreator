@@ -59,7 +59,6 @@ public class TrainingProgram {
     }
 
 
-
     private void showWorkoutMenu(GymMember gymMember) {
 
         do {
@@ -95,7 +94,7 @@ public class TrainingProgram {
         //input.nextLine(); // TODO: Kan ta bort?
         gymMember.addWorkout(input.nextLine());
 
-        addExercise(currentUser,gymMember.getWorkoutList().size() - 1); // Add new exercise to the last workout in the workoutList
+        addExercise(currentUser, gymMember.getWorkoutList().size() - 1); // Add new exercise to the last workout in the workoutList
 
     }
 
@@ -306,7 +305,7 @@ public class TrainingProgram {
             }
         } while (!validNumbers);
 
-        int[] prefixArray = {workoutIndex, exerciseIndex };
+        int[] prefixArray = {workoutIndex, exerciseIndex};
         return prefixArray;
     }
 
@@ -333,7 +332,6 @@ public class TrainingProgram {
         }
         return indexArray;
     }*/
-
 
 
     // Delete workouts or exercises
@@ -367,7 +365,6 @@ public class TrainingProgram {
     }
 
 
-
     // TODO: sätt Workouts som optional?
     public void showWorkouts(GymMember gymMember, ArrayList<Workout> workouts) {
 
@@ -379,10 +376,6 @@ public class TrainingProgram {
         }
         gymMember.showWorkouts(workouts);
     }
-
-
-
-
 
 
     public void sortMenu(GymMember gymMember) {
@@ -454,8 +447,6 @@ public class TrainingProgram {
     }
 
 
-
-
     // TODO: egen klass?
     // TODO: loop
     public void help() {
@@ -500,31 +491,6 @@ public class TrainingProgram {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // TODO: Show if possible friends before
     public void showFriendsMenu() {
 
@@ -543,6 +509,7 @@ public class TrainingProgram {
                     break;
                 case 3:
                     showGymBuddies();
+                    break;
                 case 4:
                     searchGymBuddy();
                     break;
@@ -554,15 +521,11 @@ public class TrainingProgram {
     }
 
 
-
-
-
-
     public void sortFriends(GymMember gymMember) {
 
         SortFriend sortFriend = new SortFriend();
         Collections.sort(gymMember.getFriendList(), sortFriend);
-        gymMember.showFriends();
+        gymMember.showFriends(gymMember.getFriendList());
     }
 
 
@@ -590,91 +553,30 @@ public class TrainingProgram {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void showObjects(ArrayList<Object> objectList, String objectName) {
-
-        System.out.printf("Current %s\n", objectName);
-
-        if (objectList.isEmpty()) {
-            System.out.println("\t-Empty");
-            return;
-        }
-
-        // TODO SKriva ut objekten
-        for (int i = 0; i < objectList.size(); i++) {
-            //System.out.println("\n%s. %s\n", i + 1, objectList.get(i));
-        }
-
-
-    }
-
-
-
-
     // TODO: Ändra curretnUsers till gymMembers?? (nej: bara kunna en själv ska kunna söka. ja: programmet bör vara utformat för alla..)
     // TODO: COmbine with search workout?
     public void searchGymBuddy() {
 
-        int numberOfMatchingNames = 0;
-        int numberOfRelatedNames = 0;
 
         System.out.println("Enter name of the friend you are looking for:");
         input.nextLine();
         String searchedFriend = input.nextLine();
 
+        ArrayList<GymMember> matchingFriends = currentUser.getSearchedFriend(searchedFriend);
+        ArrayList<GymMember> relatedFriends = currentUser.getRelatedSearchedFriend(searchedFriend);
 
-        for (int i = 0; i < currentUser.getFriendList().size(); i++) {
+        if (!matchingFriends.isEmpty()) {
+            System.out.println("Friend(s) Found:");
+            currentUser.showFriends(matchingFriends);
 
-            if (currentUser.getFriendList().get(i).getFullName().equalsIgnoreCase(searchedFriend)) {
-                if (numberOfMatchingNames == 0) {
-                    System.out.println("Friend(s) Found:");
-                }
-                System.out.println(currentUser.getFriendList().get(i).getFullName());
-                numberOfMatchingNames++;
-
-                // TODO: FIxa för många upperCase?
-                //} else if (workout.contains(searchedWorkout) &&  !workout.equals(searchedWorkout)) {
-            } else if (currentUser.getFriendList().get(i).getFullName().toUpperCase().contains(searchedFriend.toUpperCase()) && numberOfMatchingNames == 0) {
-
-                // Only get related workouts in no exact match are found
-                if (numberOfRelatedNames == 0) {
-                    System.out.printf("Friend that contains '%s' found:\n", searchedFriend);
-                }
-                System.out.println(currentUser.getFriendList().get(i).getFullName());
-                numberOfRelatedNames++;
-            }
+        } else if (!relatedFriends.isEmpty()) {
+            System.out.printf("Friend(s) that contains '%s' found:\n", searchedFriend);
+            currentUser.showFriends(relatedFriends);
+        } else {
+            System.out.printf("No friends matching %s found\n", searchedFriend);
         }
 
-        // If no matching or related workout found
-        if (numberOfMatchingNames == 0 && numberOfRelatedNames == 0) {
-            System.out.println("No Friends found with that name");
-        }
     }
-
-
 
 
     public void addGymBuddy() {
@@ -703,8 +605,6 @@ public class TrainingProgram {
     }
 
 
-
-
     public void showGymBuddies() {
 
         System.out.println("Friends in friend list:");
@@ -714,15 +614,7 @@ public class TrainingProgram {
             System.out.println("\t-Empty");
             return;
         }
-
-
-        currentUser.showFriends();
-        /*for (int i = 0; i < accountHolder.gymBuddies.size(); i++) {
-            System.out.printf("\n%s. %s\n", i + 1, accountHolder.gymBuddies.get(i).getWorkoutName());
-
-            accountHolder.workoutList.get(i).showExercises(i + 1);
-        }*/
-
+        currentUser.showFriends(currentUser.getFriendList());
     }
 
     public void editGymBuddy() {
@@ -761,12 +653,23 @@ public class TrainingProgram {
     }
 
 
+    public int getNumberFromUserInput() {
+
+        int numb = -999;
+
+        do {
+            String userInput = input.nextLine();
+            try {
+                numb = Integer.parseInt(userInput);
+            } catch (Exception e) {
+                System.out.println("Must enter a number:");
+            }
+        } while (numb == -999);
+        return numb;
+    }
 
 
-
-
-
-
+    // TESTS!!
 
 
     // TODO: ta bort?
@@ -789,24 +692,20 @@ public class TrainingProgram {
     }*/
 
 
-    public int getNumberFromUserInput() {
+   /* public void showObjects(ArrayList<Object> objectList, String objectName) {
 
-        int numb = -999;
+        System.out.printf("Current %s\n", objectName);
 
-        do {
-            String userInput = input.nextLine();
-            try {
-                numb = Integer.parseInt(userInput);
-            } catch (Exception e) {
-                System.out.println("Must enter a number:");
-            }
-        } while (numb == -999);
-        return numb;
-    }
+        if (objectList.isEmpty()) {
+            System.out.println("\t-Empty");
+            return;
+        }
 
-
-
-
+        // TODO SKriva ut objekten
+        for (int i = 0; i < objectList.size(); i++) {
+            //System.out.println("\n%s. %s\n", i + 1, objectList.get(i));
+        }
+    }*/
 
 
   /*public <T extends Number> T checkInput() {
@@ -838,22 +737,6 @@ public class TrainingProgram {
             }
         } while (true);
     } */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
