@@ -2,7 +2,7 @@ package com.HenrikJangefelt;
 
 import java.util.ArrayList;
 
-// TODO: ta bort comparable?
+// TODO: ta bort comparable? Eller ha det bara i workouts
 public class Workout implements Comparable<Workout> {
 
     private ArrayList<Exercise> exerciseList = new ArrayList<>();
@@ -33,7 +33,7 @@ public class Workout implements Comparable<Workout> {
         exerciseList.remove(indexPosition);
     }
 
-    // TODO, ha bara logick
+    // TODO, ha bara logick, inga prints?
     public void showExercises(int workoutIndex) {
         for (int i = 0; i < exerciseList.size(); i++) {
             System.out.printf("\t%s.%s %s\n", workoutIndex + 1, i + 1, exerciseList.get(i).toString());

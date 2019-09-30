@@ -103,7 +103,7 @@ public class GymMember extends Person {
     }
 
 
-    // TODO Gör så att den bara kan ta in generic objekts
+    // TODO: Gör så att den bara kan ta in generic objekts
     public <T extends Object> ArrayList<T> getSearchedObject(ArrayList<T> objectList, String searchWord) {
 
         ArrayList<T> matches = new ArrayList<>();

@@ -9,4 +9,6 @@ public class SortWorkoutName implements Comparator<Workout> {
     public int compare(Workout o1, Workout o2) {
         return o1.getWorkoutName().compareTo(o2.getWorkoutName());
     }
+
+    // TODO ADD SORT BY TOTAL AMOUNT OF EXERCISES
 }
