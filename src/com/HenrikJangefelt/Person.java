@@ -1,8 +1,10 @@
 package com.HenrikJangefelt;
 
+import java.io.Serializable;
+
 // TODO: Rename to something else??
 // TODO: Add an abstract metod
-public abstract class Person {
+public abstract class Person implements Serializable {
 
     private String firstName;
     private String lastName;

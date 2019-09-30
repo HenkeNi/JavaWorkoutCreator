@@ -1,7 +1,9 @@
 package com.HenrikJangefelt;
 
+import java.io.Serializable;
+
 // TODO: Ta bort comparable
-public class Exercise {
+public class Exercise implements Serializable {
 
     private String exerciseName;
     private Muscle targetedMuscle;

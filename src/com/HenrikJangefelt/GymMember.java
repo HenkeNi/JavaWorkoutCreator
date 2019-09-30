@@ -1,10 +1,11 @@
 package com.HenrikJangefelt;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 // TODO: renam???
 // GymGoer, lifter, trainee,
-public class GymMember extends Person {
+public class GymMember extends Person implements Serializable {
 
     // TODO: ha bara logik i klasserna!!
     private ArrayList<Workout> workoutList = new ArrayList<>();

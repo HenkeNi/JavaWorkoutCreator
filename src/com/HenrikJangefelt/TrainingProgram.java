@@ -91,7 +91,22 @@ public class TrainingProgram {
         System.out.println("Enter workout's name:");
         gymMember.addWorkout(input.nextLine());
 
-        addExercise(currentUser, gymMember.getWorkoutList().size() - 1); // Add new exercise to the last workout in the workoutList
+        addExercise(gymMember, gymMember.getWorkoutList().size() - 1); // Add new exercise to the last workout in the workoutList
+
+
+        /*for (int i = 0; i < gymMember.getWorkoutList().size(); i++) {
+            gymMember.getWorkoutList().get(i).showExercises(i);
+        }*/
+
+        ArrayList<Workout> workouts = gymMember.getWorkoutList();
+
+        // TODO: hämta workouts från textfil (om det finns någon), ladda upp igen (plus ny workout)
+        //FileUtils.writeGenericObjects("workouts.ser", gymMember.getWorkoutList());
+        FileUtils.writeGenericObjects("workouts.ser", workouts);
+
+        //System.out.println(gymMember.getWorkoutList());
+        List<Workout> savedWorkouts = FileUtils.readGenericObjects("workouts.ser");
+        savedWorkouts.get(0).showExercises(0);
     }
 
 

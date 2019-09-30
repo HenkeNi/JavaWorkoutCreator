@@ -1,9 +1,10 @@
 package com.HenrikJangefelt;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 // TODO: ta bort comparable? Eller ha det bara i workouts
-public class Workout implements Comparable<Workout> {
+public class Workout implements Comparable<Workout>, Serializable {
 
     private ArrayList<Exercise> exerciseList = new ArrayList<>();
     private String workoutName;
@@ -40,6 +41,7 @@ public class Workout implements Comparable<Workout> {
         }
     }
 
+    // TODO: skriv även ut exercises som tillhör???
     public String toString() {
         return workoutName + " (total number of exercises: " + exerciseList.size() + ")";
     }
