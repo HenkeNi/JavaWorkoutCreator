@@ -15,83 +15,102 @@ import java.util.*;
 
 // TODO: sätt så mycket som möjligt till private?
 
-
 // TODO: Final check- kolla att man bara kan ange siffror, samt bara rätt intervall för tex arrayer...
 // TODO: Final check Rensa klasser som inte används längre, compareTo/comparator kika närmare på
 
 public class TrainingProgram {
 
-    Scanner input = new Scanner(System.in);
+    //Scanner input = new Scanner(System.in); // TODO Ta bort ich ha bara i view klassen!
+    View view = View.getInstance(); // Get instance to View class
 
-    static GymMember currentUser = new GymMember("", ""); // TEST (Static) TODO: (ta bort från konstruktorn i Person???)
+    static GymMember currentUser = new GymMember("", ""); // TEST (Static) TODO: (ta bort från konstruktorn i Person???) EJ STATIC!!
 
     public TrainingProgram() {
         showMainMenu(currentUser);
     }
 
-    // TODO: lägg till funktion för att köra passet?
-    public void showMainMenu(GymMember gymMember) {
+
+
+
+
+
+    public void showMainMenu(GymMember gymMember) {  // TODO: Renmae gymMember
 
         do {
-            System.out.println("Main Menu:\n1. Workouts\n2. Friends\n3. Check Available Staff\n4. Help(TODO)\n0. Exit");
+            view.showMenu(View.MainMenuItem.class, "Main Menu:"); // Displays main menu by sending correct enumType to the showMenu method in 'View' class.
 
-            int menuSelection = getNumberFromUserInput();
+            // Switch on the returned enum case from the View class.
+            switch (view.getMenuChoice(View.MainMenuItem.class)) {
 
-            switch (menuSelection) {
-                case 0:
-                    return;
-                case 1:
+                case WORKOUTS:
                     showWorkoutMenu(gymMember);
                     break;
-                case 2:
+                case FRIENDS:
                     showFriendsMenu();
                     break;
-                case 3:
+                case AVAILABLE_STAFF:
                     checkAvailableStaff();
                     break;
-                case 4:
+                case HELP:
                     help();
                     break;
+                case EXIT:
+                    return;
             }
         } while (true);
     }
 
 
+    // TODO: lägg till funktion för att köra passet?
     private void showWorkoutMenu(GymMember gymMember) {
 
         do {
-            System.out.println("Workout menu:\n1. Add Workout\n2. Edit Workout\n3. Show Workouts \n4. Search Workout\n5. Sort Workout \n0. Go Back");
-            int menuSelection = getNumberFromUserInput();
+            view.showMenu(View.SubMenuItem.class, "Workout Menu:"); // Displays main menu by sending correct enumType to the showMenu method in 'View' class.
 
-            switch (menuSelection) {
-                case 0:
-                    return;
-                case 1:
+            // TODO: lägg till funktion för att köra passet?
+            switch (view.getMenuChoice(View.SubMenuItem.class)) {
+
+                case ADD:
                     createWorkout(gymMember);
                     break;
-                case 2:
+                case EDIT:
                     showEditWorkoutMenu(gymMember);
                     break;
-                case 3:
+                case SHOW:
                     showWorkouts(gymMember, gymMember.getWorkoutList());
                     break;
-                case 4:
+                case SEARCH:
                     searchWorkout(gymMember);
                     break;
-                case 5:
+                case SORT:
                     sortMenu(gymMember);
                     break;
+                case BACK:
+                    return;
             }
         } while (true);
     }
 
 
+    // TODO: make a workoutFactory
     public void createWorkout(GymMember gymMember) {
 
-        System.out.println("Enter workout's name:");
-        gymMember.addWorkout(input.nextLine());
+        UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "Enter workout's name:");
+        gymMember.addWorkout(userInput.message);
+
+        //String workoutName = view.getUserInput("Enter workout's name");
+        //gymMember.addWorkout(workoutName);
+
+        //System.out.println("Enter workout's name:");
+        //gymMember.addWorkout(input.nextLine());
+
 
         addExercise(gymMember, gymMember.getWorkoutList().size() - 1); // Add new exercise to the last workout in the workoutList
+
+
+
+
+
 
 
         /*for (int i = 0; i < gymMember.getWorkoutList().size(); i++) {
@@ -110,21 +129,26 @@ public class TrainingProgram {
     }
 
 
+
+
+
+
+
     public void addExercise(GymMember gymMember, int workoutIndex) {
 
         do {
-            System.out.println("Exercise name:");
-            String exerciseName = input.nextLine();
+            UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "Exercise name:");
+            String exerciseName = userInput.message;
 
-            System.out.println("Number of reps:");
-            int numberOfReps = getNumberFromUserInput();
+            userInput = view.getUserInput(UserInput.InputType.INT, "Number of reps:");
+            int numberOfReps = userInput.number;
 
-            System.out.println("Number of sets:");
-            int numberOfSets = getNumberFromUserInput();
+            userInput = view.getUserInput(UserInput.InputType.INT, "Number of sets:");
+            int numberOfSets = userInput.number;
 
             gymMember.getWorkoutList().get(workoutIndex).addExercise(exerciseName, numberOfReps, numberOfSets, selectMuscleGroup());
 
-
+            // TODO: put in view?
             System.out.printf("Workout: \'%s\' currently consist of %s exercises\n", gymMember.getWorkoutList().get(workoutIndex).getWorkoutName(), gymMember.getWorkoutList().get(workoutIndex).getExerciseList().size());
             System.out.println("1. Add another exercise\n0. Go Back");
 
@@ -141,16 +165,10 @@ public class TrainingProgram {
     // TODO: Bara kunna ange tal mellan 1-7
     // Choose worked muscle group for exercise
     public Exercise.Muscle selectMuscleGroup() {
-        System.out.println("Choose targeted muscle for exercise:\n" +
-                "1. Chest\n" +
-                "2. Back\n" +
-                "3. Shoulders\n" +
-                "4. Biceps\n" +
-                "5. Triceps\n" +
-                "6. Abs\n" +
-                "7. Legs");
 
-        int muscleSelection = getNumberFromUserInput();
+        view.showMenu(Exercise.Muscle.class, "Choose targeted muscle for exercise:");
+        
+        int muscleSelection = view.getNumberFromUserInput();
 
         switch (muscleSelection) {
             case 1:
@@ -666,6 +684,7 @@ public class TrainingProgram {
     }
 
 
+    // TODO: put in view class
     public int getNumberFromUserInput() {
 
         int numb = -999;
@@ -753,4 +772,58 @@ public class TrainingProgram {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ public void addExercise(GymMember gymMember, int workoutIndex) {
+
+        do {
+            String exerciseName = view.getUserInput(UserInput.InputType.STRING,"Exercise name:");
+
+            /*System.out.println("Exercise name:");
+            String exerciseName = input.nextLine();
+
+            System.out.println("Number of reps:");
+                    int numberOfReps = getNumberFromUserInput();
+
+                    System.out.println("Number of sets:");
+                    int numberOfSets = getNumberFromUserInput();
+
+                    gymMember.getWorkoutList().get(workoutIndex).addExercise(exerciseName, numberOfReps, numberOfSets, selectMuscleGroup());
+
+
+                    System.out.printf("Workout: \'%s\' currently consist of %s exercises\n", gymMember.getWorkoutList().get(workoutIndex).getWorkoutName(), gymMember.getWorkoutList().get(workoutIndex).getExerciseList().size());
+                    System.out.println("1. Add another exercise\n0. Go Back");
+
+                    int menuSelection = getNumberFromUserInput();
+
+                    switch (menuSelection) {
+                    case 0:
+                    return;
+                    }
+                    } while (true);
+                    }
+ */
 

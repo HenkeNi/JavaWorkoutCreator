@@ -2,6 +2,7 @@ package com.HenrikJangefelt;
 
 import java.util.ArrayList;
 
+// TODO: TA BORT???
 // TEST (Obs this class should only be created once(Static??)
 public class CurrentUser extends GymMember {
 

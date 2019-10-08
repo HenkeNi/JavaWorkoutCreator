@@ -2,6 +2,7 @@ package com.HenrikJangefelt;
 
 import java.util.ArrayList;
 
+// TODO: TA BORT????
 // TODO: can/should only create one instance of this object
 public class PersonalTrainer extends Person {
 

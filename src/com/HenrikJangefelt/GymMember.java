@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 // TODO: renam???
 // GymGoer, lifter, trainee,
-public class GymMember extends Person implements Serializable {
+public class GymMember extends Person {
 
     // TODO: ha bara logik i klasserna!!
     private ArrayList<Workout> workoutList = new ArrayList<>();
