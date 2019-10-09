@@ -1,10 +1,13 @@
 package com.HenrikJangefelt;
 
-import java.util.EnumSet;
 import java.util.Scanner;
 
 // Singleton
 public class View {
+
+    // TODO: FIxa try and catch for inputs!!
+    // TODO: Final check- kolla att man bara kan ange siffror, samt bara rätt intervall för tex arrayer...
+    // TODO: ta in userInout som String och omvandla sedan (Fixar bugg med nextLine inte läses in?) TODO: FIx isNumber
 
     Scanner input = new Scanner(System.in);
     private static View instance = null;
@@ -97,7 +100,8 @@ public class View {
     }
 
 
-    // enum? number or string
+    // TODO; kanske splita upp i en del som vissar meddelande och en som tar input
+    // TODO: KAnkse bättre med två olika funktioner ändå???
     public UserInput getUserInput(UserInput.InputType inputType, String message) {
         System.out.println(message);
 
@@ -105,17 +109,20 @@ public class View {
 
         switch (inputType) {
             case STRING:
-                userInput.message = input.nextLine();
+                userInput.stringValue = input.nextLine().trim();
                 break;
             case INT:
-                userInput.number = getNumberFromUserInput();
+                userInput.intValue = getNumberFromUserInput();
                 break;
+            case NONE:
+                return null; // TODO Correct?
         }
         return userInput;
     }
 
-
-
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
 
     public void showErrorMessage(String errorMessage) {
         System.out.println("Error: " + errorMessage);
@@ -141,3 +148,74 @@ public class View {
 
 }
 
+
+
+
+// TESTS!!
+
+
+// TODO: ta bort?
+    /*public Number checkIfValidNumber(String str) {
+
+        do {
+            try {
+                int number = Integer.parseInt(str);
+                System.out.println("Is a int number " + number);
+            } catch (Exception e) {
+                System.out.println("Is not an int number");
+                try {
+                    double number = Double.parseDouble(str);
+                    System.out.println("is a double");
+                } catch (Exception d) {
+                    System.out.println("neither double or int");
+                }
+            }
+        } while (true);
+    }*/
+
+
+   /* public void showObjects(ArrayList<Object> objectList, String objectName) {
+
+        System.out.printf("Current %s\n", objectName);
+
+        if (objectList.isEmpty()) {
+            System.out.println("\t-Empty");
+            return;
+        }
+
+        // TODO SKriva ut objekten
+        for (int i = 0; i < objectList.size(); i++) {
+            //System.out.println("\n%s. %s\n", i + 1, objectList.get(i));
+        }
+    }*/
+
+
+  /*public <T extends Number> T checkInput() {
+
+        String userInput = input.nextLine();
+        T number;
+
+        try {
+            number = Integer.parseInt(userInput);
+        }
+    }*/
+
+/*
+    // TODO: BYGG OM SÅ ATT DEN RETURNERAR DOUBLE ELLER INT
+
+    // TODO: Fixa med overloading metod istället
+    // Generic function
+    public <T extends NumberFormat<T>> T isNumber(T a, T b, T c) {
+
+    }
+
+
+    public <T> T isIntOrDouble(String str) {
+        do {
+            try {
+                return Integer.parseInt(str);
+            } catch (Exception e) {
+
+            }
+        } while (true);
+    } */

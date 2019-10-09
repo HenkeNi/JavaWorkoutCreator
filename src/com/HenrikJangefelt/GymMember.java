@@ -50,6 +50,19 @@ public class GymMember extends Person {
         workoutList.add(newWorkout);
     }
 
+
+
+
+    public <T extends Object> void show(ArrayList<T> list) {
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).toString());
+
+            //if (list == Workout)
+        }
+    }
+
+
     public void showWorkouts(ArrayList<Workout> workouts) {
 
         for (int i = 0; i < workouts.size(); i++) {
@@ -57,6 +70,19 @@ public class GymMember extends Person {
             workouts.get(i).showExercises(i);
         }
     }
+
+    public void showFriends(ArrayList<GymMember> friends) {
+        for (int i = 0; i < friends.size(); i++) {
+            System.out.printf("\t%s. %s\n", i + 1, friends.get(i).getFullName());
+        }
+    }
+
+
+
+
+
+
+
 
     // Returns workouts that match searched workout
     public ArrayList<Workout> getSearchedWorkout(String searchedWorkout) {
@@ -97,11 +123,7 @@ public class GymMember extends Person {
         friendList.remove(indexPosition);
     }
 
-    public void showFriends(ArrayList<GymMember> friends) {
-        for (int i = 0; i < friends.size(); i++) {
-            System.out.printf("\t%s. %s\n", i + 1, friends.get(i).getFullName());
-        }
-    }
+
 
 
     // TODO: Gör så att den bara kan ta in generic objekts

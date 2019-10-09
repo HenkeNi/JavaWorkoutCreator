@@ -5,8 +5,10 @@ public class UserInput {
     enum InputType {
         STRING,
         INT,
+        NONE,
     }
 
-    String message;
-    int number;
+    // TODO två int variabler???
+    String stringValue;
+    int intValue;
 }

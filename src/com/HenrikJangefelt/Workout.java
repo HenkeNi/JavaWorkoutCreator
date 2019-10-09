@@ -9,7 +9,6 @@ public class Workout implements Comparable<Workout>, Serializable {
     private ArrayList<Exercise> exerciseList = new ArrayList<>();
     private String workoutName;
 
-
     public Workout(String workoutName) {
         this.workoutName = workoutName;
     }

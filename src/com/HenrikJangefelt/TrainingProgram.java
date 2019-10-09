@@ -6,38 +6,35 @@ import java.util.*;
 
 // TODO: egen class för StaffSchedule
 
-// TODO: FIxa try and catch for inputs!!
-// TODO: ta in userInout som String och omvandla sedan (Fixar bugg med nextLine inte läses in?) TODO: FIx isNumber
+// TODO: lägg till funktion för att köra passet?
 
 // TODO: Försök implementera: Interface, mer enums(?), abstrakta metoder, Singleton (design mönster)
-// TODO: Förbättra: Jobba mer med att lägga logik i klasser
+// TODO: Förbättra: Jobba mer med att lägga logik i klasser? MVC Och design mönster
+
 // TODO: Lägga till: Settings -> chang your username, ändra/se sitt password/email. Rensa alla arrays. Staff -> Ange veckodagar dem arbetar
 
 // TODO: sätt så mycket som möjligt till private?
-
-// TODO: Final check- kolla att man bara kan ange siffror, samt bara rätt intervall för tex arrayer...
 // TODO: Final check Rensa klasser som inte används längre, compareTo/comparator kika närmare på
+
+// TODO: SUPERVIKTIGT KOLLA ATT VÄRDET INTE ÄR NULL FRÅN VIEW!!!!!!
 
 public class TrainingProgram {
 
-    //Scanner input = new Scanner(System.in); // TODO Ta bort ich ha bara i view klassen!
+    Scanner input = new Scanner(System.in); // TODO Ta bort ich ha bara i view klassen!
     View view = View.getInstance(); // Get instance to View class
-
     static GymMember currentUser = new GymMember("", ""); // TEST (Static) TODO: (ta bort från konstruktorn i Person???) EJ STATIC!!
+
 
     public TrainingProgram() {
         showMainMenu(currentUser);
     }
 
-
-
-
-
-
-    public void showMainMenu(GymMember gymMember) {  // TODO: Renmae gymMember
+    // Main menu
+    private void showMainMenu(GymMember gymMember) {
 
         do {
-            view.showMenu(View.MainMenuItem.class, "Main Menu:"); // Displays main menu by sending correct enumType to the showMenu method in 'View' class.
+            // Displays main menu by sending correct enumType to the showMenu method in 'View' class.
+            view.showMenu(View.MainMenuItem.class, "Main Menu:");
 
             // Switch on the returned enum case from the View class.
             switch (view.getMenuChoice(View.MainMenuItem.class)) {
@@ -61,13 +58,12 @@ public class TrainingProgram {
     }
 
 
-    // TODO: lägg till funktion för att köra passet?
+    // Workout menu
     private void showWorkoutMenu(GymMember gymMember) {
 
         do {
-            view.showMenu(View.SubMenuItem.class, "Workout Menu:"); // Displays main menu by sending correct enumType to the showMenu method in 'View' class.
+            view.showMenu(View.SubMenuItem.class, "Workout Menu:");
 
-            // TODO: lägg till funktion för att köra passet?
             switch (view.getMenuChoice(View.SubMenuItem.class)) {
 
                 case ADD:
@@ -96,7 +92,7 @@ public class TrainingProgram {
     public void createWorkout(GymMember gymMember) {
 
         UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "Enter workout's name:");
-        gymMember.addWorkout(userInput.message);
+        gymMember.addWorkout(userInput.stringValue);
 
         //String workoutName = view.getUserInput("Enter workout's name");
         //gymMember.addWorkout(workoutName);
@@ -138,13 +134,13 @@ public class TrainingProgram {
 
         do {
             UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "Exercise name:");
-            String exerciseName = userInput.message;
+            String exerciseName = userInput.stringValue;
 
             userInput = view.getUserInput(UserInput.InputType.INT, "Number of reps:");
-            int numberOfReps = userInput.number;
+            int numberOfReps = userInput.intValue;
 
             userInput = view.getUserInput(UserInput.InputType.INT, "Number of sets:");
-            int numberOfSets = userInput.number;
+            int numberOfSets = userInput.intValue;
 
             gymMember.getWorkoutList().get(workoutIndex).addExercise(exerciseName, numberOfReps, numberOfSets, selectMuscleGroup());
 
@@ -167,7 +163,7 @@ public class TrainingProgram {
     public Exercise.Muscle selectMuscleGroup() {
 
         view.showMenu(Exercise.Muscle.class, "Choose targeted muscle for exercise:");
-        
+
         int muscleSelection = view.getNumberFromUserInput();
 
         switch (muscleSelection) {
@@ -221,7 +217,10 @@ public class TrainingProgram {
 
     public void updateWorkout(GymMember gymMember, int workoutNumber) {
 
+        UserInput userInput = new UserInput();
+
         do {
+            // TODO ENUM?
             System.out.println("" +
                     "Workout options:\n" +
                     "1. Change workout name\n" +
@@ -247,6 +246,7 @@ public class TrainingProgram {
     public void updateExercise(GymMember gymMember, int workoutNumber, int exerciseNumber) {
 
         do {
+            // TODO: ENUM
             System.out.println("" +
                     "Exercise options:\n" +
                     "1. Change exercise name\n" +
@@ -361,21 +361,19 @@ public class TrainingProgram {
 
     public void searchWorkout(GymMember gymMember) {
 
+        UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "Enter the name of the workout you are looking for:");
 
-        System.out.println("Enter name of the workout you are looking for:");
-        String searchedWorkout = input.nextLine();
-
-        ArrayList<Workout> matches = gymMember.getSearchedObject(gymMember.getWorkoutList(), searchedWorkout);
-        ArrayList<Workout> related = gymMember.getRelatedSearchedObject(gymMember.getWorkoutList(), searchedWorkout);
+        ArrayList<Workout> matches = gymMember.getSearchedObject(gymMember.getWorkoutList(), userInput.stringValue);
+        ArrayList<Workout> related = gymMember.getRelatedSearchedObject(gymMember.getWorkoutList(), userInput.stringValue);
 
         if (!matches.isEmpty()) {
             System.out.println("Workout(s) Found:");
             gymMember.showWorkouts(matches);
         } else if (!related.isEmpty()) {
-            System.out.printf("Workout that contains '%s' found:\n", searchedWorkout);
+            System.out.printf("Workout that contains '%s' found:\n", userInput.stringValue);
             gymMember.showWorkouts(related);
         } else {
-            System.out.printf("No workouts matching %s found\n", searchedWorkout);
+            System.out.printf("No workouts matching %s found\n", userInput.stringValue);
         }
 
 
@@ -397,17 +395,7 @@ public class TrainingProgram {
     }
 
 
-    // TODO: sätt Workouts som optional?
-    public void showWorkouts(GymMember gymMember, ArrayList<Workout> workouts) {
 
-        System.out.println("Current Workouts:");
-
-        if (gymMember.getWorkoutList().isEmpty()) {
-            System.out.println("\t -Empty");
-            return;
-        }
-        gymMember.showWorkouts(workouts);
-    }
 
 
     public void sortMenu(GymMember gymMember) {
@@ -482,10 +470,9 @@ public class TrainingProgram {
     // TODO: egen klass?
     // TODO: loop
     public void help() {
-        System.out.println("What do you need help with?");
-        System.out.println("1. How to create a workout\n2. How to edit a workout\n3. How to search for a workout\n0. Go Back\n");
+        UserInput userInput = view.getUserInput(UserInput.InputType.INT, "Help Menu:\n1. How to create a workout\n2. How to edit a workout\n3. How to search for a workout\n0. Go Back\n");
 
-        int menuSelector = getNumberFromUserInput();
+        int menuSelector = userInput.intValue;
 
         switch (menuSelector) {
             case 0:
@@ -534,16 +521,16 @@ public class TrainingProgram {
                 case 0:
                     return;
                 case 1:
-                    addGymBuddy();
+                    addFriend();
                     break;
                 case 2:
-                    editGymBuddy();
+                    editFriendList();
                     break;
                 case 3:
-                    showGymBuddies();
+                    showFriends();
                     break;
                 case 4:
-                    searchGymBuddy();
+                    searchFriend();
                     break;
                 case 5:
                     sortFriends(currentUser);
@@ -587,7 +574,7 @@ public class TrainingProgram {
 
     // TODO: Ändra curretnUsers till gymMembers?? (nej: bara kunna en själv ska kunna söka. ja: programmet bör vara utformat för alla..)
     // TODO: COmbine with search workout?
-    public void searchGymBuddy() {
+    public void searchFriend() {
 
 
         System.out.println("Enter name of the friend you are looking for:");
@@ -610,25 +597,25 @@ public class TrainingProgram {
     }
 
 
-    public void addGymBuddy() {
+    public void addFriend() {
 
-        System.out.println("Here you can add friends to your friendslist!");
+        UserInput userInput;
 
         do {
-            System.out.println("Enter your friends first name");
-            String firstName = input.nextLine().trim();
+            userInput = view.getUserInput(UserInput.InputType.STRING, "Add new friend:\nFirst name:");
+            String firstName = userInput.stringValue;
 
-            System.out.println("Enter friends last name");
-            String lastName = input.nextLine().trim();
+            userInput = view.getUserInput(UserInput.InputType.STRING, "Last name:");
+            String lastName = userInput.stringValue;
 
             currentUser.addFriend(firstName, lastName);
+
+            // TODO: Change??
             System.out.println(currentUser.getFriendList().get(currentUser.getFriendList().size() - 1).getFullName() + " was added to your friendlist");
 
-            System.out.println("Do you want to add another friend?\n1. Add friend\n2. Go Back");
-            int menuSelection = getNumberFromUserInput();
+            userInput = view.getUserInput(UserInput.InputType.INT, "Do you want to add another friend?\n1. Add friend\n2. Go Back");
 
-            switch (menuSelection) {
-
+            switch (userInput.intValue) {
                 case 2:
                     return;
             }
@@ -636,7 +623,21 @@ public class TrainingProgram {
     }
 
 
-    public void showGymBuddies() {
+
+
+    // TODO: sätt Workouts som optional?
+    public void showWorkouts(GymMember gymMember, ArrayList<Workout> workouts) {
+
+        System.out.println("Current Workouts:");
+
+        if (gymMember.getWorkoutList().isEmpty()) {
+            System.out.println("\t -Empty");
+            return;
+        }
+        gymMember.showWorkouts(workouts);
+    }
+
+    public void showFriends() {
 
         System.out.println("Friends in friend list:");
 
@@ -648,22 +649,48 @@ public class TrainingProgram {
         currentUser.showFriends(currentUser.getFriendList());
     }
 
-    public void editGymBuddy() {
 
-        // Show all gym buddies
-        showGymBuddies();
+    // TODO: Fix show any object
+    // T extens object?
+    public <T extends ArrayList<T>> void show(ArrayList<T> arrayList, String listType) {
+        UserInput userInput = view.getUserInput(UserInput.InputType.NONE, listType);
 
-        if (currentUser.getFriendList().size() == 0) {
-            return;
+        if (arrayList.isEmpty()) { return; }
+
+        for (T listItem : arrayList) {
+            view.showMessage(listItem.toString());
+
+
         }
 
-        // Choose buddy
-        System.out.println("Enter the number of the friend you wish to change:");
-        int friendIndex = getNumberFromUserInput();
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public void editFriendList() {
+
+        showFriends(); // Show all friends
+
+        // If no friends in friendList => return
+        if (currentUser.getFriendList().size() == 0) { return; }
+
+        // TODO: Implement friend ID istället???
+        UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "Enter the number of the friend you wish to change:");
+
+        int friendIndex = userInput.intValue;
 
         do {
-            System.out.println("Options:\n1. Edit First Name\n2. Edit Last Name\n3. Remove Friend\n0. Go Back");
-            int menuSelection = getNumberFromUserInput();
+            // TODO: make enum cases???
+            userInput = view.getUserInput(UserInput.InputType.INT, "Options:\n1. Edit First Name\n2. Edit Last Name\n3. Remove Friend\n0. Go Back");
+            int menuSelection = userInput.intValue;
 
             switch (menuSelection) {
                 case 0:
@@ -684,7 +711,7 @@ public class TrainingProgram {
     }
 
 
-    // TODO: put in view class
+    /*// TODO: put in view class
     public int getNumberFromUserInput() {
 
         int numb = -999;
@@ -698,77 +725,10 @@ public class TrainingProgram {
             }
         } while (numb == -999);
         return numb;
-    }
-
-
-    // TESTS!!
-
-
-    // TODO: ta bort?
-    /*public Number checkIfValidNumber(String str) {
-
-        do {
-            try {
-                int number = Integer.parseInt(str);
-                System.out.println("Is a int number " + number);
-            } catch (Exception e) {
-                System.out.println("Is not an int number");
-                try {
-                    double number = Double.parseDouble(str);
-                    System.out.println("is a double");
-                } catch (Exception d) {
-                    System.out.println("neither double or int");
-                }
-            }
-        } while (true);
     }*/
 
 
-   /* public void showObjects(ArrayList<Object> objectList, String objectName) {
 
-        System.out.printf("Current %s\n", objectName);
-
-        if (objectList.isEmpty()) {
-            System.out.println("\t-Empty");
-            return;
-        }
-
-        // TODO SKriva ut objekten
-        for (int i = 0; i < objectList.size(); i++) {
-            //System.out.println("\n%s. %s\n", i + 1, objectList.get(i));
-        }
-    }*/
-
-
-  /*public <T extends Number> T checkInput() {
-
-        String userInput = input.nextLine();
-        T number;
-
-        try {
-            number = Integer.parseInt(userInput);
-        }
-    }*/
-
-/*
-    // TODO: BYGG OM SÅ ATT DEN RETURNERAR DOUBLE ELLER INT
-
-    // TODO: Fixa med overloading metod istället
-    // Generic function
-    public <T extends NumberFormat<T>> T isNumber(T a, T b, T c) {
-
-    }
-
-
-    public <T> T isIntOrDouble(String str) {
-        do {
-            try {
-                return Integer.parseInt(str);
-            } catch (Exception e) {
-
-            }
-        } while (true);
-    } */
 
 
 }

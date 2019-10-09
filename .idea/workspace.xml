@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69a07059-ef3f-46ad-9ed0-2e4502d139a0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/UserInput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/View.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/WorkoutFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/CurrentUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/CurrentUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/GymMember.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/GymMember.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/PersonalTrainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/PersonalTrainer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/CurrentUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/CurrentUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/GymMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/GymMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/PersonalTrainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/PersonalTrainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/UserInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/UserInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/Workout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/Workout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/WorkoutFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/WorkoutFactory.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
