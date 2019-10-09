@@ -3,7 +3,7 @@ package com.HenrikJangefelt;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-// TODO: renam???
+// TODO: Renam???
 // GymGoer, lifter, trainee,
 public class GymMember extends Person {
 
@@ -52,15 +52,17 @@ public class GymMember extends Person {
 
 
 
-
-    public <T extends Object> void show(ArrayList<T> list) {
+    // TODO: Creata a flexible method for showing objects (workouts / friends)
+    public <T extends ArrayList<T>> void show(ArrayList<T> list) {
 
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i).toString());
 
+
             //if (list == Workout)
         }
     }
+
 
 
     public void showWorkouts(ArrayList<Workout> workouts) {

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="69a07059-ef3f-46ad-9ed0-2e4502d139a0" name="Default Changelist" comment="">
+    <list default="true" id="69a07059-ef3f-46ad-9ed0-2e4502d139a0" name="Default Changelist" comment="TEST COmmit">
+      <change afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/GymMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/GymMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/UserInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/UserInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/Workout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/Workout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/WorkoutFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/WorkoutFactory.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +29,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -89,5 +88,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="TEST COmmit" />
+    <option name="LAST_COMMIT_MESSAGE" value="TEST COmmit" />
   </component>
 </project>

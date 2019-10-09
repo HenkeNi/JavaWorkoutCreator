@@ -143,9 +143,6 @@ public class View {
         } while (numb == -999);
         return numb;
     }
-
-
-
 }
 
 
