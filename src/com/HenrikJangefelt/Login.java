@@ -2,6 +2,7 @@ package com.HenrikJangefelt;
 
 import java.util.Scanner;
 
+// Todo: kolla om email finns sparat...
 // TODO: använd nextLine, men spara bara första delen av strängen(?)
 public class Login {
 

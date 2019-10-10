@@ -5,12 +5,6 @@ import java.io.Serializable;
 // TODO: Ta bort comparable
 public class Exercise implements Serializable {
 
-    private String exerciseName;
-    private Muscle targetedMuscle;
-    private int numberOfReps;
-    private int numberOfSets;
-    // private float weightUsed; // TODO: add weight used?
-
     enum Muscle {
         CHEST("Chest"),
         BACK("Back"),
@@ -19,14 +13,26 @@ public class Exercise implements Serializable {
         TRICEPS("Triceps"),
         ABS("Abs"),
         LEGS("Legs"),
-        UNKOWN("Unspecified");
+        UNKOWN("Unspecified"); // TODO: Ta bort
 
         public String label;
 
-        private Muscle(String label) {
+        Muscle(String label) {
             this.label = label;
         }
+
+        @Override
+        public String toString() {
+            return label;
+        }
     }
+
+    private String exerciseName;
+    private Muscle targetedMuscle;
+    private int numberOfReps;
+    private int numberOfSets;
+    // private float weightUsed; // TODO: add weight used?
+
 
     public Exercise(String exerciseName, int numberOfReps, int numberOfSets, Muscle targetedMuscle) {
         this.exerciseName = exerciseName;
@@ -35,9 +41,6 @@ public class Exercise implements Serializable {
         this.targetedMuscle = targetedMuscle;
     }
 
-    public String getExerciseName() {
-        return exerciseName;
-    }
 
     public int getNumberOfReps() {
         return numberOfReps;
@@ -47,13 +50,11 @@ public class Exercise implements Serializable {
         return numberOfSets;
     }
 
-    public String getTargetedMuscle() {
-        return targetedMuscle.toString();
+    public String getExerciseName() {
+        return exerciseName;
     }
 
-    public void setExerciseName(String exerciseName) {
-        this.exerciseName = exerciseName;
-    }
+    public String getTargetedMuscle() { return targetedMuscle.label; } //toString();
 
     public void setNumberOfReps(int numberOfReps) {
         this.numberOfReps = numberOfReps;
@@ -63,9 +64,14 @@ public class Exercise implements Serializable {
         this.numberOfSets = numberOfSets;
     }
 
+    public void setExerciseName(String exerciseName) {
+        this.exerciseName = exerciseName;
+    }
+
     public void setTargetedMuscle(Muscle targetedMuscle) {
         this.targetedMuscle = targetedMuscle;
     }
+
 
     public String toString() {
         return exerciseName +

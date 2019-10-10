@@ -7,7 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("ETalsödkölksdka ");
         new Login();
         //Login login = new Login();
         //boolean is logedIn = login.loginUser; ???

@@ -45,19 +45,23 @@ public class GymMember extends Person {
     }
 
 
-    public void addWorkout(String workoutName) {
+    /*public void addWorkout(String workoutName) {
         Workout newWorkout = new Workout(workoutName);
         workoutList.add(newWorkout);
-    }
+    }*/
 
 
 
     // TODO: Creata a flexible method for showing objects (workouts / friends)
-    public <T extends ArrayList<T>> void show(ArrayList<T> list) {
+    // public <T extends ArrayList<T>> void show(ArrayList<T> list) {
+    public <T extends Object> void show(ArrayList<T> list) {
 
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i).toString());
-
+            if (list.equals(workoutList)) {
+                System.out.println("Wokrout list");
+                workoutList.get(i).showExercises(i);
+            }
 
             //if (list == Workout)
         }

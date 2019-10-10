@@ -8,6 +8,7 @@ public class View {
     // TODO: FIxa try and catch for inputs!!
     // TODO: Final check- kolla att man bara kan ange siffror, samt bara rätt intervall för tex arrayer...
     // TODO: ta in userInout som String och omvandla sedan (Fixar bugg med nextLine inte läses in?) TODO: FIx isNumber
+    // TODO: lägg till eftet t.ex: Add (Workout) eller Add (Friend)
 
     Scanner input = new Scanner(System.in);
     private static View instance = null;
@@ -42,11 +43,48 @@ public class View {
         SHOW("Show"),
         SORT("Sort"),
         SEARCH("Search"),
-        BACK("Back");
+        BACK("Go Back");
 
         private String description;
 
         SubMenuItem(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+    }
+
+    public enum EditMenuItem {
+        ADD("Add"),
+        EDIT("Edit"),
+        REMOVE("Remove"),
+        BACK("Go Back");
+
+        private String description;
+
+        EditMenuItem(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+    }
+
+    public enum ExerciseOptions {
+        NAME("Name"),
+        REPS("Reps"),
+        SETS("Sets"),
+        MUSCLE("Muscle"),
+        BACK("Go Back");
+
+        private String description;
+
+        ExerciseOptions(String description) {
             this.description = description;
         }
 
@@ -86,6 +124,7 @@ public class View {
     }
 
 
+    // TODO: rename get menuItem???
     public <T extends Enum<T>> T getMenuChoice(Class<T> enumType) {
 
         int choiceIndex = getNumberFromUserInput();

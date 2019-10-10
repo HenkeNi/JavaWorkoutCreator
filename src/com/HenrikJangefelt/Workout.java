@@ -13,6 +13,7 @@ public class Workout implements Comparable<Workout>, Serializable {
         this.workoutName = workoutName;
     }
 
+
     public ArrayList<Exercise> getExerciseList() {
         return exerciseList;
     }
@@ -25,20 +26,29 @@ public class Workout implements Comparable<Workout>, Serializable {
         this.workoutName = workoutName;
     }
 
-    public void addExercise(String exerciseName, int amountOfReps, int amountOfSets, Exercise.Muscle targetedMuscle) {
-        exerciseList.add(new Exercise(exerciseName, amountOfReps, amountOfSets, targetedMuscle));
-    }
 
+
+
+    /*public void addExercise(String exerciseName, int amountOfReps, int amountOfSets, Exercise.Muscle targetedMuscle) {
+        exerciseList.add(new Exercise(exerciseName, amountOfReps, amountOfSets, targetedMuscle));
+    }*/
+
+    // Ta bort?
     public void removeExercise(int indexPosition) {
         exerciseList.remove(indexPosition);
     }
 
-    // TODO, ha bara logick, inga prints?
+    // TODO, lägg kod i Training Program??
+    // TODO, ha bara logick, inga prints
     public void showExercises(int workoutIndex) {
         for (int i = 0; i < exerciseList.size(); i++) {
             System.out.printf("\t%s.%s %s\n", workoutIndex + 1, i + 1, exerciseList.get(i).toString());
         }
     }
+
+
+
+
 
     // TODO: skriv även ut exercises som tillhör???
     public String toString() {

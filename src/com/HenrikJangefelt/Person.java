@@ -42,6 +42,12 @@ public abstract class Person implements Serializable {
         return password;
     }
 
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
+
+
     //TODO: add an abstract metod
     //public abstract String greeting();
     // Login som abstakt // ??? GymMembers använder kanske nånting annat
