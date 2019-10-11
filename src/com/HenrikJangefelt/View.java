@@ -57,6 +57,7 @@ public class View {
         }
     }
 
+
     public enum EditMenuItem {
         ADD("Add"),
         EDIT("Edit"),
@@ -115,7 +116,7 @@ public class View {
         int i = 0;
 
         for (Enum<T> item : enumType.getEnumConstants()) {
-            System.out.println((++i) + " " + item.toString());
+            System.out.println((++i) + ". " + item.toString());
         }
 
           /*for (T item : EnumSet.allOf(enumType)) {

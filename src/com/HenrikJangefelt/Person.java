@@ -48,6 +48,7 @@ public abstract class Person implements Serializable {
     }
 
 
+
     //TODO: add an abstract metod
     //public abstract String greeting();
     // Login som abstakt // ??? GymMembers använder kanske nånting annat
