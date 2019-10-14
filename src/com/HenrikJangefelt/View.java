@@ -110,6 +110,12 @@ public class View {
 
 
 
+
+
+
+    // TODO: combine show (för att vissa objekt) och showMenu
+    // TODO: Show alla listor eller enums
+    // TODO: Combine show And Get for menu
     public <T extends Enum<T>> void showMenu(Class<T> enumType, String menuType) {
 
         System.out.printf("%s:\n", menuType);
@@ -125,13 +131,15 @@ public class View {
     }
 
 
-    // TODO: rename get menuItem???
-    public <T extends Enum<T>> T getMenuChoice(Class<T> enumType) {
+    public <T extends Enum<T>> T getMenuItem(Class<T> enumType) {
 
         int choiceIndex = getNumberFromUserInput();
 
         return enumType.getEnumConstants()[choiceIndex - 1]; // TODO: felhantering för index out of bounds??!!
     }
+
+
+
 
 
     // Displays message from user and expects an input

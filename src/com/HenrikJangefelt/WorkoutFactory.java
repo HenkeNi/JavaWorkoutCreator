@@ -1,5 +1,6 @@
 package com.HenrikJangefelt;
 
+// TODO: mer logik i denna klass
 // TODO: abstract?
 public class WorkoutFactory {
 
@@ -11,9 +12,12 @@ public class WorkoutFactory {
         return new Workout(workoutName);
     }
 
-    public static Exercise addExercise(String exerciseName, int amountOfReps, int amountOfSets, Exercise.Muscle targetedMuscle) {
+    public static Exercise createExercise(String exerciseName, int amountOfReps, int amountOfSets, Exercise.Muscle targetedMuscle) {
         return new Exercise(exerciseName, amountOfReps, amountOfSets, targetedMuscle);
     }
+
+
+    // TODO: EN GEMENSAM GENERIC?
 
 
 }

@@ -15,7 +15,7 @@ public class Login {
     private void loginMenu() {
 
        do {
-            System.out.println("\nWelcome to the 'Workout Creator' a tool for creating custom workouts.\n1. Login\n2. Register new user\n3. Exit\n   ...\n4. (Secret bypass option for lazy teachers)");
+            System.out.println("\nWelcome to the 'Workout Creator' a tool for creating custom workouts.\n1. Login\n2. Register new user\n3. Exit\n   ...\n4. Quick Login");
             int menuSelection = input.nextInt();
 
             switch (menuSelection) {
