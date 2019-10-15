@@ -113,15 +113,15 @@ public class View {
 
 
 
-    // TODO: combine show (för att vissa objekt) och showMenu
+    // TODO: combine show (för att vissa objekt) och showMenu ... En metod som vissar allt
     // TODO: Show alla listor eller enums
-    // TODO: Combine show And Get for menu
-    public <T extends Enum<T>> void showMenu(Class<T> enumType, String menuType) {
+    // TODO: Combine show And Get for menu???
+    public <T extends Enum> void showMenu(Class<T> enumType, String menuType) {
 
         System.out.printf("%s:\n", menuType);
         int i = 0;
 
-        for (Enum<T> item : enumType.getEnumConstants()) {
+        for (Enum item : enumType.getEnumConstants()) {
             System.out.println((++i) + ". " + item.toString());
         }
 

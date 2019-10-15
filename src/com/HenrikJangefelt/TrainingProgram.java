@@ -67,21 +67,22 @@ public class TrainingProgram {
 
     View view = View.getInstance(); // Get instance to View class
     static GymMember currentUser = new GymMember("", ""); // TEST (Static) TODO: (ta bort från konstruktorn i Person???) EJ STATIC!!
-    boolean isLoggedIn = false;
+    static boolean isLoggedIn = false;
     // TODO: Ta bort static och skicka gymMEmber till login (först TrainningProgrm sen öppnas login)
 
 
 
     public TrainingProgram() {
 
+        Login login = new Login();
 
         if (isLoggedIn) {
             fetchWorkouts(); // TODO: ladda in workouts/friends från fil?
             showMainMenu(currentUser);
         }
 
-        fetchWorkouts(); // TODO: ladda in workouts/friends från fil?
-        showMainMenu(currentUser);
+        //fetchWorkouts(); // TODO: ladda in workouts/friends från fil?
+        //showMainMenu(currentUser);
     }
 
 
@@ -108,6 +109,7 @@ public class TrainingProgram {
                     help();
                     break;
                 case EXIT:
+                    isLoggedIn = false;
                     return;
             }
         } while (true);

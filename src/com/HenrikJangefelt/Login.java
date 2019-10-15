@@ -2,23 +2,30 @@ package com.HenrikJangefelt;
 
 import java.util.Scanner;
 
+// TODO: Använd bara welcome "user" på ett ställe
+// TODO: is logged in på bara ett ställe med?
 // Todo: kolla om email finns sparat...
-// TODO: använd nextLine, men spara bara första delen av strängen(?)
 public class Login {
 
+    View view = View.getInstance(); // Get instance to View class
     Scanner input = new Scanner(System.in);
 
     public Login() {
         loginMenu();
     }
 
+
     private void loginMenu() {
 
        do {
-            System.out.println("\nWelcome to the 'Workout Creator' a tool for creating custom workouts.\n1. Login\n2. Register new user\n3. Exit\n   ...\n4. Quick Login");
-            int menuSelection = input.nextInt();
+           UserInput userInput = view.getUserInput(UserInput.InputType.INT, "\n" +
+                   "Welcome to the 'Workout Creator' a tool for creating custom workouts.\n" +
+                   "1. Login\n" +
+                   "2. Register new user\n" +
+                   "3. Exit\n   ...\n" +
+                   "4. Quick Login");
 
-            switch (menuSelection) {
+            switch (userInput.intValue) {
                 case 1:
                     login();
                     break;
@@ -26,13 +33,13 @@ public class Login {
                     createAccount();
                     break;
                 case 3:
-                    System.out.println("Terminating...");
+                    view.getUserInput(UserInput.InputType.NONE, "Terminating...");
                     return;
                 case 4:
                     quickLogin();
                     break;
             }
-        } while (true);
+        } while (!TrainingProgram.isLoggedIn);
     }
 
 
@@ -45,18 +52,20 @@ public class Login {
         String password;
 
         do {
-            System.out.println("\nCreating new account...\n\nEmail address: ");
-            emailAddress = input.next();
-            validEmail = checkEmailFormat(emailAddress); // Checks for valid email input
+            UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "\n" +
+                    "Creating new account...\n\n" +
+                    "Email address:");
+
+            emailAddress = userInput.stringValue;
+            validEmail = validateEmailFormat(emailAddress); // Checks for valid email input
         } while (!validEmail);
 
         do {
-            System.out.println("Password:");
-            password = input.next();
+            UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "Password:");
+            password = userInput.stringValue;
 
-            if (!password.equals("") && !password.equals("password")) {
-                validPassword = true;
-            }
+            validPassword = validatePasswordFormat(password); // Checks for valid password
+
         } while (!validPassword);
 
         createNewUser(emailAddress, password);
@@ -65,22 +74,18 @@ public class Login {
 
     private void createNewUser(String emailAddress, String password) {
 
-        input.nextLine();
-        System.out.println("Enter first name:");
-        TrainingProgram.currentUser.setFirstName(input.nextLine());
-
-        System.out.println("Enter last name:");
-        TrainingProgram.currentUser.setLastName(input.nextLine());
-
+        // TODO: Kolla upp om Userinput userinput inte behövs!!!
+        TrainingProgram.currentUser.setFirstName(view.getUserInput(UserInput.InputType.STRING, "Enter first name:").stringValue);
+        TrainingProgram.currentUser.setLastName(view.getUserInput(UserInput.InputType.STRING, "Enter last name:").stringValue);
         TrainingProgram.currentUser.setEmailAdress(emailAddress);
         TrainingProgram.currentUser.setPassword(password);
 
-        System.out.printf("Welcome %s!\n\n", TrainingProgram.currentUser.getFullName());
-        new TrainingProgram();
+        view.getUserInput(UserInput.InputType.NONE, "Welcome " + TrainingProgram.currentUser.getFullName() + "!\n\n");
+        TrainingProgram.isLoggedIn = true;
     }
 
     // TODO: use else if instead??
-    private boolean checkEmailFormat(String emailAddress) {
+    private boolean validateEmailFormat(String emailAddress) {
 
         if (emailAddress.length() < 15) {
             System.out.println("Email must be 15 characters or longer");
@@ -99,23 +104,25 @@ public class Login {
         return true;
     }
 
+    private boolean validatePasswordFormat(String password) {
+
+        return !password.equals("") && !password.equals("password");
+    }
+
 
     private void login() {
 
-        System.out.println("Email address:");
-        String loginEmail = input.next();
+        String userEmail = view.getUserInput(UserInput.InputType.STRING, "Email Address:").stringValue;
+        String userPassword = view.getUserInput(UserInput.InputType.STRING, "Password:").stringValue;
 
-        System.out.println("Password:");
-        String loginPassword = input.next();
+        boolean loginApproved = checkLoginInformation(userEmail, userPassword);
 
-        boolean loginCorrect = checkLoginInformation(loginEmail, loginPassword);
+        String accessMessage = loginApproved ? "Granted" : "Denied";
+        view.getUserInput(UserInput.InputType.NONE, "Access" + accessMessage);
 
-        String accessMessage = loginCorrect ? "granted" : "denied";
-        System.out.println("Access " + accessMessage);
-
-        if (loginCorrect) {
-            System.out.printf("Welcome Back %s!\n", TrainingProgram.currentUser.getFullName());
-            new TrainingProgram();
+        if (loginApproved) {
+            view.getUserInput(UserInput.InputType.NONE, "Welcome Back " + TrainingProgram.currentUser.getFullName() + "!\n");
+            TrainingProgram.isLoggedIn = true;
         } else {
             return;
         }
@@ -124,11 +131,11 @@ public class Login {
     private boolean checkLoginInformation(String email, String password) {
 
         if (!email.equals(TrainingProgram.currentUser.getEmailAdress())) {
-            System.out.println("Invalid Email Address");
+            view.getUserInput(UserInput.InputType.NONE, "Invalid Email Adress");
             return false;
         }
         if (!password.equals(TrainingProgram.currentUser.getPassword())) {
-            System.out.println("Invalid Password");
+            view.getUserInput(UserInput.InputType.NONE, "Invalid Password");
             return false;
         }
 
@@ -145,8 +152,8 @@ public class Login {
         TrainingProgram.currentUser.setEmailAdress("Test@hotmail.com");
         TrainingProgram.currentUser.setPassword("password123");
 
-        System.out.printf("Welcome %s!\n\n", TrainingProgram.currentUser.getFullName());
-        new TrainingProgram();
+        view.getUserInput(UserInput.InputType.NONE, "Welcome " + TrainingProgram.currentUser.getFullName() + "!\n");
+        TrainingProgram.isLoggedIn = true;
     }
 }
 

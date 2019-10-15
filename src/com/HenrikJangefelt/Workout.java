@@ -3,6 +3,7 @@ package com.HenrikJangefelt;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// TODO: ha exercise som en hashtable istället ?? NEJ!
 // TODO: ta bort comparable? Eller ha det bara i workouts
 public class Workout implements Comparable<Workout>, Serializable {
 
@@ -52,7 +53,9 @@ public class Workout implements Comparable<Workout>, Serializable {
 
     // TODO: skriv även ut exercises som tillhör???
     public String toString() {
-        return workoutName + " (total number of exercises: " + exerciseList.size() + ")";
+
+        return workoutName + " (exercises in workout: " + exerciseList.size() + ")";
+        //return workoutName + "\n" + exerciseList.toString();
     }
 
 
