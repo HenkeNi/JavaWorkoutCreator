@@ -177,6 +177,8 @@ public class View {
     }
 
 
+
+
     public int getNumberFromUserInput() {
 
         int numb = -999;
@@ -191,6 +193,38 @@ public class View {
         } while (numb == -999);
         return numb;
     }
+
+
+
+    // TODO: bygg om / fixa
+    public int[] getWorkoutNumberPrefix(String editOrDelete) {
+
+            boolean validNumbers = false;
+            int workoutIndex = 0;
+            int exerciseIndex = 0;
+
+            do {
+                UserInput userInput = getUserInput(UserInput.InputType.STRING, "Enter the prefix-number of the workout or exercise you want to " + editOrDelete);
+                String input = userInput.stringValue.replace(".", "").trim();
+                try {
+                    //workoutIndex = Character.getNumericValue(userInput.charAt(0));
+                    workoutIndex = Integer.parseInt(input.substring(0, 1));
+                    if (input.length() >= 2) {
+                        exerciseIndex = Integer.parseInt(input.substring(1));
+                    }
+                    validNumbers = true;
+                } catch (Exception e) {
+                    System.out.println("Must enter a valid number prefix.");
+                }
+            } while (!validNumbers);
+
+            int[] prefixArray = {workoutIndex, exerciseIndex};
+            return prefixArray;
+
+    }
+
+
+
 }
 
 

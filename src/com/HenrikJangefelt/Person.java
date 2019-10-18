@@ -2,6 +2,7 @@ package com.HenrikJangefelt;
 
 import java.io.Serializable;
 
+// TODO: ta bort onödiga getters osv....
 // TODO: Rename to something else??
 // TODO: Add an abstract metod
 public abstract class Person implements Serializable {
@@ -35,6 +36,10 @@ public abstract class Person implements Serializable {
     public String getFullName() {
         return firstName + " " + lastName;
     }
+
+    public String getFirstName() { return firstName; }
+
+    public String getLastName() { return lastName; }
 
     public String getEmailAdress() { return emailAdress; }
 

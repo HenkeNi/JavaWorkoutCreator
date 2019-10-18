@@ -36,10 +36,11 @@ public class Login {
                     view.getUserInput(UserInput.InputType.NONE, "Terminating...");
                     return;
                 case 4:
-                    quickLogin();
+                    createNewUser(true, "Test@hotmail.com", "password123");
+                    //quickLogin();
                     break;
             }
-        } while (!TrainingProgram.isLoggedIn);
+        } while (true);
     }
 
 
@@ -68,21 +69,25 @@ public class Login {
 
         } while (!validPassword);
 
-        createNewUser(emailAddress, password);
+        createNewUser(false, emailAddress, password);
     }
 
 
-    private void createNewUser(String emailAddress, String password) {
 
-        // TODO: Kolla upp om Userinput userinput inte behövs!!!
-        TrainingProgram.currentUser.setFirstName(view.getUserInput(UserInput.InputType.STRING, "Enter first name:").stringValue);
-        TrainingProgram.currentUser.setLastName(view.getUserInput(UserInput.InputType.STRING, "Enter last name:").stringValue);
-        TrainingProgram.currentUser.setEmailAdress(emailAddress);
+
+    private void createNewUser(boolean isQuickLogin, String email, String password) {
+
+        String firstName = isQuickLogin ? "Mr." : view.getUserInput(UserInput.InputType.STRING, "Enter first name:").stringValue;
+        String lastName = isQuickLogin ? "Default" : view.getUserInput(UserInput.InputType.STRING, "Enter last name:").stringValue;
+
+        TrainingProgram.currentUser.setFirstName(firstName);
+        TrainingProgram.currentUser.setLastName(lastName);
+        TrainingProgram.currentUser.setEmailAdress(email);
         TrainingProgram.currentUser.setPassword(password);
 
-        view.getUserInput(UserInput.InputType.NONE, "Welcome " + TrainingProgram.currentUser.getFullName() + "!\n\n");
-        TrainingProgram.isLoggedIn = true;
+        new TrainingProgram();
     }
+
 
     // TODO: use else if instead??
     private boolean validateEmailFormat(String emailAddress) {
@@ -122,7 +127,9 @@ public class Login {
 
         if (loginApproved) {
             view.getUserInput(UserInput.InputType.NONE, "Welcome Back " + TrainingProgram.currentUser.getFullName() + "!\n");
-            TrainingProgram.isLoggedIn = true;
+
+            new TrainingProgram();
+            //TrainingProgram.isLoggedIn = true;
         } else {
             return;
         }
@@ -131,17 +138,32 @@ public class Login {
     private boolean checkLoginInformation(String email, String password) {
 
         if (!email.equals(TrainingProgram.currentUser.getEmailAdress())) {
-            view.getUserInput(UserInput.InputType.NONE, "Invalid Email Adress");
+            view.getUserInput(UserInput.InputType.NONE, "Invalid Email Address");
             return false;
         }
         if (!password.equals(TrainingProgram.currentUser.getPassword())) {
             view.getUserInput(UserInput.InputType.NONE, "Invalid Password");
             return false;
         }
-
         return true;
+    }
 
-        //return email.equals(TrainingProgram.currentUser.getEmailAdress()) && password.equals(TrainingProgram.currentUser.getPassword());
+
+}
+
+
+
+   /*private void createNewUser(String emailAddress, String password) {
+
+        // TODO: Kolla upp om Userinput userinput inte behövs!!!
+        TrainingProgram.currentUser.setFirstName(view.getUserInput(UserInput.InputType.STRING, "Enter first name:").stringValue);
+        TrainingProgram.currentUser.setLastName(view.getUserInput(UserInput.InputType.STRING, "Enter last name:").stringValue);
+        TrainingProgram.currentUser.setEmailAdress(emailAddress);
+        TrainingProgram.currentUser.setPassword(password);
+
+        view.getUserInput(UserInput.InputType.NONE, "Welcome " + TrainingProgram.currentUser.getFullName() + "!\n\n");
+        new TrainingProgram();
+        //TrainingProgram.isLoggedIn = true;
     }
 
     private void quickLogin() {
@@ -153,7 +175,6 @@ public class Login {
         TrainingProgram.currentUser.setPassword("password123");
 
         view.getUserInput(UserInput.InputType.NONE, "Welcome " + TrainingProgram.currentUser.getFullName() + "!\n");
-        TrainingProgram.isLoggedIn = true;
-    }
-}
-
+        new TrainingProgram();
+        //TrainingProgram.isLoggedIn = true;
+    }*/

@@ -7,7 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        new TrainingProgram();
-        //TrainingProgram trainingProgram = new TrainingProgram();
+        new Login();
     }
 }
