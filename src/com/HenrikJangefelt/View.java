@@ -10,6 +10,8 @@ public class View {
     // TODO: ta in userInout som String och omvandla sedan (Fixar bugg med nextLine inte läses in?) TODO: FIx isNumber
     // TODO: lägg till eftet t.ex: Add (Workout) eller Add (Friend)
 
+    // TODO: ta bort showMessage???
+
     Scanner input = new Scanner(System.in);
     private static View instance = null;
 

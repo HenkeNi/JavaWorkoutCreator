@@ -1,4 +1,5 @@
-package com.HenrikJangefelt;
+//package com.HenrikJangefelt;
+package com.HenrikJangefelt.person;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

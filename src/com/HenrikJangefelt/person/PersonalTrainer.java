@@ -1,5 +1,8 @@
-package com.HenrikJangefelt;
+//package com.HenrikJangefelt;
+package com.HenrikJangefelt.person;
 
+
+import com.HenrikJangefelt.Workout;
 import java.util.ArrayList;
 
 // TODO: TA BORT????

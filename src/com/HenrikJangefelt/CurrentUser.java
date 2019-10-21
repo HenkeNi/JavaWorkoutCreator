@@ -1,8 +1,10 @@
 package com.HenrikJangefelt;
 
+import com.HenrikJangefelt.person.GymMember;
+
 import java.util.ArrayList;
 
-// TODO: TA BORT???
+// TODO: TA BORT Hela klassen???
 // TEST (Obs this class should only be created once(Static??)
 public class CurrentUser extends GymMember {
 

@@ -1,5 +1,6 @@
 package com.HenrikJangefelt;
 
+import com.HenrikJangefelt.person.StaffMember;
 import java.util.ArrayList;
 
 public class Gym {

@@ -1,6 +1,8 @@
-package com.HenrikJangefelt;
+//package com.HenrikJangefelt;
+package com.HenrikJangefelt.person;
 
-import java.io.Serializable;
+
+import com.HenrikJangefelt.Workout;
 import java.util.ArrayList;
 
 // TODO: Renam???
@@ -69,7 +71,7 @@ public class GymMember extends Person {
 
 
 
-    public void showWorkouts(ArrayList<Workout> workouts) {
+    /*public void showWorkouts(ArrayList<Workout> workouts) {
 
         for (int i = 0; i < workouts.size(); i++) {
             System.out.printf("%s. %s\n", i + 1, workouts.get(i).toString());
@@ -81,7 +83,7 @@ public class GymMember extends Person {
         for (int i = 0; i < friends.size(); i++) {
             System.out.printf("\t%s. %s\n", i + 1, friends.get(i).getFullName());
         }
-    }
+    }*/
 
 
 

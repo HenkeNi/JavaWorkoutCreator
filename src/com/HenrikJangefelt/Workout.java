@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 // TODO: ha exercise som en hashtable istället ?? NEJ!
 // TODO: ta bort comparable? Eller ha det bara i workouts
-public class Workout implements Comparable<Workout>, Serializable {
+public class Workout implements Serializable {
 
     private ArrayList<Exercise> exerciseList = new ArrayList<>();
     private String workoutName;
@@ -59,9 +59,5 @@ public class Workout implements Comparable<Workout>, Serializable {
     }
 
 
-    // TODO: kan ta bort? Eller ha kvar enbart för workout (sorteras bara efter namn)
-    @Override
-    public int compareTo(Workout o) {
-        return 0;
-    }
+
 }

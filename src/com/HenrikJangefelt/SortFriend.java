@@ -1,5 +1,6 @@
 package com.HenrikJangefelt;
 
+import com.HenrikJangefelt.person.GymMember;
 import java.util.Comparator;
 
 public class SortFriend {

@@ -2,13 +2,13 @@ package com.HenrikJangefelt;
 
 import java.util.Scanner;
 
+// TODO: Hämta hel användare som är  sparad??!!
 // TODO: Använd bara welcome "user" på ett ställe
 // TODO: is logged in på bara ett ställe med?
 // Todo: kolla om email finns sparat...
 public class Login {
 
     View view = View.getInstance(); // Get instance to View class
-    Scanner input = new Scanner(System.in);
 
     public Login() {
         loginMenu();
@@ -18,14 +18,15 @@ public class Login {
     private void loginMenu() {
 
        do {
-           UserInput userInput = view.getUserInput(UserInput.InputType.INT, "\n" +
+           int menuChoice = view.getUserInput(UserInput.InputType.INT, "\n" +
                    "Welcome to the 'Workout Creator' a tool for creating custom workouts.\n" +
                    "1. Login\n" +
                    "2. Register new user\n" +
-                   "3. Exit\n   ...\n" +
-                   "4. Quick Login");
+                   "3. Exit\n" +
+                   "   ...\n" +
+                   "4. Quick Login").intValue;
 
-            switch (userInput.intValue) {
+            switch (menuChoice) {
                 case 1:
                     login();
                     break;
@@ -117,13 +118,15 @@ public class Login {
 
     private void login() {
 
+        // TODO: Fetch user?
+
         String userEmail = view.getUserInput(UserInput.InputType.STRING, "Email Address:").stringValue;
         String userPassword = view.getUserInput(UserInput.InputType.STRING, "Password:").stringValue;
 
         boolean loginApproved = checkLoginInformation(userEmail, userPassword);
 
         String accessMessage = loginApproved ? "Granted" : "Denied";
-        view.getUserInput(UserInput.InputType.NONE, "Access" + accessMessage);
+        view.getUserInput(UserInput.InputType.NONE, "Access " + accessMessage);
 
         if (loginApproved) {
             view.getUserInput(UserInput.InputType.NONE, "Welcome Back " + TrainingProgram.currentUser.getFullName() + "!\n");
@@ -138,11 +141,11 @@ public class Login {
     private boolean checkLoginInformation(String email, String password) {
 
         if (!email.equals(TrainingProgram.currentUser.getEmailAdress())) {
-            view.getUserInput(UserInput.InputType.NONE, "Invalid Email Address");
+            view.getUserInput(UserInput.InputType.NONE, "Invalid Email Address!");
             return false;
         }
         if (!password.equals(TrainingProgram.currentUser.getPassword())) {
-            view.getUserInput(UserInput.InputType.NONE, "Invalid Password");
+            view.getUserInput(UserInput.InputType.NONE, "Invalid Password!");
             return false;
         }
         return true;

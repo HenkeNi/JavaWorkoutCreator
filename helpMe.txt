@@ -1,0 +1,50 @@
+Section1
+************************************************************************************************************************
+*                                               How to Create a workout!                                               *
+************************************************************************************************************************
+*                                                                                                                      *
+*           Step 1: Choose add in the workout menu.                                                                    *
+*                                                                                                                      *
+*           Step 2: Give your workout a fitting name, for example: 'Chest day' or 'Monday Workout'.                    *
+*                - It's okey for two or more workouts to have the same name.                                           *
+*                                                                                                                      *
+*           Step 3: Enter the name of the exercise you want to add (all workouts need at least one exercise).          *
+*               - It's also okey for two or more exercises in the same workout to have the same name.                  *
+*                                                                                                                      *
+*           Step 4: Specify the number of reps for the given exercise.                                                 *
+*               - Reps or repitions are the number of times you perform a given exercise                               *
+*               - For example: doing 15 pushups, 15 will be your amount of reps.                                       *
+*                                                                                                                      *
+*           Step 5: Specify the amount of sets of the given exercise.                                                  *
+*               - Sets are the number of times you're gonna repeat an exercise                                         *
+*               - if you do 15 pushups then rest and then do 15 more, you have done two sets.                          *
+*                                                                                                                      *
+*           Step 6: Choose which muscle group is being primarily worked for the given exercise.                        *
+*                                                                                                                      *
+*           Step 7: Choose to either add another exercise or go back to the menu.                                      *
+*                                                                                                                      *
+************************************************************************************************************************
+
+Section2
+************************************************************************************************************************
+*                                               How to Edit a workout!                                                 *
+************************************************************************************************************************
+*                                                                                                                      *
+*           Step 1: Choose edit in the workout menu (there must be workouts in your workout list).                     *
+*                                                                                                                      *
+*           Step 2: Press 'Add exercise' to add additional exercises to an already created workout.                    *
+*               - Enter the prefix number for the workout you want to add exercises to.                                *
+*                                                                                                                      *
+*           Step 3: Specify the number of reps for the given exercise.                                                 *
+*               - Reps or repitions are the number of times you perform a given exercise                               *
+*               - For example: doing 15 pushups, 15 will be your amount of reps.                                       *
+*                                                                                                                      *
+*           Step 4: Specify the amount of sets of the given exercise.                                                  *
+*               - Sets are the number of times you're gonna repeat an exercise                                         *
+*               - if you do 15 pushups then rest and then do 15 more, you have done two sets.                          *
+*                                                                                                                      *
+*           Step 5: Choose which muscle group is being primarily worked for the given exercise.                        *
+*                                                                                                                      *
+************************************************************************************************************************
+
+Section3

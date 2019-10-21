@@ -4,10 +4,81 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileUtils {
+
+
+    //Read from file...
+    /*public static void readAllLines(String readFrom, String readTo, String fileName) {
+        //String fileName = "helpMe.txt";
+        boolean atReadStartPosition = false;
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(fileName));
+            for (String line : lines) {
+
+                if (line.contains(readFrom)) {
+                    atReadStartPosition = true;
+                }
+
+                if (atReadStartPosition) {
+                    System.out.println(line);
+                    if (line.contains(readTo)) {
+                        return;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
+
+
+    //Read from file...
+    public static  ArrayList<String> readAllLines(String fileName) {
+
+        ArrayList<String> allLines = new ArrayList<>();
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(fileName));
+            for (String line : lines) {
+                allLines.add(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return allLines;
+    }
+
+    /*
+     //Read from file...
+    public static void readAllLines(String readFrom, String readTo, String fileName) {
+
+        //String fileName = "helpMe.txt";
+        boolean atReadStartPosition;
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(fileName));
+            for (String line : lines) {
+                System.out.println(line);
+                if (line.contains(readTo)) {
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     */
+
+
+
+
+
 
 
 
