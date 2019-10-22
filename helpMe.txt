@@ -47,4 +47,26 @@ Section2
 *                                                                                                                      *
 ************************************************************************************************************************
 
-Section3
+Section3 // TODO: FIXA!!
+************************************************************************************************************************
+*                                            How to Search for a workout!                                              *
+************************************************************************************************************************
+*                                                                                                                      *
+*           Step 1: Choose search in the workout menu (there must be workouts in your workout list).                   *
+*                                                                                                                      *
+*           Step 2: Press !!!!!!!!!!!dd additional exercises to an already created workout.                            *
+*               - Enter the prefix number for the workout you want to add exercises to.                                *
+*                                                                                                                      *
+*           Step 3: Specify the number of reps for the given exercise.                                                 *
+*               - Reps or repitions are the number of times you perform a given exercise                               *
+*               - For example: doing 15 pushups, 15 will be your amount of reps.                                       *
+*                                                                                                                      *
+*           Step 4: Specify the amount of sets of the given exercise.                                                  *
+*               - Sets are the number of times you're gonna repeat an exercise                                         *
+*               - if you do 15 pushups then rest and then do 15 more, you have done two sets.                          *
+*                                                                                                                      *
+*           Step 5: Choose which muscle group is being primarily worked for the given exercise.                        *
+*                                                                                                                      *
+************************************************************************************************************************
+
+Section 4
