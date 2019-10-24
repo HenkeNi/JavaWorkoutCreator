@@ -5,6 +5,7 @@ package com.HenrikJangefelt.person;
 import com.HenrikJangefelt.Workout;
 import java.util.ArrayList;
 
+// TODO: currentUser extends GymMember????
 // TODO: Renam???
 // GymGoer, lifter, trainee,
 public class GymMember extends Person {
@@ -19,10 +20,16 @@ public class GymMember extends Person {
         super(firstName, lastName);
     }
 
-
     public ArrayList<Workout> getWorkoutList() {
         return workoutList;
     }
+
+    public ArrayList<GymMember> getFriendList() {
+        return friendList;
+    }
+
+
+
 
     /*
     public void removeWorkout(int indexPosition) {
@@ -47,43 +54,6 @@ public class GymMember extends Person {
     }
 
 
-    /*public void addWorkout(String workoutName) {
-        Workout newWorkout = new Workout(workoutName);
-        workoutList.add(newWorkout);
-    }*/
-
-
-
-    // TODO: Creata a flexible method for showing objects (workouts / friends)
-    // public <T extends ArrayList<T>> void show(ArrayList<T> list) {
-    public <T extends Object> void show(ArrayList<T> list) {
-
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).toString());
-            if (list.equals(workoutList)) {
-                System.out.println("Wokrout list");
-                workoutList.get(i).showExercises(i);
-            }
-
-            //if (list == Workout)
-        }
-    }
-
-
-
-    /*public void showWorkouts(ArrayList<Workout> workouts) {
-
-        for (int i = 0; i < workouts.size(); i++) {
-            System.out.printf("%s. %s\n", i + 1, workouts.get(i).toString());
-            workouts.get(i).showExercises(i);
-        }
-    }
-
-    public void showFriends(ArrayList<GymMember> friends) {
-        for (int i = 0; i < friends.size(); i++) {
-            System.out.printf("\t%s. %s\n", i + 1, friends.get(i).getFullName());
-        }
-    }*/
 
 
 
@@ -91,38 +61,7 @@ public class GymMember extends Person {
 
 
 
-
-    // Returns workouts that match searched workout
-    public ArrayList<Workout> getSearchedWorkout(String searchedWorkout) {
-
-        ArrayList<Workout> matchingWorkouts = new ArrayList<>();
-        for (int i = 0; i < workoutList.size(); i++) {
-
-            if (workoutList.get(i).getWorkoutName().equalsIgnoreCase(searchedWorkout)) {
-                matchingWorkouts.add(workoutList.get(i));
-            }
-        }
-        return matchingWorkouts;
-    }
-
-    // Returns workouts that contains the seatched workout
-    public ArrayList<Workout> getRelatedSearchedWorkout(String searchedWorkout) {
-
-        ArrayList<Workout> relatedWorkouts = new ArrayList<>();
-        for (int i = 0; i < workoutList.size(); i++) {
-
-            if (workoutList.get(i).getWorkoutName().toUpperCase().contains(searchedWorkout.toUpperCase())) {
-                relatedWorkouts.add(workoutList.get(i));
-            }
-        }
-        return relatedWorkouts;
-    }
-
-
-    public ArrayList<GymMember> getFriendList() {
-        return friendList;
-    }
-
+    // TODO: Gör en friendFactory
     public void addFriend(String firstName, String lastName) {
         friendList.add(new GymMember(firstName, lastName));
     }
@@ -134,6 +73,7 @@ public class GymMember extends Person {
 
 
 
+    // TODO: använd instanceOf istället
     // TODO: Gör så att den bara kan ta in generic objekts
     public <T extends Object> ArrayList<T> getSearchedObject(ArrayList<T> objectList, String searchWord) {
 
@@ -171,11 +111,44 @@ public class GymMember extends Person {
 
 
 
+}
 
 
-    // TODO: Combine getSearcchedFriend/Workout && getRelated.../Friend/Workout && showWorkout//Friend
 
-    public ArrayList<GymMember> getSearchedFriend(String searchedFriend) {
+
+
+
+
+
+// TODO: Creata a flexible method for showing objects (workouts / friends)
+// public <T extends ArrayList<T>> void show(ArrayList<T> list) {
+    /*public <T extends Object> void show(ArrayList<T> list) {
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).toString());
+            if (list.equals(workoutList)) {
+                System.out.println("Wokrout list");
+                workoutList.get(i).showExercises(i);
+            }
+
+            //if (list == Workout)
+        }
+    }*/
+
+    /*public void showWorkouts(ArrayList<Workout> workouts) {
+
+        for (int i = 0; i < workouts.size(); i++) {
+            System.out.printf("%s. %s\n", i + 1, workouts.get(i).toString());
+            workouts.get(i).showExercises(i);
+        }
+    }
+
+    public void showFriends(ArrayList<GymMember> friends) {
+        for (int i = 0; i < friends.size(); i++) {
+            System.out.printf("\t%s. %s\n", i + 1, friends.get(i).getFullName());
+        }
+    }*/
+   /*public ArrayList<GymMember> getSearchedFriend(String searchedFriend) {
 
         ArrayList<GymMember> matchingFriends = new ArrayList<>();
         for (int i = 0; i < friendList.size(); i++) {
@@ -198,8 +171,4 @@ public class GymMember extends Person {
             }
         }
         return relatedFriends;
-    }
-
-
-
-}
+    }*/

@@ -1,8 +1,9 @@
 package com.HenrikJangefelt;
 
-import java.util.Scanner;
-
+// TODO: när man skapar ett konto/registrerar nytt ladda inte in data från fil (använd bool)
 // TODO: Hämta hel användare som är  sparad??!!
+
+
 // TODO: Använd bara welcome "user" på ett ställe
 // TODO: is logged in på bara ett ställe med?
 // Todo: kolla om email finns sparat...

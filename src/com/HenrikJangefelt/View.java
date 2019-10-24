@@ -41,10 +41,10 @@ public class View {
 
         ADD("Add"),
         EDIT("Edit"),
-        //REMOVE("Remove"),
         SHOW("Show"),
         SORT("Sort"),
         SEARCH("Search"),
+        REMOVE("Remove"),
         BACK("Go Back");
 
         private String description;
@@ -98,6 +98,22 @@ public class View {
     }
 
 
+    public enum WorkoutOptions {
+        NAME("Name"),
+        EXERCISES("Exercises"),
+        BACK("Go Back");
+
+        private String description;
+
+        WorkoutOptions(String description) { this.description = description; }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+    }
+
+
     private View() {
         // Hidden Constructor
     }
@@ -110,6 +126,28 @@ public class View {
     }
 
 
+
+
+    public enum EditExercise {
+
+        EDIT_NAME("Change exercise name"),
+        EDIT_REPS("Change number of reps"),
+        EDIT_SETS("Change number of sets"),
+        EDIT_MUSCLE("Change worked muscle"),
+        GO_BACK("Go back");
+
+        private String description;
+
+        EditExercise(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+
+    }
 
 
 
@@ -180,7 +218,7 @@ public class View {
 
 
 
-
+    // TODO: GÖr test fil till denna?
     public int getNumberFromUserInput() {
 
         int numb = -999;
@@ -199,7 +237,7 @@ public class View {
 
 
     // TODO: bygg om / fixa
-    public int[] getWorkoutNumberPrefix(String editOrDelete) {
+    public int[] getListNumberPrefix(String editOrDelete) {
 
             boolean validNumbers = false;
             int workoutIndex = 0;

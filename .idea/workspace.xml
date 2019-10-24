@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="TheWorkoutCreator:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="69a07059-ef3f-46ad-9ed0-2e4502d139a0" name="Default Changelist" comment="TEST COmmit">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/TheWorkoutCreator_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgramTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheWorkoutCreator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TheWorkoutCreator.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpMe.txt" beforeDir="false" afterPath="$PROJECT_DIR$/helpMe.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/FileUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/FileUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/SortBy.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/View$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/View$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/View$SubMenuItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/View$SubMenuItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/View.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/person/GymMember.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/person/GymMember.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/SortBy.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/person/GymMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/person/GymMember.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/workouts.ser" beforeDir="false" afterPath="$PROJECT_DIR$/workouts.ser" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,6 +41,7 @@
       <list>
         <option value="Class" />
         <option value="Enum" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -29,11 +51,26 @@
   <component name="ProjectId" id="1QjzhoTY5RukmZSCBiECuIbzBzk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TODO_SCOPE" value="All Places" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.HenrikJangefelt" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

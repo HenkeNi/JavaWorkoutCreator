@@ -200,4 +200,10 @@ public class FileUtils {
     }
 
 
+    public boolean isWriteProtected() {
+        //if (canWrite)
+        return false;
+    }
+    // can write
+
 }
