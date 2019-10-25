@@ -5,37 +5,14 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileUtils {
 
-
-    //Read from file...
-    /*public static void readAllLines(String readFrom, String readTo, String fileName) {
-        //String fileName = "helpMe.txt";
-        boolean atReadStartPosition = false;
-
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(fileName));
-            for (String line : lines) {
-
-                if (line.contains(readFrom)) {
-                    atReadStartPosition = true;
-                }
-
-                if (atReadStartPosition) {
-                    System.out.println(line);
-                    if (line.contains(readTo)) {
-                        return;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 
 
     //Read from file...
@@ -54,7 +31,93 @@ public class FileUtils {
         return allLines;
     }
 
-    /*
+
+
+
+
+    // Flexibel för generic objekt
+    public static <T extends Object> void writeGenericObjects(String fileName, List<T> objectList){
+        ObjectOutputStream objectOutputStream = null;
+        FileOutputStream fileOutputStream = null;
+        try{
+            fileOutputStream = new FileOutputStream(fileName, false); // objekt oftast '.ser' true innebär lägger till/false skriver över
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(objectList);
+            objectOutputStream.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+
+
+    // TEST
+    public static <T extends Object> void saveObjects(String filename, ArrayList<T> objects, StandardOpenOption... option) {
+        Path path = Paths.get(filename);
+        try (ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(path, option))) {
+            for (T object : objects) {
+                out.writeObject(object);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+    // TEST
+    public static <T extends Object> ArrayList<T> loadObjects(String filename) {
+
+        Path path = Paths.get(filename);
+        ArrayList<T> objectList = null;
+        try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(path))) {
+            return (ArrayList<T>) in.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+    // TODO: Spara antingen workouts och friends för sig elle gymMember object
+    public static <T extends Object> ArrayList<T> readGenericObjects(String fileName){
+        ObjectInputStream objectinputstream = null;
+        ArrayList<T> objectList = null;
+        try {
+            FileInputStream streamIn = new FileInputStream(fileName);
+            objectinputstream = new ObjectInputStream(streamIn);
+            objectList = (ArrayList<T>) objectinputstream.readObject();
+            objectinputstream .close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return objectList;
+    }
+
+
+
+
+
+
+
+
+    public boolean isWriteProtected() {
+        //if (canWrite)
+        return false;
+    }
+    // can write
+
+}
+
+
+
+
+
+
+
+
+   /*
      //Read from file...
     public static void readAllLines(String readFrom, String readTo, String fileName) {
 
@@ -96,7 +159,7 @@ public class FileUtils {
         }
     }*/
 
-    // Static, so it can be reaced without creating an object of FileUtils
+// Static, so it can be reaced without creating an object of FileUtils
     /*public static void writeObjects(String fileName, ArrayList<Workout> workouts) {
         ObjectOutputStream objectOutputStream = null;
         FileOutputStream fileOutputStream = null;
@@ -169,41 +232,29 @@ public class FileUtils {
         }
     }*/
 
-    // TODO: Spara antingen workouts och friends för sig elle gymMember object
-    public static <T extends Object> ArrayList<T> readGenericObjects(String fileName){
-        ObjectInputStream objectinputstream = null;
-        ArrayList<T> objectList = null;
+
+
+//Read from file...
+    /*public static void readAllLines(String readFrom, String readTo, String fileName) {
+        //String fileName = "helpMe.txt";
+        boolean atReadStartPosition = false;
+
         try {
-            FileInputStream streamIn = new FileInputStream(fileName);
-            objectinputstream = new ObjectInputStream(streamIn);
-            objectList = (ArrayList<T>) objectinputstream.readObject();
-            objectinputstream .close();
+            List<String> lines = Files.readAllLines(Paths.get(fileName));
+            for (String line : lines) {
+
+                if (line.contains(readFrom)) {
+                    atReadStartPosition = true;
+                }
+
+                if (atReadStartPosition) {
+                    System.out.println(line);
+                    if (line.contains(readTo)) {
+                        return;
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return objectList;
-    }
-
-
-    // Flexibel för generic objekt
-    public static <T extends Object> void writeGenericObjects(String fileName, List<T> objectList){
-        ObjectOutputStream objectOutputStream = null;
-        FileOutputStream fileOutputStream = null;
-        try{
-            fileOutputStream = new FileOutputStream(fileName, false); // objekt oftast '.ser' true innebär lägger till/false skriver över
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(objectList);
-            objectOutputStream.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-
-    public boolean isWriteProtected() {
-        //if (canWrite)
-        return false;
-    }
-    // can write
-
-}
+    }*/

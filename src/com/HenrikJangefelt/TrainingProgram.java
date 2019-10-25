@@ -1,43 +1,64 @@
 package com.HenrikJangefelt;
 
-import com.HenrikJangefelt.person.GymMember;
+import com.HenrikJangefelt.factories.WorkoutFactory;
+import com.HenrikJangefelt.models.Exercise;
+import com.HenrikJangefelt.models.Gym;
+import com.HenrikJangefelt.models.Workout;
+import com.HenrikJangefelt.models.person.GymMember;
+import com.HenrikJangefelt.models.person.Person;
+import com.HenrikJangefelt.sortby.*;
+import com.HenrikJangefelt.models.UserInput;
+import com.HenrikJangefelt.view.View;
 
-import java.io.File;
 import java.util.*;
 
 
 // ATT GÖRA FÖRST!!!:
 
+    // TODO: Minst ett JUnit-test
+    // TODO: Minst en av klasserna ska ha korrekt JavaDoc.
+    // TODO: Minst en abstrakt klass och minst en abstrakt metod....
+    // TODO: En exekverbar JAR-fil
+    // TODO: Kolla skrivskyddat
 
+
+    // Lägg till saveing för användaren med (namn, email etc..)
     // TODO: BUGG!! SORT EXERCISES. måste ange Sort by: 1 1 1 1 många ggr för den ska registrera det!
 
 
-
-    // Inläsning från fil:
+    // TODO: Inläsning från fil (nästan klart!!):
         // TODO: fixa inläsning m.m från filer... Spara när det behövs och ladda in (bara vid start?)
 
         // TODO: Kolla om filen är skrivskyddad??
         // TODO: Gör helpMe filen skrivskyddad?
 
-    // TEST FIL...
+
 
     // Try and Catch
         // TODO: lägg till mer try and catch (kolla efter null).. gör metoderna säkrare!! istället för return vid null?!
         // TODO: SUPERVIKTIGT KOLLA ATT VÄRDET INTE ÄR NULL FRÅN VIEW!!!!!! Samt att det är giltig range för numbers
 
-
-    // Settings
-        // TODO: Lägga till: Settings -> chang your username, ändra/se sitt password/email. Rensa alla arrays. Staff -> Ange veckodagar dem arbetar
-
+    // UML m.m.
 
     // Clean up
         // TODO: testa efter krascher (ange inte nummer, eller nummer utanför range osv...)
         // TODO: Final check Rensa klasser som inte används längre, compareTo/comparator kika närmare på
 
-
+    // KOlla upp
     // TODO: kolla Christaians show (generic) metod!!!
 
-// TODO: dum idé att alla metoder tar in GymMember. Ja: onödigt? .Nej: Programmet funkar för att lägga till workouts till andra???
+    // Ändra
+        // TODO: dum idé att alla metoder tar in GymMember. Ja: onödigt? .Nej: Programmet funkar för att lägga till workouts till andra???
+
+    // Lägg till
+        // Settings
+        // TODO: Lägga till: Settings -> chang your username, ändra/se sitt password/email. Rensa alla arrays. Staff -> Ange veckodagar dem arbetar
+
+        // TODO: create new user deletes all worouts in file....
+
+        // TODO: user sparas loopa igenom alla föra tt hitta rätt?!
+
+
 
 
 
@@ -45,15 +66,7 @@ import java.util.*;
 // TODO: friendlist en array av Person, kan lägga till både friends och gymStaff?
 
 
-// FIX: add exercise i edit, delete
-// FIX: input två ggr vid ange muscle worked
-// FIX: edit crash
-// TODO: WORKOUT Ska sparas varje gång man lägger till en övning samt varje gång man ändrar en övning/wokrout
-
-
-
 // TODO: Istället för att ta in en gymMember tar den in ett objekt i metoderna!!!!!!!!
-// TODO: create new user deletes all worouts in file....
 
 
 
@@ -97,8 +110,24 @@ Det ska finnas try-catch felhantering på detta, dvs programmet ska inte krascha
 
 
 
+// LOGin
+// TODO: när man skapar ett konto/registrerar nytt ladda inte in data från fil (använd bool)
+// TODO: Hämta hel användare som är  sparad??!!
 
 
+// TODO: Använd bara welcome "user" på ett ställe
+// TODO: is logged in på bara ett ställe med?
+// Todo: kolla om email finns sparat...
+// TODO: logg in as last loged in user???!!!!
+
+
+/**
+ * <h1>TrainingProgram</h1>
+ * The TrainingProgram is where you build and create workouts as well as add friends
+ * and more.
+ *
+ * @author Henrik Jangefelt Nilsson
+ */
 public class TrainingProgram {
 
     View view = View.getInstance(); // Get instance to View class
@@ -109,6 +138,7 @@ public class TrainingProgram {
     public TrainingProgram() {
 
         fetchWorkouts();
+        fetchFriends();
         showMainMenu(currentUser);
     }
 
@@ -120,10 +150,10 @@ public class TrainingProgram {
             //fetchWorkouts(); // TODO: Lägga den här??+
 
             // Displays main menu by sending correct enumType to the showMenu method in 'View' class.
-            view.showMenu(View.MainMenuItem.class, "Main Menu");
+            view.showMenu(MainMenuItem.class, "Main Menu");
 
             // Switch on the returned enum case from the View class.
-            switch (view.getMenuItem(View.MainMenuItem.class)) {
+            switch (view.getMenuItem(MainMenuItem.class)) {
 
                 case WORKOUTS:
                     showSubMenu(gymMember, true);
@@ -150,9 +180,9 @@ public class TrainingProgram {
         String menuType = isWorkoutSubMenu ? "Workout Menu" : "Friend Menu";
 
         do {
-            view.showMenu(View.SubMenuItem.class, menuType);
+            view.showMenu(SubMenuItem.class, menuType);
 
-            switch (view.getMenuItem(View.SubMenuItem.class)) {
+            switch (view.getMenuItem(SubMenuItem.class)) {
                 case ADD:
                     if (isWorkoutSubMenu) addWorkout(gymMember);
                     else addFriend(gymMember);
@@ -176,7 +206,7 @@ public class TrainingProgram {
                     break;
                 case SORT:
                 if (isWorkoutSubMenu) sortMenu(gymMember);
-                else sortFriends(gymMember);
+                else sortFriends(currentUser.getFriendList());
                 break;
                 case BACK:
                     return;
@@ -239,6 +269,7 @@ public class TrainingProgram {
             menuChoice = view.getUserInput(UserInput.InputType.INT, "Do you want to add another friend?\n1. Add friend\n2. Go Back").intValue;
 
         } while (menuChoice != 2);
+        saveFriends();
     }
 
 
@@ -253,6 +284,9 @@ public class TrainingProgram {
     }
 
 
+
+
+
     public void saveWorkouts() {
         // TODO: Spara objekt i readMe-File (hämta redan sparade först och sen spara upp igen med den nya?
         // TODO: hämta workouts när programmet laddas (räcker det??)
@@ -264,46 +298,6 @@ public class TrainingProgram {
     public void fetchWorkouts() {
 
 
-        //ArrayList<Workout> downloadedWorkouts;
-
-            /*if (FileUtils.readGenericObjects("workouts.ser") == null &&
-                FileUtils.readGenericObjects("workouts.ser").get(0) instanceof Workout) {
-
-            System.out.println("Inga workouts att hämta!");
-            return;
-        }*/
-
-        //currentUser.getWorkoutList().add(FileUtils.readGenericObjects("workouts.ser"));
-
-        //downloadedWorkouts = FileUtils.readGenericObjects("workouts.ser");
-
-        //System.out.println(downloadedWorkouts.size());
-
-        /*for (Workout workout : downloadedWorkouts) {
-            currentUser.getWorkoutList().add(workout);
-            System.out.println(workout);
-        }*/
-
-
-
-        // Append the downloaded data
-        /*for (Workout workout : fetchedWorkouts) {
-            if (workout != null) {
-            }
-        }*/
-
-        /*if (currentUser.getWorkoutList() == null) {
-            System.out.println("TOM");
-        } else {
-            for (Workout workout : currentUser.getWorkoutList()) {
-                System.out.println(workout);
-            }
-        }*/
-
-
-
-
-
         ArrayList<Workout> downloadedWorkouts = FileUtils.readGenericObjects("workouts.ser");
 
         if (downloadedWorkouts != null) {
@@ -313,7 +307,7 @@ public class TrainingProgram {
                 // TODO:  Beövs instance of WOrkout ?????
                 //if (workout instanceof Workout) {
                     currentUser.getWorkoutList().add(workout);
-                    System.out.println(workout);
+                    System.out.println(workout); // TODO: remove
 
                 //}
             }
@@ -321,109 +315,62 @@ public class TrainingProgram {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    private void showEditWorkoutMenu(GymMember gymMember) {
-
-        do {
-            show(gymMember, gymMember.getWorkoutList(), "Current Workout(s):"); // Show current workouts
-
-            //int[] workoutPrefix
-
-            if (gymMember.getWorkoutList().isEmpty()) { return; } // TODO: BEHÖVS??
-
-            int menuChoice = view.getUserInput(UserInput.InputType.INT, "\nOptions:\n1. Add exercise\n2. Edit\n3. Delete\n0. Go Back").intValue;
-
-            switch (menuChoice) {
-                case 0:
-                    return;
-                case 1:
-                    int workoutIndex = view.getUserInput(UserInput.InputType.INT, "Enter the number of the workout you wish to add exercise to").intValue;
-                    addExercise(gymMember.getWorkoutList().get(workoutIndex - 1));
-                    break;
-                case 2:
-                    editWorkout(gymMember); // Change name of workout/exercise, amount of reps, etc.
-                    break;
-                case 3:
-                    //deleteWorkout(currentUser); // Delete workout or exercise
-                    delete(currentUser, currentUser.getWorkoutList(), "Workout");
-                    break;
-            }
-        } while (true);
+    public void saveFriends() {
+        //FileUtils.saveObjects("friends.ser", currentUser.getFriendList());
+        FileUtils.writeGenericObjects("friends.ser", currentUser.getFriendList());
     }
-     */
 
 
-    // TODO: förbättra (lägg i workout)
-    // TODO: Combine with returnWorkoutPrefix??
 
-    // TODO: ta in två nummer istället?
-    /*private void editWorkout(GymMember gymMember) {
+    public void fetchFriends() {
 
-        int[] indexArray = view.getListNumberPrefix("change");
-        int workoutNumber = indexArray[0];
-        int exerciseNumber = indexArray[1];
+        //ArrayList<GymMember> downloadedFriends = FileUtils.loadObjects("friends.ser");
+        ArrayList<GymMember> downloadedFriends = FileUtils.readGenericObjects("friends.ser");
 
-        if (exerciseNumber == 0) {
-            updateWorkout(gymMember.getWorkoutList().get(workoutNumber - 1));
-        } else {
-            updateExercise(gymMember.getWorkoutList().get(workoutNumber - 1).getExerciseList().get(exerciseNumber - 1));
+        if (downloadedFriends != null) {
+
+            for (GymMember friend : downloadedFriends) {
+
+                currentUser.getFriendList().add(friend);
+                System.out.println(friend); // TODO: remvoe
+            }
         }
-    }*/
 
-    /*
-        private void updateExercise(Exercise exercise) {
+        /*ArrayList<GymMember> downloadedFriends = FileUtils.readGenericObjects("friends.ser");
 
-        do {
-            view.showMenu(View.ExerciseOptions.class, "Edit Exercise Options");
+        if (downloadedFriends != null) {
 
-            switch (view.getMenuItem(View.ExerciseOptions.class)) {
-                case BACK:
-                    return;
-                case NAME:
-                    exercise.setExerciseName(view.getUserInput(UserInput.InputType.STRING, "Enter new exercise name:").stringValue);
-                    break;
-                case REPS:
-                    exercise.setNumberOfReps(view.getUserInput(UserInput.InputType.INT, "Enter new amount of reps:").intValue);
-                    break;
-                case SETS:
-                    exercise.setNumberOfSets(view.getUserInput(UserInput.InputType.INT, "Enter new amount of sets:").intValue);
-                    break;
-                case MUSCLE:
-                    exercise.setTargetedMuscle(getMuscleGroup());
-                    break;
+            for (GymMember friend : downloadedFriends) {
+
+                currentUser.getFriendList().add(friend);
+                System.out.println(friend); // TODO: remvoe
             }
-            view.getUserInput(UserInput.InputType.NONE, "Exercise successfully updated!");
-        } while (true);
+        }*/
+
+
+
     }
-     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public void showEditMenu() {
@@ -508,7 +455,7 @@ public class TrainingProgram {
 
 
 
-
+    // TODO: Fix
     public void editFriendList(GymMember gymMember, ArrayList<GymMember> friendList) {
 
         show(gymMember, friendList, "Friends in friend list:");
@@ -541,9 +488,11 @@ public class TrainingProgram {
                     //delete(currentUser, currentUser.getFriendList(), "Friend");
                     //gymMember.deleteFriend(friendIndex - 1);
                     gymMember.getFriendList().remove(friendIndex - 1);
+                    saveFriends();
                     return;
             }
         } while (userInput.intValue != 0);
+        saveFriends();
     }
 
 
@@ -696,10 +645,10 @@ public class TrainingProgram {
 
         System.out.println("Available Staff at your local gym:");
 
-        for (int i = 0; i < currentGym.staffMembers.size(); i++) {
+        for (int i = 0; i < currentGym.getStaffMembers().size(); i++) {
 
-            if (currentTime > currentGym.staffMembers.get(i).getShiftStartHour() && currentTime < currentGym.staffMembers.get(i).getShiftEndHour()) {
-                System.out.printf("\t-%s %s\n\n", currentGym.staffMembers.get(i).getFullName(), currentGym.staffMembers.get(i).getFullWorkShift()); // TODO: print staff
+            if (currentTime > currentGym.getStaffMembers().get(i).getShiftStartHour() && currentTime < currentGym.getStaffMembers().get(i).getShiftEndHour()) {
+                System.out.printf("\t-%s %s\n\n", currentGym.getStaffMembers().get(i).getFullName(), currentGym.getStaffMembers().get(i).getFullWorkShift()); // TODO: print staff
             }
         }
     }
@@ -754,87 +703,108 @@ public class TrainingProgram {
 
 
 
-    // TODO: !!!! Inte välja mellan exercise och Workout, utan det tas in!!!!!
-    // TODO: Lägg till sort Firends här???
-    public void sortMenu(GymMember gymMember) {
 
-        int menuChoice;
+
+    /**
+     *  Menu for sorting 'friends' by either their first- or last name.
+     * @param friendList Takes in an arrayList of friends
+     */
+    public void sortFriends(ArrayList<GymMember> friendList) {
+
+        view.showMenu(SortFriendItem.class, "Sort By"); // Show menu items for sorting friends.
+
+        // Switch case on the menu items for friends.
+        switch (view.getMenuItem(SortFriendItem.class)) {
+            case BACK:
+                return;
+            case FIRST_NAME:
+                Collections.sort(friendList, new SortFriend.SortFriendFirstName()); // Sort friends by first name.
+                break;
+            case LAST_NAME:
+                Collections.sort(friendList, new SortFriend.SortFriendLastName()); // Sort friends by last name.
+                break;
+        }
+        show(currentUser, friendList, "Current Friends in list:"); // Show friends.
+    }
+
+
+    /**
+     * Displays menu for sorting either workouts or exercises.
+     * @param workouts Takes in a ArrayList of workouts
+     */
+    public void sortMenu(ArrayList<Workout> workouts) {
 
         do {
-            menuChoice = view.getUserInput(UserInput.InputType.INT, "Sort:\n1. Workouts\n2. Exercises\n0. Go Back").intValue;
+            view.showMenu(SortMenuItem.class, "Sort"); // Show menu items for sorting.
 
-            show(gymMember, gymMember.getWorkoutList(), "Current Workout(s):");
+            show(currentUser, workouts, "Current Workout(s):"); // Show current workouts and exercises.
 
-            switch (menuChoice) {
-                case 0:
-                    saveWorkouts();
+            // Get selected menu item.
+            switch (view.getMenuItem(SortMenuItem.class)) {
+                case BACK:
+                    saveWorkouts(); // Save new order of workouts/exercises to workouts.ser file.
                     return;
-                case 1:
-                    sortWorkout(gymMember);
+                case WORKOUTS:
+                    sortWorkout(workouts); // Calls the sortWorkout method.
                     break;
-                case 2:
-                    sortExercises(gymMember.getWorkoutList());
+                case EXERCISES:
+                    sortExercises(workouts); // Calls the sortExercise method.
                     break;
             }
-            show(gymMember, gymMember.getWorkoutList(), "Current Workout(s):");
+            show(currentUser, workouts, "Current Workout(s):"); // Shows current order of workouts and exercises.
         } while (true);
     }
 
-    public void sortFriends(GymMember gymMember) {
 
-        int menuChoice = view.getUserInput(UserInput.InputType.INT, "Sort by:\n1. First name\n2. Last name\n0. Go Back").intValue;
+    /**
+     * Menu for choosing how to sort workouts. Calls on either the SortWorkoutName or
+     * SortWorkoutExercises class based on user input.
+     * @param workouts Takes in a ArrayList of workouts
+     */
+    public void sortWorkout(ArrayList<Workout> workouts) {
 
-        switch (menuChoice) {
-            case 0:
+        view.showMenu(SortWorkoutItem.class, "Sort By"); // Show menu items for sorting workouts.
+
+        // Switch case on the menu items for workouts.
+        switch (view.getMenuItem(SortWorkoutItem.class)) {
+
+            case BACK:
                 return;
-            case 1:
-                Collections.sort(gymMember.getFriendList(), new SortFriend.SortFriendFirstName());
+            case NAME:
+                Collections.sort(workouts, new SortWorkout.SortWorkoutName()); // Sort workouts by name.
                 break;
-            case 2:
-                Collections.sort(gymMember.getFriendList(), new SortFriend.SortFriendLastName());
-                break;
-        }
-        show(gymMember, gymMember.getFriendList(), "Current Friends in list:");
-        //gymMember.showFriends(gymMember.getFriendList());
-    }
-
-
-    public void sortWorkout(GymMember gymMember) {
-
-        int menuChoice = view.getUserInput(UserInput.InputType.INT, "Sort by:\n1. Workout name\n2. Number of exercises\n0. Exit").intValue;
-
-        switch (menuChoice) {
-
-            case 0:
-                return;
-            case 1:
-                Collections.sort(gymMember.getWorkoutList(), new SortWorkout.SortWorkoutName());
-                break;
-            case 2:
-                Collections.sort(gymMember.getWorkoutList(), new SortWorkout.SortWorkoutExercises());
+            case EXERCISES:
+                Collections.sort(workouts, new SortWorkout.SortWorkoutExercises()); // Sort workouts by number of exercises.
                 break;
         }
     }
 
 
+    /**
+     * Menu for sorting the exercises in all the workouts in different ways.
+     * Does the sorting by calling corresponding sorting class.
+     * @param workouts Takes in an array of workouts
+     */
     public void sortExercises(ArrayList<Workout> workouts) {
 
-        view.showMenu(View.ExerciseOptions.class, "Sort By");
+        view.showMenu(SortExerciseItem.class, "Sort By"); // Show menu items for sorting exercises.
 
+        // For all the users workout.
         for (Workout workout : workouts) {
 
-            switch (view.getMenuItem(View.ExerciseOptions.class)) {
+            // Switch case on the menu items for sorting exercises.
+            switch (view.getMenuItem(SortExerciseItem.class)) {
                 case NAME:
-                    Collections.sort(workout.getExerciseList(), new SortExercise.SortExerciseName());
+                    Collections.sort(workout.getExerciseList(), new SortExercise.SortExerciseName()); // Sort exercises by name.
                     break;
                 case REPS:
-                    Collections.sort(workout.getExerciseList(), new SortExercise.SortExerciseReps());
+                    Collections.sort(workout.getExerciseList(), new SortExercise.SortExerciseReps()); // Sort exercises by reps.
                     break;
                 case SETS:
-                    Collections.sort(workout.getExerciseList(), new SortExercise.SortExerciseSets());
+                    Collections.sort(workout.getExerciseList(), new SortExercise.SortExerciseSets()); // Sort exercises by sets.
                     break;
                 case MUSCLE:
-                    Collections.sort(workout.getExerciseList(), new SortExercise.SortExercisesMuscle());
+                    Collections.sort(workout.getExerciseList(), new SortExercise.SortExercisesMuscle()); // Sort exercises by muscle group.
                     break;
                 case BACK:
                     return;
@@ -954,6 +924,93 @@ public class TrainingProgram {
         int[] prefixArray = {workoutIndex, exerciseIndex};
         return prefixArray;
     }*/
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+    private void showEditWorkoutMenu(GymMember gymMember) {
+
+        do {
+            show(gymMember, gymMember.getWorkoutList(), "Current Workout(s):"); // Show current workouts
+
+            //int[] workoutPrefix
+
+            if (gymMember.getWorkoutList().isEmpty()) { return; } // TODO: BEHÖVS??
+
+            int menuChoice = view.getUserInput(UserInput.InputType.INT, "\nOptions:\n1. Add exercise\n2. Edit\n3. Delete\n0. Go Back").intValue;
+
+            switch (menuChoice) {
+                case 0:
+                    return;
+                case 1:
+                    int workoutIndex = view.getUserInput(UserInput.InputType.INT, "Enter the number of the workout you wish to add exercise to").intValue;
+                    addExercise(gymMember.getWorkoutList().get(workoutIndex - 1));
+                    break;
+                case 2:
+                    editWorkout(gymMember); // Change name of workout/exercise, amount of reps, etc.
+                    break;
+                case 3:
+                    //deleteWorkout(currentUser); // Delete workout or exercise
+                    delete(currentUser, currentUser.getWorkoutList(), "Workout");
+                    break;
+            }
+        } while (true);
+    }
+     */
+
+
+// TODO: förbättra (lägg i workout)
+// TODO: Combine with returnWorkoutPrefix??
+
+// TODO: ta in två nummer istället?
+    /*private void editWorkout(GymMember gymMember) {
+
+        int[] indexArray = view.getListNumberPrefix("change");
+        int workoutNumber = indexArray[0];
+        int exerciseNumber = indexArray[1];
+
+        if (exerciseNumber == 0) {
+            updateWorkout(gymMember.getWorkoutList().get(workoutNumber - 1));
+        } else {
+            updateExercise(gymMember.getWorkoutList().get(workoutNumber - 1).getExerciseList().get(exerciseNumber - 1));
+        }
+    }*/
+
+    /*
+        private void updateExercise(Exercise exercise) {
+
+        do {
+            view.showMenu(View.ExerciseOptions.class, "Edit Exercise Options");
+
+            switch (view.getMenuItem(View.ExerciseOptions.class)) {
+                case BACK:
+                    return;
+                case NAME:
+                    exercise.setExerciseName(view.getUserInput(UserInput.InputType.STRING, "Enter new exercise name:").stringValue);
+                    break;
+                case REPS:
+                    exercise.setNumberOfReps(view.getUserInput(UserInput.InputType.INT, "Enter new amount of reps:").intValue);
+                    break;
+                case SETS:
+                    exercise.setNumberOfSets(view.getUserInput(UserInput.InputType.INT, "Enter new amount of sets:").intValue);
+                    break;
+                case MUSCLE:
+                    exercise.setTargetedMuscle(getMuscleGroup());
+                    break;
+            }
+            view.getUserInput(UserInput.InputType.NONE, "Exercise successfully updated!");
+        } while (true);
+    }
+     */
 
 
 
