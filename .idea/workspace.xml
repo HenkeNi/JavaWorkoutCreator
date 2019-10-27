@@ -7,28 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69a07059-ef3f-46ad-9ed0-2e4502d139a0" name="Default Changelist" comment="TEST COmmit">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/friends.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/TheWorkoutCreator_jar/TheWorkoutCreator.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/TheWorkoutCreator_jar/TheWorkoutCreator.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/FileUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/FileUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/LoginProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/LoginProgram.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/models/person/GymMember.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/models/person/GymMember.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/models/person/Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/models/person/Person.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/view/View$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/view/View$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/view/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/view/View.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/LoginProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/LoginProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/factories/FriendFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/factories/FriendFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/factories/WorkoutFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/factories/WorkoutFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/models/person/GymMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/models/person/GymMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/models/person/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/models/person/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/view/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/workouts.ser" beforeDir="false" afterPath="$PROJECT_DIR$/workouts.ser" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
