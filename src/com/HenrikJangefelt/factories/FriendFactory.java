@@ -8,7 +8,7 @@ import com.HenrikJangefelt.models.person.StaffMember;
 import com.HenrikJangefelt.view.View;
 
 /**
- * Class responsible for creating new friends.
+ * Factory Class responsible for creating new subclass object of type Person.
  */
 public class FriendFactory {
 

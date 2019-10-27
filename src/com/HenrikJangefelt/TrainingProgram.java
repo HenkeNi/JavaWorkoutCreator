@@ -22,7 +22,7 @@ import java.util.*;
 
 // TODO: UML m.m.
     // TODO: gör uml färdigt
-    // TODO: skriv om programmet
+    // TODO: skriv om programmet text dokument
 
     // TODO: Minst ett JUnit-test (typ, går inte att köra!!)
     // TODO: Minst en av klasserna ska ha korrekt JavaDoc. (MÅSTE GÖRA DET I INTELLIJ (SKAPA DOCET ALLTSÅ!!!))
@@ -54,9 +54,6 @@ import java.util.*;
 
 
 
-
-    // Inte helt klara:
-        // Workout,
 
 
 
@@ -104,7 +101,6 @@ import java.util.*;
 
 
 
-// LOGin
 // TODO: när man skapar ett konto/registrerar nytt ladda inte in data från fil (använd bool)
 // TODO: Hämta hel användare som är  sparad??!!
 
@@ -131,8 +127,8 @@ public class TrainingProgram {
 
 
     public TrainingProgram() {
-
-        fetchWorkouts();
+        FileUtils.setReadOnly("helpMe.txt");
+        fetchWorkoutsFromFile();
         fetchFriends();
         showMainMenu(currentUser);
     }
@@ -235,7 +231,7 @@ public class TrainingProgram {
 
         } while (menuChoice != 0);
 
-        saveWorkouts();
+        saveWorkoutsToFile();
     }
 
 
@@ -262,17 +258,17 @@ public class TrainingProgram {
 
 
 
-
-    public void saveWorkouts() {
-        // TODO: Spara objekt i readMe-File (hämta redan sparade först och sen spara upp igen med den nya?
-        // TODO: hämta workouts när programmet laddas (räcker det??)
+    public void saveWorkoutsToFile() {
 
         FileUtils.writeGenericObjects("workouts.ser", currentUser.getWorkoutList()); // Save current workouts to file
-
     }
 
-    public void fetchWorkouts() {
+    public void saveFriends() {
+        //FileUtils.saveObjects("friends.ser", currentUser.getFriendList());
+        FileUtils.writeGenericObjects("friends.ser", currentUser.getFriendList());
+    }
 
+    public void fetchWorkoutsFromFile() {
 
         ArrayList<Workout> downloadedWorkouts = FileUtils.readGenericObjects("workouts.ser");
 
@@ -288,12 +284,6 @@ public class TrainingProgram {
                 //}
             }
         }
-    }
-
-
-    public void saveFriends() {
-        //FileUtils.saveObjects("friends.ser", currentUser.getFriendList());
-        FileUtils.writeGenericObjects("friends.ser", currentUser.getFriendList());
     }
 
 
@@ -445,7 +435,7 @@ public class TrainingProgram {
                     view.showMessage("Exercise " + deletedExercise + " was deleted!");
                 }
             }
-            saveWorkouts();
+            saveWorkoutsToFile();
         }
     }
 
@@ -491,7 +481,8 @@ public class TrainingProgram {
             }
 
             // TOOD: FUnkar? Eller gör på annat sätt (skriva ut email under varje friend
-            if (classType instanceof GymMember) {
+            if (classType instanceof Person) {
+                //view.showMessage(listItem.t);
                 //for (GymMember gymMember1 : gymMember.getFriendList().get())
             }
 
@@ -665,7 +656,7 @@ public class TrainingProgram {
                     break;
             }
             view.showMessage("Workout successfully updated!");
-            saveWorkouts();
+            saveWorkoutsToFile();
         } while (true);
     }
 
@@ -700,7 +691,7 @@ public class TrainingProgram {
                     return;
             }
             view.showMessage("Exercise successfully updated!");
-            saveWorkouts(); // Save changes made.
+            saveWorkoutsToFile(); // Save changes made.
         } while (true);
     }
 
@@ -804,7 +795,7 @@ public class TrainingProgram {
             // Get selected menu item.
             switch (view.getMenuItem(SortMenuItem.class)) {
                 case BACK:
-                    saveWorkouts(); // Save new order of workouts/exercises to workouts.ser file.
+                    saveWorkoutsToFile(); // Save new order of workouts/exercises to workouts.ser file.
                     return;
                 case WORKOUTS:
                     sortWorkout(workouts); // Calls the sortWorkout method.

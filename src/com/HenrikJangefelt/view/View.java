@@ -10,11 +10,6 @@ import java.util.Scanner;
  */
 public class View {
 
-    // TODO: FIxa try and catch for inputs!!
-    // TODO: Final check- kolla att man bara kan ange siffror, samt bara rätt intervall för tex arrayer...
-    // TODO: ta in userInout som String och omvandla sedan (Fixar bugg med nextLine inte läses in?) TODO: FIx isNumber
-    // TODO: lägg till eftet t.ex: Add (Workout) eller Add (Friend)
-
     Scanner input = new Scanner(System.in);
     private static View instance = null;
 
@@ -61,21 +56,19 @@ public class View {
         int choiceIndex;
 
         do {
-            choiceIndex = getNumberFromUserInput();
-        } while (choiceIndex > enumType.getEnumConstants().length);
+            choiceIndex = convertStringInputToInt();
+        } while (choiceIndex > enumType.getEnumConstants().length || choiceIndex <= 0);
 
         return enumType.getEnumConstants()[choiceIndex - 1]; // TODO: felhantering för index out of bounds??!!
     }
 
-    
+
     /**
      * Returns user input as an object (UserInput)
      * @param inputType
      * @return
      */
     public UserInput getUserInput(UserInput.InputType inputType) {
-        //public UserInput getUserInput(UserInput.InputType inputType, String message) {
-        //System.out.println(message);
 
         UserInput userInput = new UserInput();
 
@@ -84,7 +77,7 @@ public class View {
                 userInput.setStringValue(input.nextLine().trim());
                 break;
             case INT:
-                userInput.setIntValue(getNumberFromUserInput());
+                userInput.setIntValue(convertStringInputToInt());
                 break;
         }
         return userInput;
@@ -99,7 +92,7 @@ public class View {
      * Gets a number from user.
      * @return
      */
-    public int getNumberFromUserInput() {
+    public int convertStringInputToInt() {
 
         int numb = -999;
 
@@ -116,17 +109,12 @@ public class View {
     }
 
 
-
-
-
-
-    // TODO: bygg om / fixa
-
     /**
      * Returns numbers selected when selecting specific workout or exercise.
      * @param editOrDelete
      * @return
      */
+    // TODO: Fix
     public int[] getListNumberPrefix(String editOrDelete) {
 
             boolean validNumbers = false;
@@ -165,20 +153,7 @@ public class View {
 
 
 
-   /* public void showObjects(ArrayList<Object> objectList, String objectName) {
 
-        System.out.printf("Current %s\n", objectName);
-
-        if (objectList.isEmpty()) {
-            System.out.println("\t-Empty");
-            return;
-        }
-
-        // TODO SKriva ut objekten
-        for (int i = 0; i < objectList.size(); i++) {
-            //System.out.println("\n%s. %s\n", i + 1, objectList.get(i));
-        }
-    }*/
 
 
 

@@ -3,6 +3,8 @@ package com.HenrikJangefelt.models.person;
 import com.HenrikJangefelt.Introduce;
 import com.HenrikJangefelt.models.Workout;
 import com.HenrikJangefelt.view.View;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class GymMember extends Person implements Introduce {

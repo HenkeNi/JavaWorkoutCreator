@@ -6,7 +6,7 @@ import com.HenrikJangefelt.models.Workout;
 import com.HenrikJangefelt.view.View;
 
 /**
- * WorkoutFactory is incharge of creating workouts and exercises.
+ * WorkoutFactory is in charge of creating workouts and exercises.
  */
 public class WorkoutFactory {
 

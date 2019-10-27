@@ -23,6 +23,7 @@ public class LoginProgram {
      * <h1>Login Menu</h1>
      *  Menu that displays options for signing in or creating a new user.
      */
+    // TODO: Make menu enum?
     public void loginMenu() {
 
        do {
