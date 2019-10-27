@@ -7,110 +7,29 @@ import com.HenrikJangefelt.models.Gym;
 import com.HenrikJangefelt.models.Workout;
 import com.HenrikJangefelt.models.person.GymMember;
 import com.HenrikJangefelt.models.person.Person;
+import com.HenrikJangefelt.models.person.StaffMember;
 import com.HenrikJangefelt.sortby.*;
 import com.HenrikJangefelt.models.UserInput;
 import com.HenrikJangefelt.view.View;
 
 import java.util.*;
 
-
-// ATT GÖRA FÖRST!!!:
-
-// TODO: Inläsning från fil (nästan klart!!):
-    // TODO: Kolla om filen är skrivskyddad??
-    // TODO: Gör helpMe filen skrivskyddad?
-
-// TODO: UML m.m.
-    // TODO: gör uml färdigt
-    // TODO: skriv om programmet text dokument
-
-    // TODO: Minst ett JUnit-test (typ, går inte att köra!!)
-    // TODO: Minst en av klasserna ska ha korrekt JavaDoc. (MÅSTE GÖRA DET I INTELLIJ (SKAPA DOCET ALLTSÅ!!!))
     // TODO: En exekverbar JAR-fil
+    // TODO: UML och skriv om programmet text dokument
+    // TODO: Minst ett JUnit-test (typ, går inte att köra!!)
 
-    // TODO: printa ut vilken typ av friend
-
-// Clean up
-// TODO: testa efter krascher (ange inte nummer, eller nummer utanför range osv...)
-// TODO: Final check Rensa klasser som inte används längre, compareTo/comparator kika närmare på
-// TODO: kolal factories, gym etc.
-
-
-    // Lägg till saveing för användaren med (namn, email etc..)
     // TODO: BUGG!! SORT EXERCISES. måste ange Sort by: 1 1 1 1 många ggr för den ska registrera det!
-
-
-    // TODO: FIX:: Bygg ut GYM and staff, personal trainer
-
-
-
-    // Try and Catch
-        // TODO: lägg till mer try and catch (kolla efter null).. gör metoderna säkrare!! istället för return vid null?!
-        // TODO: SUPERVIKTIGT KOLLA ATT VÄRDET INTE ÄR NULL FRÅN VIEW!!!!!! Samt att det är giltig range för numbers
+    // TODO: Bugg test, inte null från view!
 
 
 
-
-
-
-
-
-
-
-
-
-    // Lägg till
-        // Settings
-        // TODO: Lägga till: Settings -> chang your username, ändra/se sitt password/email. Rensa alla arrays. Staff -> Ange veckodagar dem arbetar
-
-        // TODO: create new user deletes all worouts in file....
-
-        // TODO: user sparas loopa igenom alla föra tt hitta rätt?!
-
-        // TODO: fixa search i helpMe.txt samt lägg till annat...
-
-
-
-
-// TODO: Staff som object i fil, kan bara hämtas!?
-
-
-// BONUS:
-// TODO: lägg till _____ / **** för att skilja av olika menyer inout osv. tex: main menu \n ------
-// TODO: implementera Hashtable
-// TODO: WOrkout duration
-// TODO: egen class för StaffSchedule
-// TODO: enum för login??
-
-// KANSKE:
-// TODO: lägg till parantse i meny altenrativ tex: Add (workout)
-// TODO: enum meny för edit (kolla om man kan sätta fler värden på enum casen och sen sortera ut vissa av dem till dem olika menyerna )
-// TODO: sätt så mycket som möjligt till private?
-
-
-
-// TODO: använd helloPharases.set(0, "Hello") för att ändra workoutList
-
-
-
-// TODO: Försök implementera: Interface, mer enums(?), abstrakta metoder, Singleton (design mönster)
-// TODO: Förbättra: Jobba mer med att lägga logik i klasser? MVC Och design mönster
-
-
-// TODO: änra gymMember parametrarna till tex. ArrayList<GymMember> istället
-
-
-
-// TODO: när man skapar ett konto/registrerar nytt ladda inte in data från fil (använd bool)
-// TODO: Hämta hel användare som är  sparad??!!
-
-
-// TODO: Använd bara welcome "user" på ett ställe
-// TODO: is logged in på bara ett ställe med?
-// Todo: kolla om email finns sparat...
-// TODO: logg in as last loged in user???!!!!
-
-// TODO: add sort friend by type
+// TODO: Place staff as object in file (read only)
+// TODO: Add workout duration and weight used...
+// TODO: Settings, change name, email etc...
+// TODO: Save user in file (save whole currentUser object?)
+// TODO: Add sortFriend by type (GymMember, StaffMember etc.)
+// TODO: Build out gym and staff (and personal trainer) functions
+// TODO: Add more text in helpMe.txt
 
 /**
  * <h1>TrainingProgram</h1>
@@ -122,9 +41,7 @@ import java.util.*;
 public class TrainingProgram {
 
     View view = View.getInstance(); // Get instance to View class
-    static GymMember currentUser = new GymMember("", ""); // TEST (Static) TODO: (ta bort från konstruktorn i Person???) EJ STATIC!!
-    // TODO: Ta bort static och skicka gymMEmber till login (först TrainningProgrm sen öppnas login)
-
+    static GymMember currentUser = new GymMember("", "");
 
     public TrainingProgram() {
         FileUtils.setReadOnly("helpMe.txt");
@@ -140,8 +57,6 @@ public class TrainingProgram {
     public void showMainMenu(GymMember gymMember) {
 
         do {
-            //fetchWorkouts(); // TODO: Lägga den här??+
-
             // Displays main menu by sending correct enumType to the showMenu method in 'View' class.
             view.showMenu(MainMenuItem.class, "Main Menu");
 
@@ -167,7 +82,11 @@ public class TrainingProgram {
     }
 
 
-    // Submenu (menu for workouts or friends)
+    /**
+     * Submenu, used in as submenu in workout and friend.
+     * @param gymMember Takes in a gymMember
+     * @param isWorkoutSubMenu Takes in a boolean if menu should display workouts
+     */
     public void showSubMenu(GymMember gymMember, boolean isWorkoutSubMenu) {
 
         String menuType = isWorkoutSubMenu ? "Workout Menu" : "Friend Menu";
@@ -208,7 +127,10 @@ public class TrainingProgram {
     }
 
 
-
+    /**
+     * Method for adding a workout. Also calls the addExercise method.
+     * @param workouts
+     */
     public void addWorkout(ArrayList<Workout> workouts) {
 
         workouts.add(WorkoutFactory.createWorkout()); // Create new workout (and add to workoutList)
@@ -216,6 +138,10 @@ public class TrainingProgram {
     }
 
 
+    /**
+     * Method for adding exercises to a workout
+     * @param workout Takes in a workout
+     */
     public void addExercise(Workout workout) {
 
         int menuChoice;
@@ -235,7 +161,10 @@ public class TrainingProgram {
     }
 
 
-
+    /**
+     * Method for adding friends to friendsList
+     * @param friendList
+     */
     public void addFriend(ArrayList<Person> friendList) {
 
         int menuChoice;
@@ -253,21 +182,27 @@ public class TrainingProgram {
     }
 
 
-
-
-
-
-
+    /**
+     * Save workout objects to file
+     */
     public void saveWorkoutsToFile() {
 
         FileUtils.writeGenericObjects("workouts.ser", currentUser.getWorkoutList()); // Save current workouts to file
     }
 
+
+    /**
+     * Save Person objects to file
+     */
     public void saveFriends() {
         //FileUtils.saveObjects("friends.ser", currentUser.getFriendList());
         FileUtils.writeGenericObjects("friends.ser", currentUser.getFriendList());
     }
 
+
+    /**
+     * Fetching workout objects from file
+     */
     public void fetchWorkoutsFromFile() {
 
         ArrayList<Workout> downloadedWorkouts = FileUtils.readGenericObjects("workouts.ser");
@@ -275,22 +210,17 @@ public class TrainingProgram {
         if (downloadedWorkouts != null) {
 
             for (Workout workout : downloadedWorkouts) {
-
-                // TODO:  Beövs instance of WOrkout ?????
-                //if (workout instanceof Workout) {
-                    currentUser.getWorkoutList().add(workout);
-                    System.out.println(workout); // TODO: remove
-
-                //}
+                currentUser.getWorkoutList().add(workout);
             }
         }
     }
 
-
-
+    // TODO: CURRENTLY NOT WORKING!!!!!!
+    /**
+     * Method for fetching Person objects from file
+     */
     public void fetchFriends() {
 
-        //ArrayList<GymMember> downloadedFriends = FileUtils.loadObjects("friends.ser");
         ArrayList<Person> downloadedFriends = FileUtils.readGenericObjects("friends.ser");
 
         if (downloadedFriends != null) {
@@ -301,60 +231,14 @@ public class TrainingProgram {
                 System.out.println(friend); // TODO: remvoe
             }
         }
-
-        /*ArrayList<GymMember> downloadedFriends = FileUtils.readGenericObjects("friends.ser");
-
-        if (downloadedFriends != null) {
-
-            for (GymMember friend : downloadedFriends) {
-
-                currentUser.getFriendList().add(friend);
-                System.out.println(friend); // TODO: remvoe
-            }
-        }*/
-
-
-
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void showEditMenu() {
-
-        do {
-
-        } while (true);
-    }
-
-
-
-
-
-
-
-
-
-    // TODO: Fix
+    /**
+     * Edit friend list menu
+     * @param gymMember
+     * @param friendList
+     */
     public void editFriendList(GymMember gymMember, ArrayList<Person> friendList) {
 
         show(gymMember, friendList, "Friends in friend list:");
@@ -362,13 +246,11 @@ public class TrainingProgram {
         // If no friends in friendList => return
         if (currentUser.getFriendList().isEmpty()) { return; }
 
-        // TODO: Implement friend ID istället???
         view.showMessage("Enter the number of the friend you wish to change:");
 
         int friendIndex = view.getUserInput(UserInput.InputType.INT).getIntValue();
 
         do {
-            // TODO: make enum cases???
             view.showMessage("Options:\n1. Edit First Name\n2. Edit Last Name\n0. Go Back");
 
             switch (view.getUserInput(UserInput.InputType.INT).getIntValue()) {
@@ -389,27 +271,21 @@ public class TrainingProgram {
     }
 
 
-    // TODO: gör mer generic
+    /**
+     * Method for deleting objects in array list
+     * @param gymMember Takes in a gymMember object
+     * @param list Takes in an arrayList of objects
+     * @param listType Takes in a listType as a String
+     * @param <T>
+     */
     public  <T extends Object> void delete(GymMember gymMember, ArrayList<T> list, String listType) {
 
         show(gymMember, list, listType);
 
-        if (list.isEmpty()) { return; }
+        if (list.isEmpty()) { return; } // Return if empty list
 
-        int[] indexArray = view.getListNumberPrefix("delete");
+        int[] indexArray = view.getListNumberPrefix("delete"); // Get index position for deleting position in list
 
-        /*boolean isWorkout = list.get(0) instanceof Workout ? true : false;
-
-        if (isWorkout && indexArray[1] == 0) {
-
-        } else {
-            if (isWorkout) {
-                gymMember.getWorkoutList().remove(indexArray[0] - 1);
-            } else {
-
-            }
-
-        }*/
 
         // Remove friend from list
         if (list.get(0) instanceof GymMember) {
@@ -440,10 +316,6 @@ public class TrainingProgram {
     }
 
 
-    // TODO: COmbine med showWorkout i View????
-    // TODO: KOlla upp om man kan kolla hela arrayLista (arrayList instanceOf ArrayList<Workout>
-    // TODO: ANvänd bara currentUSer???
-    // Java doc , beskrivning utanför, kommentera vanlig inuti
     /**
      * Takes in any ArrayList of object and show each element
      * @param gymMember   User
@@ -457,72 +329,32 @@ public class TrainingProgram {
         if (arrayList.isEmpty()) { view.showMessage("\t -Empty"); return; }
 
 
-        T classType = arrayList.get(0); // Get the Class type from the first element in the arrayList
+        T objectType = arrayList.get(0); // Get the Class type from the first element in the arrayList
         int index = 0;
 
 
+        // For every object in arrayList
         for (T listItem : arrayList) {
             view.showMessage((index + 1) + ". " + listItem.toString()); // Shows number before workout and the workout itself
 
             int subIndex = 0;
 
+            // If object is of type Workout
+            if (objectType instanceof Workout) {
 
-            /*if (arrayList.get(0) instanceof Workout) {
-                fetchWorkouts();
-            }*/
-
-            if (classType instanceof Workout) {
-
-
+                // Show exercises for workout
                 for (Exercise exercise : gymMember.getWorkoutList().get(index).getExerciseList()) {
                     view.showMessage("\t" + (index + 1) + "." + (subIndex + 1) + ". " + gymMember.getWorkoutList().get(index).getExerciseList().get(subIndex));
                     subIndex++;
                 }
             }
 
-            // TOOD: FUnkar? Eller gör på annat sätt (skriva ut email under varje friend
-            if (classType instanceof Person) {
-                //view.showMessage(listItem.t);
-                //for (GymMember gymMember1 : gymMember.getFriendList().get())
+            // TODO: Add friend type etc...
+            if (objectType instanceof Person) {
             }
-
-            // TODO: Lägg till ---------- eler nåt för att skilja olikw workouts/ friends åt
             index++;
         }
     }
-
-
-
-
-
-
-    // TODO: if no staff. skriv ingen oersonal. Samt tid när deet är bamanat? alt. när nästashift börjar?
-    public void checkAvailableStaff() {
-
-        Gym currentGym = new Gym();
-
-        // TODO: add workdays (5 days of the week)
-        //Date todaysDate = new Date();
-        //todaysDate.getTime();
-
-        //System.out.println(java.time.LocalTime.now().getHour()); // GETS Current time
-
-        int currentTime = java.time.LocalTime.now().getHour();
-
-        System.out.println("Available Staff at your local gym:");
-
-        for (int i = 0; i < currentGym.getStaffMembers().size(); i++) {
-
-            if (currentTime > currentGym.getStaffMembers().get(i).getShiftStartHour() && currentTime < currentGym.getStaffMembers().get(i).getShiftEndHour()) {
-                System.out.printf("\t-%s %s\n\n", currentGym.getStaffMembers().get(i).getFullName(), currentGym.getStaffMembers().get(i).getFullWorkShift()); // TODO: print staff
-            }
-        }
-    }
-
-
-
-
-
 
 
     /**
@@ -531,7 +363,6 @@ public class TrainingProgram {
      * @param arrayList
      * @param <T>
      */
-    // TODO: Förbättra??
     public  <T extends Object> void searchForObject(GymMember gymMember, ArrayList<T> arrayList) {
 
         // If arrayList is empty return
@@ -557,8 +388,13 @@ public class TrainingProgram {
     }
 
 
-
-
+    /**
+     * A generic method for getting objects with names matching searched word.
+     * @param objectList Takes in a ArrayList of objects
+     * @param searchWord Takes in a searched word as a String
+     * @param <T> is generic
+     * @return
+     */
     public <T extends Object> ArrayList<T> getSearchedObject(ArrayList<T> objectList, String searchWord) {
 
         ArrayList<T> matchingObjects = new ArrayList<>();
@@ -612,11 +448,9 @@ public class TrainingProgram {
 
 
     /**
-     *
+     *  Calls either the updateWorkout or updateExercise method based on user input.
      * @param gymMember
      */
-    // TODO: Fixa
-    // Did press edit workout
     public void editWorkouts(GymMember gymMember) {
 
         show(gymMember, gymMember.getWorkoutList(), "Current Workout(s):"); // Show current workouts
@@ -868,6 +702,44 @@ public class TrainingProgram {
 
 
 
+    // TODO: Rebuild and improve!!
+    public void checkAvailableStaff() {
+
+        Gym currentGym = new Gym();
+        addGymStaff(currentGym);
+
+        // TODO: add workdays (5 days of the week)
+        //Date todaysDate = new Date();
+        //todaysDate.getTime();
+
+        //System.out.println(java.time.LocalTime.now().getHour()); // GETS Current time
+
+        int currentTime = java.time.LocalTime.now().getHour();
+
+        System.out.println("Available Staff at your local gym:");
+
+        for (int i = 0; i < currentGym.getStaffMembers().size(); i++) {
+
+            if (currentTime > currentGym.getStaffMembers().get(i).getShiftStartHour() && currentTime < currentGym.getStaffMembers().get(i).getShiftEndHour()) {
+                view.showMessage("\t- " + currentGym.getStaffMembers().get(i).getFullName() + " (" + currentGym.getStaffMembers().get(i).getFullWorkShift() + ")");
+            }
+        }
+    }
+
+    // TODO: FIX
+    public void addGymStaff(Gym gym) {
+
+        StaffMember arnoldSchwarzenegger = new StaffMember("Arnold", "Schwarzenegger");
+        arnoldSchwarzenegger.setShiftStartHour(6);
+        arnoldSchwarzenegger.setShiftEndHour(15);
+        StaffMember sylvesterStallone = new StaffMember("Sylvester", "Stallone");
+        sylvesterStallone.setShiftStartHour(15);
+        sylvesterStallone.setShiftEndHour(23);
+
+        gym.getStaffMembers().add(arnoldSchwarzenegger);
+        gym.getStaffMembers().add(sylvesterStallone);
+
+    }
 
 }
 

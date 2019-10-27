@@ -7,7 +7,101 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69a07059-ef3f-46ad-9ed0-2e4502d139a0" name="Default Changelist" comment="TEST COmmit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/EditExerciseItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/EditExerciseItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/FileUtils.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/FileUtils.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/HelpMenuItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/HelpMenuItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/Introduce.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/Introduce.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/LoginProgram.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/LoginProgram.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/LoginProgramTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/LoginProgramTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/Main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/MainMenuItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/MainMenuItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/SubMenuItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/SubMenuItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/TrainingProgram.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/TrainingProgram.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/factories/FriendFactory.FriendType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/factories/FriendFactory.FriendType.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/factories/FriendFactory.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/factories/FriendFactory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/factories/WorkoutFactory.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/factories/WorkoutFactory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/factories/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/factories/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/factories/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/factories/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/Exercise.Muscle.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/Exercise.Muscle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/Exercise.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/Exercise.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/Gym.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/Gym.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/UserInput.InputType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/UserInput.InputType.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/UserInput.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/UserInput.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/Workout.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/Workout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/GymMember.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/GymMember.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/Person.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/Person.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/PersonalTrainer.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/PersonalTrainer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/StaffMember.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/StaffMember.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/models/person/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExercise.SortExerciseName.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExercise.SortExerciseName.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExercise.SortExerciseReps.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExercise.SortExerciseReps.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExercise.SortExerciseSets.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExercise.SortExerciseSets.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExercise.SortExercisesMuscle.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExercise.SortExercisesMuscle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExercise.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExercise.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExerciseItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortExerciseItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortFriend.SortFriendFirstName.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortFriend.SortFriendFirstName.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortFriend.SortFriendLastName.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortFriend.SortFriendLastName.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortFriend.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortFriend.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortFriendItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortFriendItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortMenuItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortMenuItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortWorkout.SortWorkoutExercises.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortWorkout.SortWorkoutExercises.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortWorkout.SortWorkoutName.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortWorkout.SortWorkoutName.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortWorkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortWorkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortWorkoutItem.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/SortWorkoutItem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/sortby/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/view/View.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/view/View.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/view/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/view/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/com/HenrikJangefelt/view/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/com/HenrikJangefelt/view/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-12.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-13.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-14.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-15.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-16.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-17.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-17.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-18.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-18.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-19.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-19.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index-files/index-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/doc/member-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/member-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/doc/member-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/package-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/doc/package-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/serialized-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/serialized-form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/type-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/doc/type-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/FileUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/FileUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/models/Gym.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/models/Gym.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/models/person/StaffMember.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/models/person/StaffMember.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/view/View$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/view/View$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/view/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/view/View.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/models/Gym.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/models/Gym.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/models/person/StaffMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/models/person/StaffMember.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +126,7 @@
   <component name="ProjectId" id="1QjzhoTY5RukmZSCBiECuIbzBzk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
