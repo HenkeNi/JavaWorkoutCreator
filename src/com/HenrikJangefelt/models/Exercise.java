@@ -2,7 +2,9 @@ package com.HenrikJangefelt.models;
 
 import java.io.Serializable;
 
-// TODO: Ta bort comparable
+/**
+ * Class Exercise contains four attributes (exercise name, number of reps, number of sets and targeted muscle)
+ */
 public class Exercise implements Serializable {
 
     public enum Muscle {
@@ -12,8 +14,7 @@ public class Exercise implements Serializable {
         BICEPS("Biceps"),
         TRICEPS("Triceps"),
         ABS("Abs"),
-        LEGS("Legs"),
-        UNKOWN("Unspecified"); // TODO: Ta bort
+        LEGS("Legs");
 
         public String label;
 
@@ -31,8 +32,7 @@ public class Exercise implements Serializable {
     private Muscle targetedMuscle;
     private int numberOfReps;
     private int numberOfSets;
-    // private float weightUsed; // TODO: add weight used?
-
+    // private float weightUsed; // TODO: Implement weight used for given exercise
 
     public Exercise(String exerciseName, int numberOfReps, int numberOfSets, Muscle targetedMuscle) {
         this.exerciseName = exerciseName;
@@ -40,7 +40,6 @@ public class Exercise implements Serializable {
         this.numberOfSets = numberOfSets;
         this.targetedMuscle = targetedMuscle;
     }
-
 
     public int getNumberOfReps() {
         return numberOfReps;
@@ -71,7 +70,6 @@ public class Exercise implements Serializable {
     public void setTargetedMuscle(Muscle targetedMuscle) {
         this.targetedMuscle = targetedMuscle;
     }
-
 
     public String toString() {
         return exerciseName +

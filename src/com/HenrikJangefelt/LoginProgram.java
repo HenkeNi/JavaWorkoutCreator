@@ -23,16 +23,17 @@ public class LoginProgram {
      * <h1>Login Menu</h1>
      *  Menu that displays options for signing in or creating a new user.
      */
-    private void loginMenu() {
+    public void loginMenu() {
 
        do {
-           int menuChoice = view.getUserInput(UserInput.InputType.INT, "\n" +
+           view.showMessage("\n" +
                    "Welcome to the 'Workout Creator' a tool for creating custom workouts.\n" +
                    "1. Login\n" +
                    "2. Register new user\n" +
                    "3. Exit\n" +
                    "   ...\n" +
-                   "4. Quick Login").intValue;
+                   "4. Quick Login");
+           int menuChoice = view.getUserInput(UserInput.InputType.INT).getIntValue();
 
             switch (menuChoice) {
                 case 1:
@@ -42,7 +43,7 @@ public class LoginProgram {
                     getEmailAndPassword();
                     break;
                 case 3:
-                    view.getUserInput(UserInput.InputType.NONE, "Terminating...");
+                    view.showMessage("Terminating...");
                     return;
                 case 4:
                     createNewUser(true, "Test@hotmail.com", "password123");
@@ -57,7 +58,7 @@ public class LoginProgram {
      * <h1>getEmailAndPassword</h1>
      * Creates email and password for new user.
      */
-    private void getEmailAndPassword() {
+    public void getEmailAndPassword() {
 
         boolean validEmail = false;
         boolean validPassword = false;
@@ -66,17 +67,18 @@ public class LoginProgram {
         String password;
 
         do {
-            UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "\n" +
+            view.showMessage("\n" +
                     "Creating new account...\n\n" +
                     "Email address:");
 
-            emailAddress = userInput.stringValue;
+
+            emailAddress = view.getUserInput(UserInput.InputType.STRING).getStringValue();
             validEmail = validateEmailFormat(emailAddress); // Checks for valid email input
         } while (!validEmail);
 
         do {
-            UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "Password:");
-            password = userInput.stringValue;
+            view.showMessage("Password:");
+            password = view.getUserInput(UserInput.InputType.STRING).getStringValue();
 
             validPassword = validatePasswordFormat(password); // Checks for valid password
 
@@ -92,10 +94,14 @@ public class LoginProgram {
      * @param email Takes in a string as second parameter to createNewUser method
      * @param password Takes in a string as third parameter to createNewUser method
      */
-    private void createNewUser(boolean isQuickLogin, String email, String password) {
+    public void createNewUser(boolean isQuickLogin, String email, String password) {
 
-        String firstName = isQuickLogin ? "Mr." : view.getUserInput(UserInput.InputType.STRING, "Enter first name:").stringValue;
-        String lastName = isQuickLogin ? "Default" : view.getUserInput(UserInput.InputType.STRING, "Enter last name:").stringValue;
+        // TODO: Fixa
+        //view.showMessage();
+        //String firstName = isQuickLogin ? "Mr." : view.getUserInput(UserInput.InputType.STRING, "Enter first name:").stringValue;
+        //String lastName = isQuickLogin ? "Default" : view.getUserInput(UserInput.InputType.STRING, "Enter last name:").stringValue;
+        String firstName = isQuickLogin ? "Mr." : view.getUserInput(UserInput.InputType.STRING).getStringValue();
+        String lastName = isQuickLogin ? "Default" : view.getUserInput(UserInput.InputType.STRING).getStringValue();
 
         TrainingProgram.currentUser.setFirstName(firstName);
         TrainingProgram.currentUser.setLastName(lastName);
@@ -111,7 +117,7 @@ public class LoginProgram {
      * @param emailAddress Takes in a string as first parameter
      * @return Returns validated email as a boolean
      */
-    private boolean validateEmailFormat(String emailAddress) {
+    public boolean validateEmailFormat(String emailAddress) {
 
         if (emailAddress.length() < 15) {
             System.out.println("Email must be 15 characters or longer");
@@ -136,9 +142,8 @@ public class LoginProgram {
      * @param password Takes in a string as first parameter
      * @return Returns validated password as a boolean
      */
-    private boolean validatePasswordFormat(String password) {
-
-        return !password.equals("") && !password.equals("password");
+    public boolean validatePasswordFormat(String password) {
+        return !password.equals("") && !password.equals("password") && password.length() >= 8;
     }
 
 
@@ -146,23 +151,25 @@ public class LoginProgram {
      * Checks email and password input with current users eamil and password and either let the user progress to the rest
      * of the program of returns the user to the menu if failed.
      */
-    private void login() {
+    public void login() {
 
         // TODO: Fetch user?
 
-        String userEmail = view.getUserInput(UserInput.InputType.STRING, "Email Address:").stringValue;
-        String userPassword = view.getUserInput(UserInput.InputType.STRING, "Password:").stringValue;
+        view.showMessage("Email Address:");
+        String userEmail = view.getUserInput(UserInput.InputType.STRING).getStringValue();
+
+        view.showMessage("Password:");
+        String userPassword = view.getUserInput(UserInput.InputType.STRING).getStringValue();
 
         boolean loginApproved = checkLoginInformation(userEmail, userPassword);
 
         String accessMessage = loginApproved ? "Granted" : "Denied";
-        view.getUserInput(UserInput.InputType.NONE, "Access " + accessMessage);
+        view.showMessage("Access " + accessMessage);
 
         if (loginApproved) {
-            view.getUserInput(UserInput.InputType.NONE, "Welcome Back " + TrainingProgram.currentUser.getFullName() + "!\n");
+            view.showMessage("Welcome Back " + TrainingProgram.currentUser.getFullName() + "!\n");
 
             new TrainingProgram();
-            //TrainingProgram.isLoggedIn = true;
         } else {
             return;
         }
@@ -175,14 +182,14 @@ public class LoginProgram {
      * @param password Takes in a string as second parameter
      * @return Returns validated login information as a boolean
      */
-    private boolean checkLoginInformation(String email, String password) {
+    public boolean checkLoginInformation(String email, String password) {
 
         if (!email.equals(TrainingProgram.currentUser.getEmailAddress())) {
-            view.getUserInput(UserInput.InputType.NONE, "Invalid Email Address!");
+            view.showMessage("Invalid Email Address!");
             return false;
         }
         if (!password.equals(TrainingProgram.currentUser.getPassword())) {
-            view.getUserInput(UserInput.InputType.NONE, "Invalid Password!");
+            view.showMessage("Invalid Password!");
             return false;
         }
         return true;

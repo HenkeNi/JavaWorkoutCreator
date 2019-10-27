@@ -1,5 +1,8 @@
 package com.HenrikJangefelt.sortby;
 
+/**
+ * Menu items for sorting menu.
+ */
 public enum SortMenuItem {
 
     WORKOUTS("Workouts"),

@@ -1,5 +1,8 @@
 package com.HenrikJangefelt.sortby;
 
+/**
+ * Menu items for sorting friends.
+ */
 public enum SortFriendItem {
 
     FIRST_NAME("Fist name"),

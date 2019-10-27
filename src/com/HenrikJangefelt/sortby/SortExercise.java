@@ -4,10 +4,17 @@ import com.HenrikJangefelt.models.Exercise;
 
 import java.util.Comparator;
 
-// TODO: static eller vanliga?
-// TODO: lägg sortBy i controllers??
+/**
+ * <h1>SortExercise</h1>
+ * The class SortExercise contains nested classes responsible for sorting an ArrayList of exercises in various ways.
+ *
+ * @author Henrik Jangefelt Nilsson
+ */
 public class SortExercise {
 
+    /**
+     * SortExerciseName sorts objects of Exercise type by their name.
+     */
     public static class SortExerciseName implements Comparator<Exercise> {
 
         @Override
@@ -17,6 +24,9 @@ public class SortExercise {
         }
     }
 
+    /**
+     * SortExerciseReps sort objects of Exercise type by the amount of reps.
+     */
     public static class SortExerciseReps implements Comparator<Exercise> {
 
         @Override
@@ -26,6 +36,9 @@ public class SortExercise {
         }
     }
 
+    /**
+     * SortExerciseSets sort objects of Exercise type by the amount of sets.
+     */
     public static class SortExerciseSets implements Comparator<Exercise> {
 
         @Override
@@ -35,6 +48,9 @@ public class SortExercise {
         }
     }
 
+    /**
+     * SortExerciseMuscle sort objects of Exercise type by their muscle group.
+     */
     public static class SortExercisesMuscle implements Comparator<Exercise> {
 
         @Override

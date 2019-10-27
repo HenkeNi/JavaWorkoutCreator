@@ -1,5 +1,8 @@
 package com.HenrikJangefelt.sortby;
 
+/**
+ * Menu items for sorting workouts.
+ */
 public enum SortWorkoutItem {
 
     NAME("Name"),

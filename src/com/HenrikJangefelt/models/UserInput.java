@@ -1,16 +1,24 @@
 package com.HenrikJangefelt.models;
 
-// TODO: lägg i models
-// TODO:sätt private??
+/**
+ * Class UserInput works as return type for user input.
+ */
 public class UserInput {
 
     public enum InputType {
         STRING,
         INT,
-        NONE,
     }
 
-    // TODO två int variabler???
-    public String stringValue;
-    public int intValue;
+    private String stringValue;
+
+    private int intValue;
+
+    public int getIntValue() { return intValue; }
+
+    public String getStringValue() { return stringValue; }
+
+    public void setIntValue(int intValue) { this.intValue = intValue; }
+
+    public void setStringValue(String stringValue) { this.stringValue = stringValue; }
 }

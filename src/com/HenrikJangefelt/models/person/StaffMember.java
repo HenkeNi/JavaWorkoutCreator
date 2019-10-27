@@ -1,20 +1,25 @@
 //package com.HenrikJangefelt;
 package com.HenrikJangefelt.models.person;
 
+import com.HenrikJangefelt.Introduce;
+import com.HenrikJangefelt.view.View;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class StaffMember extends Person {
+public class StaffMember extends Person implements Introduce {
+
+    View view = View.getInstance();
 
     private int shiftStartHour;
     private int shiftEndHour;
     private int staffNumber; // Eller nåt???
 
-    public StaffMember(String firstName, String lastName, int shiftStartHour, int shiftEndHour) {
+    public StaffMember(String firstName, String lastName) {
         super(firstName, lastName);
-        this.shiftStartHour = shiftStartHour;
-        this.shiftEndHour = shiftEndHour;
+        //this.shiftStartHour = shiftStartHour;
+        //this.shiftEndHour = shiftEndHour;
 
         //StaffMember arnoldSchwarzenegger = new StaffMember("Arnold", "Schwarzenegger", 6, 15);
         //StaffMember sylvesterStallone = new StaffMember("Sylvester", "Stallone", 15, 23);
@@ -29,10 +34,24 @@ public class StaffMember extends Person {
         return shiftEndHour;
     }
 
+    public void setShiftStartHour(int shiftStartHour) {
+        this.shiftStartHour = shiftStartHour;
+    }
+
+    public void setShiftEndHour(int shiftEndHour) {
+        this.shiftEndHour = shiftEndHour;
+    }
 
     // toString istället = (returnerar allt!?)
+
+
     public String getFullWorkShift() {
         return "starts: " + shiftStartHour + ", ends: " + shiftEndHour;
+    }
+
+    @Override
+    public void introduceYourself() {
+        view.showMessage("My name is " + getFullName() + " and I'm a Personal Trainer");
     }
 
 

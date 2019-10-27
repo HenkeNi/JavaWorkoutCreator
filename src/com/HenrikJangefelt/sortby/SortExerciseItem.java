@@ -1,5 +1,8 @@
 package com.HenrikJangefelt.sortby;
 
+/**
+ * Menu items for sorting exercises.
+ */
 public enum SortExerciseItem {
 
     NAME("Name"),

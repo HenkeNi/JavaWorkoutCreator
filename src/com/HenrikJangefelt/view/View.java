@@ -4,7 +4,10 @@ import com.HenrikJangefelt.models.UserInput;
 
 import java.util.Scanner;
 
-// Singleton
+
+/**
+ * A Singleton class that is in charge of user input and -output.
+ */
 public class View {
 
     // TODO: FIxa try and catch for inputs!!
@@ -12,56 +15,10 @@ public class View {
     // TODO: ta in userInout som String och omvandla sedan (Fixar bugg med nextLine inte läses in?) TODO: FIx isNumber
     // TODO: lägg till eftet t.ex: Add (Workout) eller Add (Friend)
 
-    // TODO: ta bort showMessage???
-
     Scanner input = new Scanner(System.in);
     private static View instance = null;
 
 
-    public enum EditExercise {
-
-        EDIT_NAME("Change exercise name"),
-        EDIT_REPS("Change number of reps"),
-        EDIT_SETS("Change number of sets"),
-        EDIT_MUSCLE("Change worked muscle"),
-        GO_BACK("Go back");
-
-        private String description;
-
-        EditExercise(String description) {
-            this.description = description;
-        }
-
-        @Override
-        public String toString() {
-            return description;
-        }
-
-    }
-
-
-    public enum EditMenuItem {
-        ADD("Add"),
-        EDIT("Edit"),
-        REMOVE("Remove"),
-        BACK("Go Back");
-
-        private String description;
-
-        EditMenuItem(String description) {
-            this.description = description;
-        }
-
-        @Override
-        public String toString() {
-            return description;
-        }
-    }
-
-
-
-
-    // Hidden Constructor (Singleton Pattern)
     private View() {}
 
     public static View getInstance() {
@@ -72,17 +29,12 @@ public class View {
     }
 
 
-
-
-
-
-
-
-
-
-    // TODO: combine show (för att vissa objekt) och showMenu ... En metod som vissar allt
-    // TODO: Show alla listor eller enums
-    // TODO: Combine show And Get for menu???
+    /**
+     * Method for showing menus consisting of enum cases (or classes).
+     * @param enumType Takes in a enumType (actually a class)
+     * @param menuType Takes in a String, what kind of menu
+     * @param <T>
+     */
     public <T extends Enum> void showMenu(Class<T> enumType, String menuType) {
 
         System.out.printf("%s:\n", menuType);
@@ -98,6 +50,12 @@ public class View {
     }
 
 
+    /**
+     * Returns menu item selected in menu.
+     * @param enumType
+     * @param <T>
+     * @return
+     */
     public <T extends Enum<T>> T getMenuItem(Class<T> enumType) {
 
         int choiceIndex;
@@ -109,46 +67,25 @@ public class View {
         return enumType.getEnumConstants()[choiceIndex - 1]; // TODO: felhantering för index out of bounds??!!
     }
 
-
-    /*public <T extends Enum<T>> T getMenuItem(Class<T> enumType) {
-
-        int choiceIndex;
-
-        do {
-
-        } while ()
-
-        int choiceIndex = getNumberFromUserInput();
-
-        return enumType.getEnumConstants()[choiceIndex - 1]; // TODO: felhantering för index out of bounds??!!
-    }*/
-
-
-
-
-
-    // Displays message from user and expects an input
-    public void inOutUser() {
-        // TODO: Returnera ett objekt (String, int (vad som behövs))
-    }
-
-
-    // TODO; kanske splita upp i en del som vissar meddelande och en som tar input
-    // TODO: KAnkse bättre med två olika funktioner ändå???
-    public UserInput getUserInput(UserInput.InputType inputType, String message) {
-        System.out.println(message);
+    
+    /**
+     * Returns user input as an object (UserInput)
+     * @param inputType
+     * @return
+     */
+    public UserInput getUserInput(UserInput.InputType inputType) {
+        //public UserInput getUserInput(UserInput.InputType inputType, String message) {
+        //System.out.println(message);
 
         UserInput userInput = new UserInput();
 
         switch (inputType) {
             case STRING:
-                userInput.stringValue = input.nextLine().trim();
+                userInput.setStringValue(input.nextLine().trim());
                 break;
             case INT:
-                userInput.intValue = getNumberFromUserInput();
+                userInput.setIntValue(getNumberFromUserInput());
                 break;
-            case NONE:
-                return null; // TODO Correct?
         }
         return userInput;
     }
@@ -157,13 +94,11 @@ public class View {
         System.out.println(message);
     }
 
-    public void showErrorMessage(String errorMessage) {
-        System.out.println("Error: " + errorMessage);
-    }
 
-
-
-    // TODO: GÖr test fil till denna?
+    /**
+     * Gets a number from user.
+     * @return
+     */
     public int getNumberFromUserInput() {
 
         int numb = -999;
@@ -186,6 +121,12 @@ public class View {
 
 
     // TODO: bygg om / fixa
+
+    /**
+     * Returns numbers selected when selecting specific workout or exercise.
+     * @param editOrDelete
+     * @return
+     */
     public int[] getListNumberPrefix(String editOrDelete) {
 
             boolean validNumbers = false;
@@ -193,8 +134,9 @@ public class View {
             int exerciseIndex = 0;
 
             do {
-                UserInput userInput = getUserInput(UserInput.InputType.STRING, "Enter the prefix-number of the workout or exercise you want to " + editOrDelete);
-                String input = userInput.stringValue.replace(".", "").trim();
+                showMessage("Enter the prefix-number of the workout or exercise you want to " + editOrDelete);
+                UserInput userInput = getUserInput(UserInput.InputType.STRING);
+                String input = userInput.getStringValue().replace(".", "").trim();
                 try {
                     //workoutIndex = Character.getNumericValue(userInput.charAt(0));
                     workoutIndex = Integer.parseInt(input.substring(0, 1));
