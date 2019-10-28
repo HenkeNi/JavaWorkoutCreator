@@ -14,7 +14,6 @@ import com.HenrikJangefelt.view.View;
 
 import java.util.*;
 
-    // TODO: En exekverbar JAR-fil??? Kanske räcker så som jag har det?
     // TODO: UML och skriv om programmet text dokument
     // TODO: en float
     // TODO: serializable problem med Person
@@ -28,6 +27,7 @@ import java.util.*;
 // TODO: Add sortFriend by type (GymMember, StaffMember etc.)
 // TODO: Build out gym and staff (and personal trainer) functions
 // TODO: Add more text in helpMe.txt
+// TODO: More try/catch
 
 /**
  * <h1>TrainingProgram</h1>
@@ -226,7 +226,6 @@ public class TrainingProgram {
             for (Person friend : downloadedFriends) {
 
                 currentUser.getFriendList().add(friend);
-                System.out.println(friend); // TODO: remvoe
             }
         }
     }
@@ -284,8 +283,12 @@ public class TrainingProgram {
         int[] indexArray = view.getListNumberPrefix("delete"); // Get index position for deleting position in list
 
         // Remove friend from list
-        if (list.get(0) instanceof GymMember) {
-            gymMember.getFriendList().remove(indexArray[0] - 1);
+        if (list.get(0) instanceof Person) {
+            try {
+                gymMember.getFriendList().remove(indexArray[0] - 1);
+            } catch (Exception e) {
+                view.showMessage("Friend couldn't be deleted");
+            }
             //saveFriends();
             return;
         }
@@ -294,17 +297,29 @@ public class TrainingProgram {
         if (list.get(0) instanceof Workout) {
 
             if (indexArray[1] == 0) {
-                Workout deletedWorkout = gymMember.getWorkoutList().remove(indexArray[0] - 1);
-                view.showMessage("Workout " + deletedWorkout + " was deleted");
+                try {
+                    Workout deletedWorkout = gymMember.getWorkoutList().remove(indexArray[0] - 1);
+                    view.showMessage("Workout " + deletedWorkout + " was deleted");
+                } catch (Exception e) {
+                    view.showMessage("Workout couldn't be deleted");
+                }
+
             } else {
 
                 // If exercise is the last in workout, then delete the whole workout
                 if (gymMember.getWorkoutList().get(indexArray[0] - 1).getExerciseList().size() <= 1) {
-                    Workout deletedWorkout = gymMember.getWorkoutList().remove(indexArray[0] - 1);
-
+                    try {
+                        Workout deletedWorkout = gymMember.getWorkoutList().remove(indexArray[0] - 1);
+                    } catch (Exception e) {
+                        view.showMessage("Workout couldn't be deleted");
+                    }
                 } else {
-                    Exercise deletedExercise = gymMember.getWorkoutList().get(indexArray[0] - 1).getExerciseList().remove(indexArray[1] - 1);
-                    view.showMessage("Exercise " + deletedExercise + " was deleted!");
+                    try {
+                        Exercise deletedExercise = gymMember.getWorkoutList().get(indexArray[0] - 1).getExerciseList().remove(indexArray[1] - 1);
+                        view.showMessage("Exercise " + deletedExercise + " was deleted!");
+                    } catch (Exception e) {
+                        view.showMessage("Exercise couldn't be delted");
+                    }
                 }
             }
             saveWorkoutsToFile();
@@ -315,23 +330,23 @@ public class TrainingProgram {
     /**
      * Takes in any ArrayList of object and show each element
      * @param gymMember   User
-     * @param arrayList   ArrayList of any object
+     * @param objectList   ArrayList of any object
      * @param listType    String
      * @param <T>
      */
-    public  <T extends Object> void show(GymMember gymMember, ArrayList<T> arrayList, String listType) {
+    public  <T extends Object> void show(GymMember gymMember, ArrayList<T> objectList, String listType) {
 
         view.showMessage(listType); // Print out menu type
-        if (arrayList.isEmpty()) { view.showMessage("\t -Empty"); return; }
+        if (objectList.isEmpty()) { view.showMessage("\t -Empty"); return; }
 
 
-        T objectType = arrayList.get(0); // Get the Class type from the first element in the arrayList
+        T objectType = objectList.get(0); // Get the Class type from the first element in the objectList
         int index = 0;
 
 
-        // For every object in arrayList
-        for (T listItem : arrayList) {
-            view.showMessage((index + 1) + ". " + listItem.toString()); // Shows number before workout and the workout itself
+        // For every object in objectList
+        for (T object : objectList) {
+            view.showMessage((index + 1) + ". " + object.toString()); // Shows number before workout and the workout itself
 
             int subIndex = 0;
 
@@ -347,6 +362,12 @@ public class TrainingProgram {
 
             // TODO: Add friend type etc...
             if (objectType instanceof Person) {
+
+            }
+
+            // TODO: Fix
+            if (objectType instanceof Introduce) {
+                ((Introduce) objectType).introduceYourself();
             }
             index++;
         }
@@ -404,7 +425,6 @@ public class TrainingProgram {
 
             if (object instanceof Person &&
                     currentUser.getFriendList().get(index).getFullName().equalsIgnoreCase(searchWord)) {
-                System.out.println("Hello");
                 matchingObjects.add(object);
             }
             index++;
@@ -434,7 +454,6 @@ public class TrainingProgram {
 
             if (object instanceof Person &&
                     currentUser.getFriendList().get(index).getFullName().toUpperCase().contains(searchWord.toUpperCase())) {
-                System.out.println("Hello");
                 relatedObjects.add(object);
             }
             index++;
@@ -712,7 +731,7 @@ public class TrainingProgram {
 
         int currentTime = java.time.LocalTime.now().getHour();
 
-        System.out.println("Available Staff at your local gym:");
+        view.showMessage("Available Staff at your local gym:");
 
         for (int i = 0; i < currentGym.getStaffMembers().size(); i++) {
 

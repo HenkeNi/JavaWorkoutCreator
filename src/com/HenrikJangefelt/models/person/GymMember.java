@@ -28,6 +28,6 @@ public class GymMember extends Person implements Introduce {
 
     @Override
     public void introduceYourself() {
-        view.showMessage("My name is " + getFullName() + " and I'm a GymMember");
+        view.showMessage("\t \"My name is " + getFullName() + " and I'm a GymMember\"");
     }
 }

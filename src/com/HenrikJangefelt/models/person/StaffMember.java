@@ -14,7 +14,7 @@ public class StaffMember extends Person implements Introduce {
 
     private int shiftStartHour;
     private int shiftEndHour;
-    private int staffNumber; // Eller nåt???
+    private int staffNumber;
 
     public StaffMember(String firstName, String lastName) {
         super(firstName, lastName);
@@ -42,16 +42,13 @@ public class StaffMember extends Person implements Introduce {
         this.shiftEndHour = shiftEndHour;
     }
 
-    // toString istället = (returnerar allt!?)
-
-
     public String getFullWorkShift() {
         return String.format("starts: %s ends: %s", shiftStartHour, shiftEndHour);
     }
 
     @Override
     public void introduceYourself() {
-        view.showMessage("My name is " + getFullName() + " and I'm a Personal Trainer");
+        view.showMessage("\t \"My name is " + getFullName() + " and I'm a Staff Member\"");
     }
 
 

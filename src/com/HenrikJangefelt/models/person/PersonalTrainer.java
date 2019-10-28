@@ -12,17 +12,21 @@ public class PersonalTrainer extends Person implements Introduce {
 
     View view = View.getInstance();
 
-
-    final int MAX_AMOUNT_OF_CLIENTS = 10;
-    GymMember[] clientList = new GymMember[MAX_AMOUNT_OF_CLIENTS];
-    ArrayList<Workout> clientWorkoutList = new ArrayList<>();
+    private final int MAX_AMOUNT_OF_CLIENTS = 10;
+    private GymMember[] clientList = new GymMember[MAX_AMOUNT_OF_CLIENTS];
 
     public PersonalTrainer(String firstName, String lastName) {
         super(firstName, lastName);
     }
 
+    public int getMAX_AMOUNT_OF_CLIENTS() { return MAX_AMOUNT_OF_CLIENTS; }
+
+    public GymMember[] getClientList() { return clientList; }
+
+    public void setClientList(GymMember[] clientList) { this.clientList = clientList; }
+
     @Override
     public void introduceYourself() {
-        view.showMessage("My name is " + getFullName() + " and I'm a Personal Trainer");
+        view.showMessage("\t \"My name is " + getFullName() + " and I'm a Personal Trainer\"");
     }
 }
