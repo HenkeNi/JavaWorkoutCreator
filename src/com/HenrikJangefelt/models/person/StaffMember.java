@@ -46,7 +46,7 @@ public class StaffMember extends Person implements Introduce {
 
 
     public String getFullWorkShift() {
-        return "starts: " + shiftStartHour + " ends: " + shiftEndHour;
+        return String.format("starts: %s ends: %s", shiftStartHour, shiftEndHour);
     }
 
     @Override

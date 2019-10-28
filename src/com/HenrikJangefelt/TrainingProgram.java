@@ -14,15 +14,13 @@ import com.HenrikJangefelt.view.View;
 
 import java.util.*;
 
-    // TODO: En exekverbar JAR-fil
+    // TODO: En exekverbar JAR-fil??? Kanske räcker så som jag har det?
     // TODO: UML och skriv om programmet text dokument
-    // TODO: Minst ett JUnit-test (typ, går inte att köra!!)
+    // TODO: en float
+    // TODO: serializable problem med Person
 
-    // TODO: BUGG!! SORT EXERCISES. måste ange Sort by: 1 1 1 1 många ggr för den ska registrera det!
-    // TODO: Bugg test, inte null från view!
-
-
-
+// TODO: BUGG!! SORT EXERCISES. måste ange Sort by: 1 1 1 1 många ggr för den ska registrera det!
+// TODO: Bugg test, inte null från view!
 // TODO: Place staff as object in file (read only)
 // TODO: Add workout duration and weight used...
 // TODO: Settings, change name, email etc...
@@ -46,7 +44,7 @@ public class TrainingProgram {
     public TrainingProgram() {
         FileUtils.setReadOnly("helpMe.txt");
         fetchWorkoutsFromFile();
-        fetchFriends();
+        //fetchFriends();
         showMainMenu(currentUser);
     }
 
@@ -178,7 +176,7 @@ public class TrainingProgram {
             menuChoice = view.getUserInput(UserInput.InputType.INT).getIntValue();
 
         } while (menuChoice != 0);
-        saveFriends();
+        //saveFriends();
     }
 
 
@@ -196,7 +194,7 @@ public class TrainingProgram {
      */
     public void saveFriends() {
         //FileUtils.saveObjects("friends.ser", currentUser.getFriendList());
-        FileUtils.writeGenericObjects("friends.ser", currentUser.getFriendList());
+        FileUtils.writeGenericObjects("friendList.ser", currentUser.getFriendList());
     }
 
 
@@ -221,7 +219,7 @@ public class TrainingProgram {
      */
     public void fetchFriends() {
 
-        ArrayList<Person> downloadedFriends = FileUtils.readGenericObjects("friends.ser");
+        ArrayList<Person> downloadedFriends = FileUtils.readGenericObjects("friendList.ser");
 
         if (downloadedFriends != null) {
 
@@ -265,9 +263,8 @@ public class TrainingProgram {
                     gymMember.getFriendList().get(friendIndex - 1).setLastName(view.getUserInput(UserInput.InputType.STRING).getStringValue().trim());
                     break;
             }
-            saveFriends();
+            //saveFriends();
         } while (true);
-        //saveFriends();
     }
 
 
@@ -286,11 +283,10 @@ public class TrainingProgram {
 
         int[] indexArray = view.getListNumberPrefix("delete"); // Get index position for deleting position in list
 
-
         // Remove friend from list
         if (list.get(0) instanceof GymMember) {
             gymMember.getFriendList().remove(indexArray[0] - 1);
-            saveFriends();
+            //saveFriends();
             return;
         }
 
@@ -742,201 +738,4 @@ public class TrainingProgram {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       /*public void showWorkouts(GymMember gymMember, ArrayList<Workout> workouts) {
-
-        System.out.println("Current Workouts:");
-
-        if (gymMember.getWorkoutList().isEmpty()) {
-            System.out.println("\t -Empty");
-            return;
-        }
-        gymMember.showWorkouts(workouts);
-    }*/
-
-    /*public void showFriends() {
-
-        System.out.println("Friends in friend list:");
-
-        // If no friends in gymBuddies
-        if (currentUser.getFriendList().isEmpty()) {
-            System.out.println("\t-Empty");
-            return;
-        }
-        currentUser.showFriends(currentUser.getFriendList());
-    }*/
-
-
-// OLD VERSION
-   /* public int[] returnWorkoutOrExercise(String mode) {
-        System.out.printf("Enter the prefix-number of the workout or exercise you want to %s:\n", mode);
-        input.nextLine();
-        String selectedWorkout = input.nextLine();
-        int[] indexArray = new int[2];
-
-        // User entered an exercise in a workout
-        if (selectedWorkout.contains(".") && selectedWorkout.length() >= 3 && selectedWorkout.charAt(1) == '.') {
-
-            String[] numbers = selectedWorkout.split("\\."); // Split String at "."
-            int workoutIndex = Integer.parseInt(numbers[0]); // Store first half of the String in workoutIndex as a number
-            int exerciseIndex = Integer.parseInt(numbers[1].replace(".", "")); // Store the second half as a number and remove the dot
-
-            indexArray[0] = workoutIndex;
-            indexArray[1] = exerciseIndex;
-        } else {
-            char number = selectedWorkout.charAt(0);
-            int workoutIndex = Character.getNumericValue(number);
-            indexArray[0] = workoutIndex;
-        }
-        return indexArray;
-    }*/
-
-
-// TODO: Lägg i view
-    /*private int[] returnWorkoutPrefix(String editOrDelete) {
-
-        boolean validNumbers = false;
-        int workoutIndex = 0;
-        int exerciseIndex = 0;
-
-        do {
-            UserInput userInput = view.getUserInput(UserInput.InputType.STRING, "Enter the prefix-number of the workout or exercise you want to " + editOrDelete);
-            String input = userInput.stringValue.replace(".", "").trim();
-            try {
-                //workoutIndex = Character.getNumericValue(userInput.charAt(0));
-                workoutIndex = Integer.parseInt(input.substring(0, 1));
-                if (input.length() >= 2) {
-                    exerciseIndex = Integer.parseInt(input.substring(1));
-                }
-                validNumbers = true;
-            } catch (Exception e) {
-                System.out.println("Must enter a valid number prefix.");
-            }
-        } while (!validNumbers);
-
-        int[] prefixArray = {workoutIndex, exerciseIndex};
-        return prefixArray;
-    }*/
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    private void showEditWorkoutMenu(GymMember gymMember) {
-
-        do {
-            show(gymMember, gymMember.getWorkoutList(), "Current Workout(s):"); // Show current workouts
-
-            //int[] workoutPrefix
-
-            if (gymMember.getWorkoutList().isEmpty()) { return; } // TODO: BEHÖVS??
-
-            int menuChoice = view.getUserInput(UserInput.InputType.INT, "\nOptions:\n1. Add exercise\n2. Edit\n3. Delete\n0. Go Back").intValue;
-
-            switch (menuChoice) {
-                case 0:
-                    return;
-                case 1:
-                    int workoutIndex = view.getUserInput(UserInput.InputType.INT, "Enter the number of the workout you wish to add exercise to").intValue;
-                    addExercise(gymMember.getWorkoutList().get(workoutIndex - 1));
-                    break;
-                case 2:
-                    editWorkout(gymMember); // Change name of workout/exercise, amount of reps, etc.
-                    break;
-                case 3:
-                    //deleteWorkout(currentUser); // Delete workout or exercise
-                    delete(currentUser, currentUser.getWorkoutList(), "Workout");
-                    break;
-            }
-        } while (true);
-    }
-     */
-
-
-// TODO: förbättra (lägg i workout)
-// TODO: Combine with returnWorkoutPrefix??
-
-// TODO: ta in två nummer istället?
-    /*private void editWorkout(GymMember gymMember) {
-
-        int[] indexArray = view.getListNumberPrefix("change");
-        int workoutNumber = indexArray[0];
-        int exerciseNumber = indexArray[1];
-
-        if (exerciseNumber == 0) {
-            updateWorkout(gymMember.getWorkoutList().get(workoutNumber - 1));
-        } else {
-            updateExercise(gymMember.getWorkoutList().get(workoutNumber - 1).getExerciseList().get(exerciseNumber - 1));
-        }
-    }*/
-
-    /*
-        private void updateExercise(Exercise exercise) {
-
-        do {
-            view.showMenu(View.ExerciseOptions.class, "Edit Exercise Options");
-
-            switch (view.getMenuItem(View.ExerciseOptions.class)) {
-                case BACK:
-                    return;
-                case NAME:
-                    exercise.setExerciseName(view.getUserInput(UserInput.InputType.STRING, "Enter new exercise name:").stringValue);
-                    break;
-                case REPS:
-                    exercise.setNumberOfReps(view.getUserInput(UserInput.InputType.INT, "Enter new amount of reps:").intValue);
-                    break;
-                case SETS:
-                    exercise.setNumberOfSets(view.getUserInput(UserInput.InputType.INT, "Enter new amount of sets:").intValue);
-                    break;
-                case MUSCLE:
-                    exercise.setTargetedMuscle(getMuscleGroup());
-                    break;
-            }
-            view.getUserInput(UserInput.InputType.NONE, "Exercise successfully updated!");
-        } while (true);
-    }
-     */
-
-
-
 

@@ -29,7 +29,7 @@ public class Workout implements Serializable {
 
     public String toString() {
 
-        return workoutName + " (exercises in workout: " + exerciseList.size() + ")";
+        return String.format("%s (Workout have %s exercises)", workoutName, exerciseList.size());
         //return workoutName + "\n" + exerciseList.toString();
     }
 

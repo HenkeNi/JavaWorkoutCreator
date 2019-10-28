@@ -72,10 +72,13 @@ public class Exercise implements Serializable {
     }
 
     public String toString() {
-        return exerciseName +
+
+        return String.format("%s (Reps: %s, Sets: %s, Targeted Muscle: %s)", exerciseName, numberOfReps, numberOfSets, targetedMuscle);
+
+        /*return exerciseName +
                 " (Reps: " + numberOfReps +
                 ", Sets: " + numberOfSets +
                 ", Targeted Muscle: " + targetedMuscle +
-                ")";
+                ")";*/
     }
 }
