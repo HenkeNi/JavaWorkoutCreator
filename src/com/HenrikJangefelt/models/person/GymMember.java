@@ -7,7 +7,7 @@ import com.HenrikJangefelt.view.View;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GymMember extends Person implements Introduce {
+public class GymMember extends Person {
 
     View view = View.getInstance();
 
@@ -27,7 +27,8 @@ public class GymMember extends Person implements Introduce {
     }
 
     @Override
-    public void introduceYourself() {
-        view.showMessage("\t \"My name is " + getFullName() + " and I'm a GymMember\"");
+    public void personalIntroduction() {
+        view.showMessage("\t \"My name is " + getFullName() + " and I'm a Gym member\"");
     }
+
 }

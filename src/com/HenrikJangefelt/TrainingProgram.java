@@ -28,7 +28,7 @@ import java.util.*;
 // TODO: Build out gym and staff (and personal trainer) functions
 // TODO: Add more text in helpMe.txt
 // TODO: More try/catch
-
+// TODO: Build program so user is a Personal Trainer and builds workouts for clients??
 /**
  * <h1>TrainingProgram</h1>
  * The TrainingProgram is where you build and create workouts as well as add friends
@@ -336,14 +336,11 @@ public class TrainingProgram {
      */
     public  <T extends Object> void show(GymMember gymMember, ArrayList<T> objectList, String listType) {
 
-        view.showMessage(listType); // Print out menu type
-        if (objectList.isEmpty()) { view.showMessage("\t -Empty"); return; }
-
-
-        T objectType = objectList.get(0); // Get the Class type from the first element in the objectList
         int index = 0;
 
-
+        view.showMessage(listType); // Print out menu type
+        if (objectList.isEmpty()) { view.showMessage("\t -Empty"); return; }
+        
         // For every object in objectList
         for (T object : objectList) {
             view.showMessage((index + 1) + ". " + object.toString()); // Shows number before workout and the workout itself
@@ -351,7 +348,7 @@ public class TrainingProgram {
             int subIndex = 0;
 
             // If object is of type Workout
-            if (objectType instanceof Workout) {
+            if (object instanceof Workout) {
 
                 // Show exercises for workout
                 for (Exercise exercise : gymMember.getWorkoutList().get(index).getExerciseList()) {
@@ -360,15 +357,10 @@ public class TrainingProgram {
                 }
             }
 
-            // TODO: Add friend type etc...
-            if (objectType instanceof Person) {
-
+            if (object instanceof Person) {
+                ((Person) object).personalIntroduction();
             }
 
-            // TODO: Fix
-            if (objectType instanceof Introduce) {
-                ((Introduce) objectType).introduceYourself();
-            }
             index++;
         }
     }

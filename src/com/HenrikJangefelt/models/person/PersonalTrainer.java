@@ -8,7 +8,7 @@ import com.HenrikJangefelt.view.View;
 
 import java.util.ArrayList;
 
-public class PersonalTrainer extends Person implements Introduce {
+public class PersonalTrainer extends Person {
 
     View view = View.getInstance();
 
@@ -26,7 +26,8 @@ public class PersonalTrainer extends Person implements Introduce {
     public void setClientList(GymMember[] clientList) { this.clientList = clientList; }
 
     @Override
-    public void introduceYourself() {
+    public void personalIntroduction() {
         view.showMessage("\t \"My name is " + getFullName() + " and I'm a Personal Trainer\"");
     }
+
 }

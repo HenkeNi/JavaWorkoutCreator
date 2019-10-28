@@ -1,14 +1,9 @@
 //package com.HenrikJangefelt;
 package com.HenrikJangefelt.models.person;
 
-import com.HenrikJangefelt.Introduce;
 import com.HenrikJangefelt.view.View;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-public class StaffMember extends Person implements Introduce {
+public class StaffMember extends Person {
 
     View view = View.getInstance();
 
@@ -24,7 +19,6 @@ public class StaffMember extends Person implements Introduce {
         //StaffMember arnoldSchwarzenegger = new StaffMember("Arnold", "Schwarzenegger", 6, 15);
         //StaffMember sylvesterStallone = new StaffMember("Sylvester", "Stallone", 15, 23);
     }
-
 
     public int getShiftStartHour() {
         return shiftStartHour;
@@ -47,7 +41,7 @@ public class StaffMember extends Person implements Introduce {
     }
 
     @Override
-    public void introduceYourself() {
+    public void personalIntroduction() {
         view.showMessage("\t \"My name is " + getFullName() + " and I'm a Staff Member\"");
     }
 

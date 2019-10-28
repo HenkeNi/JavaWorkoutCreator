@@ -45,6 +45,8 @@ public abstract class Person implements Serializable {
         return password;
     }
 
+    public abstract void personalIntroduction();
+
     @Override
     public String toString() {
         return String.format("%s %s", firstName, lastName);
