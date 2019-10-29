@@ -9,10 +9,6 @@
     <list default="true" id="69a07059-ef3f-46ad-9ed0-2e4502d139a0" name="Default Changelist" comment="TEST COmmit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/TheWorkoutCreator_jar/run.pages" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TheWorkoutCreator/com/HenrikJangefelt/TrainingProgram.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/workouts.ser" beforeDir="false" afterPath="$PROJECT_DIR$/workouts.ser" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
