@@ -39,7 +39,7 @@ import java.util.*;
 public class TrainingProgram {
 
     View view = View.getInstance(); // Get instance to View class
-    static GymMember currentUser = new GymMember("", "");
+    static GymMember currentUser = new GymMember("", ""); // TODO: rebuild program as a Personal Trainer class instead?
 
     public TrainingProgram() {
         FileUtils.setReadOnly("helpMe.txt");
@@ -243,11 +243,11 @@ public class TrainingProgram {
         // If no friends in friendList => return
         if (currentUser.getFriendList().isEmpty()) { return; }
 
-        view.showMessage("Enter the number of the friend you wish to change:");
-
-        int friendIndex = view.getUserInput(UserInput.InputType.INT).getIntValue();
-
         do {
+
+            view.showMessage("Enter the number of the friend you wish to change:");
+            int friendIndex = view.getUserInput(UserInput.InputType.INT).getIntValue();
+
             view.showMessage("Options:\n1. Edit First Name\n2. Edit Last Name\n0. Go Back");
 
             switch (view.getUserInput(UserInput.InputType.INT).getIntValue()) {
@@ -340,7 +340,7 @@ public class TrainingProgram {
 
         view.showMessage(listType); // Print out menu type
         if (objectList.isEmpty()) { view.showMessage("\t -Empty"); return; }
-        
+
         // For every object in objectList
         for (T object : objectList) {
             view.showMessage((index + 1) + ". " + object.toString()); // Shows number before workout and the workout itself
@@ -360,7 +360,6 @@ public class TrainingProgram {
             if (object instanceof Person) {
                 ((Person) object).personalIntroduction();
             }
-
             index++;
         }
     }
@@ -465,13 +464,23 @@ public class TrainingProgram {
             return;
         }
 
-        int[] workoutPrefix = view.getListNumberPrefix("edit");
+        do {
+            int[] workoutPrefix = view.getListNumberPrefix("edit");
 
-        if (workoutPrefix[1] == 0) {
-            updateWorkout(gymMember.getWorkoutList().get(workoutPrefix[0] - 1));
-        } else {
-            updateExercise(gymMember.getWorkoutList().get(workoutPrefix[0] - 1).getExerciseList().get(workoutPrefix[1] - 1));
-        }
+            try {
+                if (workoutPrefix[1] == 0) {
+                    updateWorkout(gymMember.getWorkoutList().get(workoutPrefix[0] - 1));
+                    return;
+                } else {
+                    updateExercise(gymMember.getWorkoutList().get(workoutPrefix[0] - 1).getExerciseList().get(workoutPrefix[1] - 1));
+                    return;
+                }
+            } catch (Exception e) {
+                view.showMessage("Not a valid prefix");
+            }
+        } while (true);
+
+
     }
 
 
