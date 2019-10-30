@@ -9,6 +9,9 @@
     <list default="true" id="69a07059-ef3f-46ad-9ed0-2e4502d139a0" name="Default Changelist" comment="TEST COmmit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/TheWorkoutCreator_jar/run.pages" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/HenrikJangefelt/TrainingProgram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/workouts.ser" beforeDir="false" afterPath="$PROJECT_DIR$/workouts.ser" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -164,8 +167,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.LoginProgramTest.validatePasswordFormat" />
         <item itemvalue="JUnit.LoginProgramTest.validateEmailFormat" />
+        <item itemvalue="JUnit.LoginProgramTest.validatePasswordFormat" />
         <item itemvalue="JUnit.LoginProgramTest" />
         <item itemvalue="JUnit.LoginProgramTest.validateEmailFormatTest" />
       </list>
