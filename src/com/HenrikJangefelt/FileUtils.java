@@ -89,7 +89,8 @@ public class FileUtils {
             objectList = (ArrayList<T>) objectinputstream.readObject();
             objectinputstream .close();
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            View.getInstance().showMessage("No Objects to load!");
         }
         return objectList;
     }
