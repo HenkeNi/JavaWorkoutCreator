@@ -44,7 +44,7 @@ public class TrainingProgram {
     public TrainingProgram() {
         FileUtils.setReadOnly("helpMe.txt");
         fetchWorkoutsFromFile();
-        fetchFriends();
+        //fetchFriends();
         showMainMenu(currentUser);
     }
 

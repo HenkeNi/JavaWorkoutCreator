@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FileUtils {
 
-    
+
     /**
      * Fetches text from textFile as an arrayList of strings
      * @param fileName Takes in a filename or filepath
